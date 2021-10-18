@@ -33,7 +33,9 @@ In order to provide most convenient and satisfying experience for NYU students, 
 
 ## Team Members
 
-@
+[@Comf0rTS1997]( https://github.com/Comf0rTS1997) [@AnastasiaYe](https://github.com/AnastasiaYe) [@princeampofo](https://github.com/princeampofo)
+[@Willis1118](https://github.com/Willis1118)
+
 
 ## Contributing
 
