@@ -1,17 +1,44 @@
-# Project Repository
+# LinkedNYU
 
-This repository will be used for team projects.
+This will be the primary repo where development of LinkedNYU takes place. 
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+## Product Vision
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-1a-project-setup.md)
+Providing fast and convenient experience for NYU student to directly get access to course sources and solve their confusions.
 
-1. See the [Sprint Planning instructions](instructions-1b-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+## Description
 
-1. See the [Front-End Development instructions](./instructions-2-front-end.md) for the requirements of the initial Front-End Development.
+LinkedNYU provides a platform for students from the same course to find their classmates, share notes with each other and socialize. Previous students from this course can share their experience and help others decide whether to take this course or not. 
 
-1. See the [Back-End Development instructions](./instructions-3-back-end.md) for the requirements of the initial Back-End Development.
+In order to provide most convenient and satisfying experience for NYU students, LinkedNYU is supposed to contain following basic functions:
 
-1. See the [Database Integration instructions](./instructions-4-database.md) for the requirements of integrating a database into the back-end.
+- Searching: 
 
-1. See the [Deployment instructions](./instructions-5-deployment.md) for the requirements of deploying an app.
+	Powerful searching tools that will enable students to find their courses based on the course number, name, name of Professor;
+
+	Plugin filter for students to narrow down the results and further help students find the right course.
+
+	Will show courses' status as open, waitlist, or closed.
+- Sharing:
+
+	Each course section only opens to students who are taking, or have taken the course before. 
+
+	Each course will have its own exclusive forum for students to communicate. 
+
+	Each course will have its own resource folder, which will collect notes and other resources from volunteer students who have taken the same course before.
+
+- Statistics:
+
+	Courses' historical data will be available to students, which will include average grades, professor rating, workload, etc. All students can voluntarily contribute to this part. 
+
+## Team Members
+
+@
+
+## Contributing
+
+Anyone is welcome to dive in! Feel free to Open an issue or Pull Request. 
+
+In terms of more detailed contributing rule, read through 
+[CONTRIBUTING.md](https://github.com/software-students-fall2021/project-setup-linkednyu/blob/master/CONTRIBUTING.md).
+
