@@ -4,32 +4,34 @@ This will be the primary repo where development of LinkedNYU takes place.
 
 ## Product Vision
 
-Providing fast and convenient experience for NYU student to directly get access to course sources and solve their confusions.
+Providing fast and convenient experience for NYU student to directly get access to course sources and solve their confusions.     
 
 ## Description
 
-LinkedNYU provides a platform for students from the same course to find their classmates, share notes with each other and socialize. Previous students from this course can share their experience and help others decide whether to take this course or not. 
+LinkedNYU provides a platform for students from the same course to find their classmates, discuss with each other and socialize. Previous students from this course can share their experience and help others decide whether to take this course or not. 
 
 In order to provide most convenient and satisfying experience for NYU students, LinkedNYU is supposed to contain following basic functions:
+
+- Viewing:
+
+	Students can view other's posts and comment. 
+
+	Logged in students can see new updates in the channels they joinned. 
 
 - Searching: 
 
 	Powerful searching tools that will enable students to find their courses based on the course number, name, name of Professor;
 
-	Plugin filter for students to narrow down the results and further help students find the right course.
+	Searching function will present student with relative channels and posts.
 
-	Will show courses' status as open, waitlist, or closed.
-- Sharing:
+	Students can join course channel to keep updated.
 
-	Each course section only opens to students who are taking, or have taken the course before. 
+- Posting:
 
-	Each course will have its own exclusive forum for students to communicate. 
+	Students can post discussions in their channels. 
 
-	Each course will have its own resource folder, which will collect notes and other resources from volunteer students who have taken the same course before.
+	Posts will be shared to other students, who can also join the discussion by commenting their own thoughts.
 
-- Statistics:
-
-	Courses' historical data will be available to students, which will include average grades, professor rating, workload, etc. All students can voluntarily contribute to this part. 
 
 ## Team Members
 
