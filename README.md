@@ -2,6 +2,12 @@
 
 This will be the primary repo where development of LinkedNYU takes place. 
 
+- [LinkedNYU](#linkednyu)
+	- [Product Vision](#product-vision)
+	- [Description](#description)
+	- [Team Members](#team-members)
+	- [Contributing](#contributing)
+
 ## Product Vision
 
 Providing fast and convenient experience for NYU student to directly get access to course sources and solve their confusions.     
