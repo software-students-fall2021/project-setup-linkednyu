@@ -6,6 +6,7 @@ This will be the primary repo where development of LinkedNYU takes place.
 	- [Product Vision](#product-vision)
 	- [Description](#description)
 	- [Team Members](#team-members)
+	- [Sprint 0](#sprint-0)
 	- [Contributing](#contributing)
 
 ## Product Vision
@@ -46,6 +47,10 @@ In order to provide most convenient and satisfying experience for NYU students, 
 [@princeampofo](https://github.com/princeampofo)     
 [@Willis1118](https://github.com/Willis1118)   
 @Azanah
+
+## Sprint 0
+Product Owner [@Willis1118](https://github.com/Willis1118)       
+Scrume Master [@AnastasiaYe](https://github.com/AnastasiaYe)  
 
 
 ## Contributing
