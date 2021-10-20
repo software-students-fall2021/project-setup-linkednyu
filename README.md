@@ -46,7 +46,7 @@ In order to provide most convenient and satisfying experience for NYU students, 
 [@AnastasiaYe](https://github.com/AnastasiaYe)        
 [@princeampofo](https://github.com/princeampofo)     
 [@Willis1118](https://github.com/Willis1118)   
-@Azanah
+[@Azanah](https://github.com/azanah)
 
 ## Sprint 0
 Product Owner [@Willis1118](https://github.com/Willis1118)       
