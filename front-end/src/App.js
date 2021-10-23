@@ -1,25 +1,14 @@
-import logo from './logo.svg';
+import csKitty from './images/csKitty.jpeg'
 import './App.css';
+import PostBox from './components/PostBox';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = 'container'>
+      <PostBox title = 'foo' content = 'fueihfahfliueanlfeqdnsakjdnaihiuewrhafndaleo;e. This is what your cat typed. It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!'/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+
