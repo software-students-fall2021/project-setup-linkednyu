@@ -1,5 +1,6 @@
 .TextBox {
     width: 90%;
+    resize:none;
 }
 
 .icon{
