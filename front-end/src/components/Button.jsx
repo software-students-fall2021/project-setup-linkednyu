@@ -1,9 +1,41 @@
-const Button = () => {
+import "./button.css"
+
+const STYLES = [
+	"btn--primary--solid",
+	//"btn--primary--outline",
+	"btn--warning--solid",
+	//"btn--warning--outline",
+	//"btn--danger--solid",
+	//"btn--danger--outline",
+	//"btn--success--solid",
+	//"btn--success--outline",
+]
+
+const SIZES = [
+	"btn--medium",
+	"btn--small",
+	"btn--large"
+]
+
+export const Button = ({
+	//your text here
+	children,
+	type,
+	//your onClick function here
+	onClick,
+	//style of button
+	buttonStyle,
+	//size of button
+	buttonSize,
+}) => {
+	//check if value passed in is in STYLES
+	const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0]
+	//check if value passed in is in SIZES
+	const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0]
+
 	return (
-		<div>
-			
-		</div>
+		<button className={`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type={type}>
+			{children}
+		</button>
 	)
 }
-
-export default Button
