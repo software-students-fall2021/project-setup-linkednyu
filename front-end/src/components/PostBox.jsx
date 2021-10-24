@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import PostBoxHeader from './PostBoxHeader'
 import csKitty from '../images/csKitty.jpeg'
+import '../componentsStyle/Post.css'
 
 
 const PostBox = ({title, imageSrc, content}) => {
