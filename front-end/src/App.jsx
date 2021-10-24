@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Home from './pages/home/Home';
 import NewPost from './pages/newpost/NewPost';
+import TextBox from './components/TextBox';
 
 
 
