@@ -1,7 +1,6 @@
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-
+ 
 .container {
-    /* font-family: 'Poppins', sans-serif; */
+    
     max-width: 100%;
     
 }
@@ -50,7 +49,7 @@
     margin: 0 auto;
 }
 
-.title{
+.contenttitle{
     margin: 7px 0px;
 }
 

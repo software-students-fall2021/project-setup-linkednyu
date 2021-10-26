@@ -14,7 +14,7 @@ const PostBox = ({title,userName,courseName,time,imageSrc, content}) => {
 				</div>
 				<hr/>
 				<div className="content">
-					<h3 className="title">{title}</h3>
+					<h3 className="contenttitle">{title}</h3>
 					<img className="contentImg" src = {imageSrc} alt="" ></img>
 					<p>{content}</p>
 				</div>

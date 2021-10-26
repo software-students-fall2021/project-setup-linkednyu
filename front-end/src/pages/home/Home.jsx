@@ -1,4 +1,5 @@
 import PostBox from "../../components/PostBox"
+import './home.css'
 
 export default function Home() {
     return (
