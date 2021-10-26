@@ -11,7 +11,7 @@ export default function Account() {
             </div>
             <div className="accountTop">
                 <div className="accountImage">
-                    <img className="profilePicture" src="https://picsum.photos/200"></img>
+                    <img className="profilePicture" alt="" src="https://picsum.photos/200"></img>
                 </div>
                 <div className="accountBio">
                     <h2>Bio</h2>
