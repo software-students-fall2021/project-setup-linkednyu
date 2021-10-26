@@ -1,0 +1,23 @@
+.pwResetPage{
+    margin:auto;
+    width: 90%;
+    padding: 10%;
+}
+
+.title{
+    font-size:x-large;
+    font-weight: bold;
+}
+
+.subTitle{
+    font-size:medium;
+    font-weight:lighter;
+    color: grey;
+    margin-top:3%;
+}
+
+.nextButtonArea{
+    margin-top: 5%;
+    display: flex;
+    justify-content: flex-end;
+}

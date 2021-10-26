@@ -4,7 +4,10 @@ import Header from './components/Header';
 import Home from './pages/home/Home';
 import NewPost from './pages/newpost/NewPost';
 import JoinClass from './pages/joinClass/joinClass'
-
+import Login from './pages/login/login'
+import pwReset from './pages/login/pwReset'
+import pwReset2 from './pages/login/pwReset2'
+import signUp from './pages/login/signUp'
 
 
 function App() {
@@ -21,6 +24,11 @@ function App() {
 
         </Route>
         <Route path="/joinclass" component={JoinClass} />
+
+        <Route path="/login" component={Login} />
+        <Route path="/pwreset" component={pwReset} />
+        <Route path="/pwreset2" component={pwReset2} />
+        <Route path="/signup" component={signUp} />
       </Switch>
     </BrowserRouter>
 
