@@ -1,0 +1,39 @@
+.comment{
+    width:100%;
+    border: 2px solid #57068C;
+    border-radius: 15px;
+    /*-webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);*/
+    margin: auto;
+}
+
+.commentTop{
+    display: flex;
+    margin: 5px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.commentAvatar{
+    /*border-radius: 10%;*/
+    margin: 0 10px;
+}
+
+.commentUserName{
+    font-size: small;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.commentDate{
+    font-size: small;
+}
+
+.commentBottom{
+    display: flex;
+    align-items: center;
+}
+
+.commentText{
+    margin: 15px;
+}

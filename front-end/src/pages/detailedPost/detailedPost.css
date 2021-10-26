@@ -1,0 +1,136 @@
+.detailedPost{
+    width:100%;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    margin: 5% 0;
+}
+
+.detailedPostWrapper{
+    padding: 10px;
+}
+
+.detailedPostTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 5px;
+    border: 5px double #57068C;
+    border-radius: 15px;
+}
+
+.detailedPostTopLeft{
+    display: flex;
+    flex:1;
+    align-items: center;
+    margin: 5px;
+}
+
+.detailedPostTopMiddle{
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    align-items: flex-start;
+}
+
+.detailedPostTopMiddleBottom{
+    display: flex;
+    flex-direction: row;
+}
+
+.detailedPostTopRight{
+    display: flex;
+    flex: 2;
+    align-items: flex-end;
+}
+
+.detailedPostAvatar{
+    border-radius: 20%;
+    margin: 0 10px;
+}
+
+.detailedPostClass{
+    font-size: large;
+    margin: 0 10px;
+}
+
+.detailedPostUserName{
+    font-size: medium;
+    margin: 0 10px;
+}
+
+.detailedPostDate{
+    font-size: small;
+}
+
+.detailedPostCenter{
+    display: flex;
+    flex-direction: column;
+    margin: 5% 10%;
+}
+
+.detailedPostTitle{
+    font-size: large;
+    font-weight: bold;
+}
+
+.detailedPostText{
+    margin-top: 10px;
+}
+
+.detailedPostImg{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.detailedPostBottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 10px;
+}
+
+.detailedPostCommentText{
+    font-size: 15px;
+}
+
+.detailedPostComment{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+.detailedPostFooter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    background-color: #57068C;
+    color: white;
+    text-align: center;
+    gap:5px;
+    margin-top: 200px;
+}
+
+.detailedPostAddComment{
+    flex:8;
+    width: 100%;
+    height: 30px;
+    background-color:white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}

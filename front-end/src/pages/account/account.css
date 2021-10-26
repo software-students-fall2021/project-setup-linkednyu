@@ -1,0 +1,74 @@
+
+
+.account{
+    display: flex;
+}
+
+.accountTop{
+    display: flex;
+    
+}
+
+.accountBottom{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+
+
+.accountHeader{
+    display: flex;
+    justify-content: center;
+    background-color: #57068c;
+    margin: 5px;
+    padding-top: 2px;
+    
+}
+
+.accountImage{
+    display: flex;
+    margin-left: 15px;
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    
+}
+
+.accountBio{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+.accountName{
+    color:#d6d6d6;
+}
+
+.userClasses{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 10px, solid, red;
+    background-color: #f2f2f2;
+}
+
+.contentTitle{
+    padding: 5px;
+    background-color: #57068c;
+    color: #d6d6d6;
+}
+
+.contentList{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logoutButton{
+    display: flex;
+    justify-content: center;
+}
+
