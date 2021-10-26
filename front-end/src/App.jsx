@@ -14,7 +14,7 @@ function App() {
         <Header />
       </>
       <Switch>
-        <Route path="/" component={Home}>
+        <Route path="/" component={Home} exact>
 
         </Route>
         <Route path="/newpost" component={NewPost}>
@@ -25,6 +25,7 @@ function App() {
 
         </Route>
       </Switch>
+      
     </BrowserRouter>
 
   );
