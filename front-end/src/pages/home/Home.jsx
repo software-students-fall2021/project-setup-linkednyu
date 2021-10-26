@@ -10,7 +10,7 @@ export default function Home() {
                 buttonStyle="btn--primary--solid"
                 buttonSize="btn--medium"
             > Click Here  </Button>
-            <PostBox title = 'foo'userName = 'willis' courseName = 'CalIII' time = '10/23/2021' imageSrc="" imageSrc1="" content = 'It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!'/>
+            <PostBox title='foo' userName='willis' courseName='CalIII' time='10/23/2021' imageSrc="" imageSrc1="" content='It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!' />
         </div>
     )
 }
