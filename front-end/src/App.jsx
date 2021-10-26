@@ -14,18 +14,11 @@ function App() {
         <Header />
       </>
       <Switch>
-        <Route path="/" component={Home} exact>
-
-        </Route>
-        <Route path="/newpost" component={NewPost}>
-
-        </Route>
-
-        <Route path="/account" component={Account}>
-
-        </Route>
+       
+       
+        <Route path="/newpost" component={NewPost}></Route>
+        <Route path="/account" component={Account}></Route>
       </Switch>
-      
     </BrowserRouter>
 
   );
