@@ -1,0 +1,25 @@
+.joinClass{
+    margin:auto;
+    width: 90%;
+    padding: 10%;
+}
+
+.classTitle{
+    display: inline-block;
+    align-items: center;
+    display: flex;
+}
+
+.className{
+    font-weight:bold;
+}
+
+.classTitleInstructor{
+    padding-left: 5%;
+}
+
+.joinButton{
+    display: flex;
+    width: 100%;
+}
+
