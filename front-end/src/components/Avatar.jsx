@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 export default function ImageAvatars({size}) {
   return (
     <Stack direction="row">
-      <Avatar style={{ height:size}} alt="" src="" />
+      <Avatar style={{ height:size , cursor:'pointer' }} alt="" src="" />
     </Stack>
   );
 }

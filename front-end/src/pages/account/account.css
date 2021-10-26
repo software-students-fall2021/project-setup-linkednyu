@@ -15,15 +15,12 @@
     margin: 10px;
 }
 
-
-
 .accountHeader{
     display: flex;
     justify-content: center;
     background-color: #57068c;
     margin: 5px;
-    padding-top: 2px;
-    
+    padding-top: 2px; 
 }
 
 .accountImage{

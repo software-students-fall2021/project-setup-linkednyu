@@ -16,7 +16,7 @@ function App() {
         <Header />
       </>
       <Switch>
-        <Route exact path="/" component={Home}>
+        <Route exact path="/" component={Home} exact>
 
         </Route>
         <Route path="/newpost" component={NewPost}>

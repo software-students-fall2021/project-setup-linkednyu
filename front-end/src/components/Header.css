@@ -24,6 +24,7 @@
 .burgerUi{
     font-size: 30px !important;
     color: white;
+    cursor: pointer;
 }
 
 .searchBox {
