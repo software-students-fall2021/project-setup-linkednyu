@@ -1,14 +1,29 @@
 import './PostBox.css'
 import ImageAvatars from './Avatar'
 
-export const PostBox = () => {
+
+const PostBox = ({title,userName,courseName,time,imageSrc, content}) => {
 	return (
-		<div>
-			<ImageAvatars size="30px"/>
+		<div className="container">
+			<div className = 'task'>
+				<div className = "header">
+					<ImageAvatars className="imgAvatar" size="30px" />
+					<h3 className="userName">{userName}</h3>
+					<h3 className="courseName">{courseName}</h3>
+					<h3 className="time">{time}</h3>
+				</div>
+				<hr/>
+				<div className="content">
+					<h3 className="contenttitle">{title}</h3>
+					<img className="contentImg" src = {imageSrc} alt="" ></img>
+					<p>{content}</p>
+				</div>
+				
+			</div>
+			
 		</div>
+		
 	)
 }
-
-
 
 export default PostBox
