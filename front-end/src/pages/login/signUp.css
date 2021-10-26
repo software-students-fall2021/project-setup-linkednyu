@@ -1,0 +1,21 @@
+.signupPage{
+    margin:auto;
+    width: 90%;
+    padding: 10%;
+}
+
+.title{
+    text-align:center;
+}
+
+.form{
+    margin-top:10%;
+}
+
+.emailInputArea, .pwInputArea{
+    margin-top: 5%;
+}
+
+.unInput, .emailInput, .pwInput{
+    width : 100%;
+}
