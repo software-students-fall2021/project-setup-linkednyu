@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
 
 
-export default function signUp(props){
+export default function signUp(){
     return(
         <div className = "signupPage">
             <div className = "title">
@@ -32,7 +32,7 @@ export default function signUp(props){
                 </div>
             </div>
             <div className = "nextButtonArea">
-                    <Link to="/"><Button variant = "contained" 
+                    <Link to="/"><Button  onClick={()=>setLoggedIn(true)}  variant = "contained" 
                             className = "nextButton"> Next</Button></Link>
                 </div>
         </div>
