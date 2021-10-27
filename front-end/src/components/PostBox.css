@@ -1,8 +1,6 @@
  
 .container {
-    
     max-width: 100%;
-    
 }
 
 .task {
@@ -12,7 +10,6 @@
     margin: 10px auto;
     cursor: pointer;
     height: auto;
-    border-radius: 15px;
 }
 
 .header {

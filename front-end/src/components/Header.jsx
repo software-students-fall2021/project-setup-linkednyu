@@ -1,14 +1,11 @@
 import React from "react"
-
 import "./Header.css"
-
 import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/core/ButtonUnstyled'
 import MaterialButton from '@mui/material/Button'
-
 
 
 
@@ -55,7 +52,6 @@ const Header = props => {
 		}
 	}
 
-
 	return (
 		<nav>
 			{renderMenu()}
@@ -63,7 +59,7 @@ const Header = props => {
 				<div className="topBarItems">
 					<div className="hamburgerMenu">	
 						<Button onClick = {toggleMenu}>
-							<MenuIcon />
+							<MenuIcon className="menuIcon" />
 						</Button>	
 					</div>
 					<div className="searchBox">

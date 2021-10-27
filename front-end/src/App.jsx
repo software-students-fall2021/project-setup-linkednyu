@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/home/Home';
-import NewPost from './pages/newpost/NewPost';
+// import NewPost from './pages/newpost/NewPost';
 import JoinClass from './pages/joinClass/joinClass'
 import Account from './pages/account/Account';
 import Login from './pages/login/login'
@@ -21,7 +21,7 @@ function App() {
       </>
       <Switch>
         <Route path="/" component={Home} exact/>
-        <Route path="/newpost" component={NewPost}/>
+        {/* <Route path="/newpost" component={NewPost}/> */}
         <Route path="/joinclass" component={JoinClass} />
         <Route path="/detailedpost" component={DetailedPost}/>
         
