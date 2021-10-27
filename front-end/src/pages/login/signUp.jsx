@@ -1,6 +1,8 @@
 import "./signUp.css"
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
+import { Link } from "react-router-dom"
+
 
 export default function signUp(props){
     return(
@@ -30,8 +32,8 @@ export default function signUp(props){
                 </div>
             </div>
             <div className = "nextButtonArea">
-                    <Button variant = "contained" 
-                            className = "nextButton"> Next</Button>
+                    <Link to="/"><Button variant = "contained" 
+                            className = "nextButton"> Next</Button></Link>
                 </div>
         </div>
     )

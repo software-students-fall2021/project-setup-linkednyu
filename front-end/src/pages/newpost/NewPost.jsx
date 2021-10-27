@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Button } from '../../components/Button'
 import ImageAvatars from '../../components/Avatar'
 import './NewPost.css'
-import Header from '../../components/Header'
 import { Editor, EditorState } from 'draft-js'
 import 'draft-js/dist/Draft.css'
 
@@ -54,7 +53,6 @@ export default function NewPost() {
 
     return (
         <form className = 'add-form' onSubmit = {onSubmit}>
-            <Header />
             <div className = 'container'>
             <h2> Create a Post </h2>
             <div className = 'form-control'>

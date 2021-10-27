@@ -1,6 +1,7 @@
 import "./login.css"
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
+import { Link } from "react-router-dom"
 
 export default function login(props){
     return(
@@ -25,14 +26,14 @@ export default function login(props){
                 <div className = "underArea">
                     <div className = "otherOptions">
                         <div>
-                            <a href = "/pwreset" className = "otherOptIns">Having trouble?</a>
+                            <Link to = "/pwreset" className = "otherOptIns">Having trouble?</Link>
                         </div>
                         <div>
-                            <a href = "/signup" className = "otherOptIns">I'm new, Sign me up!</a>
+                            <Link to = "/signup" className = "otherOptIns">I'm new, Sign me up!</Link>
                         </div>
                     </div>
                     <div className = "loginButtonArea">
-                        <Button variant = "contained" className = "loginButton"> Go!</Button>
+                        <Link to="/"><Button variant = "contained" className = "loginButton">Go!</Button></Link>
                     </div>
                 </div>
             </div>

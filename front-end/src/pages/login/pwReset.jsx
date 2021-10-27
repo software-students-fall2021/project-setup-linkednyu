@@ -1,6 +1,7 @@
 import "./pwRest.css"
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
+import { Link } from "react-router-dom"
 
 export default function pwReset(props){
     return(
@@ -19,8 +20,8 @@ export default function pwReset(props){
                             required
                             className = "emailInput"></TextField>
                 <div className = "nextButtonArea">
-                    <Button variant = "contained" 
-                            className = "nextButton"> Next</Button>
+                    <Link to="/pwreset2"><Button variant = "contained" 
+                            className = "nextButton"> Next</Button></Link>
                 </div>
             </div>
         </div>

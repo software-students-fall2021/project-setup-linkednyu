@@ -1,44 +1,58 @@
-import { Button } from "../../components/Button"
-import { useState } from 'react'
-import { post } from "../newpost/NewPost"
+import "./home.css"
 import PostBox from "../../components/PostBox"
+import { useState,useEffect } from "react"
+import axios from 'axios'
 
 
 export default function Home() {
-    
-    const [posts, setPosts] = useState([
-        {
-            id: '1',
-            userName: 'foo',
-            courseName: 'woo',
-            time: '1/1',
-            title: 'res',
-            text: 'Scherbastky',
-            privacy: false,
-        }
-    ])
+    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+    const picurl = "https://picsum.photos/v2/list"
+    const [post,setPosts] = useState(null)
+    const [pictures,setPictures] = useState(null)
+    const [loading , setIsloading] = useState(true)
+    const [loading1 , setIsloading1] = useState(true)
 
-    setPosts([...posts, post])
+    useEffect(()=>{
+        async function fetchposts(){
+            await axios.get(url).then(response =>{
+                setPosts(response.data)
+                setIsloading(false)
+            });
+            
+        }
+        fetchposts()
+    },[url])
+
+
+    useEffect(()=>{
+        async function fetchpictures(){
+            await axios.get(picurl).then(response =>{
+                setPictures(response.data)
+                setIsloading1(false)
+            });
+            
+        }
+        fetchpictures()
+    },[picurl])
+
+
+    if (!loading && !loading1){
+        for (let i =0 ; i<post.length ;i++){
+            post[i]["imgSrc"]=pictures[Math.floor(Math.random()*29)].download_url
+        }
+
+    }
+       
 
     return (
-        <div className="homePage">
-            <h1>Post page/Home page</h1>
-            <Button onClick={() => console.log('clicked')}
-                type="Button"
-                buttonStyle="btn--primary--solid"
-                buttonSize="btn--medium"
-            > Click Here  </Button>
-            <div>
-                {(posts.map(
-                    (posts) => (
-                        <PostBox
-                            key = {posts.id}
-                            post = {posts}
-                        />
-                    )
+        <>
+            {!loading && !loading1 && <div className="homePage">
+                {post.map((items) => (
+                    <PostBox key = {items.id} {...items}/>
                 ))}
-            </div>
-        </div>
+            </div>}
+        </>
+        
     )
 }
 

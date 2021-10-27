@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-body {
-	font-family: 'Poppins', sans-serif;
-}
 
-.container {
+.newPostContainer {
 	max-width: 95%;
 	margin: 30px auto;
 	overflow: auto;
@@ -41,7 +38,7 @@ body {
 	justify-content: space-between;
 }
 
-.header {
+.postHeader {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
