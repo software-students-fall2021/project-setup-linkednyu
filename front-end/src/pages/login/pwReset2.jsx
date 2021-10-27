@@ -1,5 +1,6 @@
 import "./pwReset2.css"
 import Button from '@mui/material/Button'
+import {Link} from 'react-router-dom'
 
 export default function pwReset2(props){
     return(
@@ -8,9 +9,9 @@ export default function pwReset2(props){
                 We have sent the reset link to your email address. 
             </div>
             <div className = "nextButtonArea">
-                    <Button variant = "contained" 
+                    <Link to="/login"><Button variant = "contained" 
                             className = "nextButton"
-                            href = "/login"> Return</Button>
+                            > Return</Button></Link>
             </div>
         </div>
     )
