@@ -1,9 +1,9 @@
 .topBarContainer {
-    max-width: 100%;
-    height: 7vh;
-    background-color: #0e0731 ;
-    position: sticky;
-   
+    position: fixed;
+    width: 100%;
+    height: 8%;
+    background-color: #0e0731;
+    z-index: 100;
 }
 
 .topBarItems {
@@ -12,14 +12,20 @@
     display: flex;
     align-items: center;
     margin: 0 auto;
+    justify-content: space-between;
     
 }
 
 .hamburgerMenu{
-    display: flex;
-    justify-content: center;
-    flex:2;
+    margin-right: 3%;
 }
+
+.hamburgerButton{
+    height:30px;
+    width: 30px;
+}
+
+
 
 .burgerUi{
     font-size: 30px !important;
@@ -35,6 +41,7 @@
     border-radius: 20px;
     display: flex;
     align-items: center;
+    margin-left: 3%;
 }
 
 .searchInput {
@@ -52,13 +59,49 @@
    outline: none;
 }
 
-.headerAvatar{
-    display: flex;
-    height: 30px;
-    justify-content: center;
-    flex: 2;
-    
+.avatarContainer{
+    margin-left: 3%;
+    margin-right: 0%;
 }
 
 
+.blankbox{
+    width: 100%;
+    margin-bottom:6%;
+}
 
+.menu{
+    position: fixed;
+    background-color:lightgrey;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+    margin-bottom: 3%;
+    z-index: 100;
+}
+
+.Menuitem{
+    margin-bottom: 3%;
+}
+
+.menuItemGroup{
+    padding-top:20%;
+}
+
+.topBarAndMenu{
+    position:fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 100;;
+    }
+}

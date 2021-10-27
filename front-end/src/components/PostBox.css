@@ -7,11 +7,12 @@
 
 .task {
     background: #f4f4f4;
-    border: 2px solid steelblue;
+    border: 2px solid #57068c;
     max-width: 95%;
     margin: 10px auto;
     cursor: pointer;
     height: auto;
+    border-radius: 15px;
 }
 
 .header {
@@ -57,5 +58,10 @@
     object-fit: contain;
     width : 100%;
     height : 200px;
-   
+    background-color: #57068c;
+}
+
+.privacy{
+    display: flex;
+    color: grey
 }

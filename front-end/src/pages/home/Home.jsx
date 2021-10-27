@@ -1,15 +1,44 @@
+import { Button } from "../../components/Button"
+import { useState } from 'react'
+import { post } from "../newpost/NewPost"
 import PostBox from "../../components/PostBox"
-import './home.css'
+
 
 export default function Home() {
+    
+    const [posts, setPosts] = useState([
+        {
+            id: '1',
+            userName: 'foo',
+            courseName: 'woo',
+            time: '1/1',
+            title: 'res',
+            text: 'Scherbastky',
+            privacy: false,
+        }
+    ])
 
+    setPosts([...posts, post])
 
     return (
         <div className="homePage">
-            <PostBox title = 'How to cook rice' userName = 'Willis' courseName = 'Soft. Engineering' time = '10/23/2021' imageSrc="https://picsum.photos/200" content = 'It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!'/>
-            <PostBox title = 'How to make banana' userName = 'Willis' courseName = 'Soft. Engineering' time = '10/23/2021' imageSrc="https://picsum.photos/200" content = 'It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!'/>
-            <PostBox title = 'What is food?' userName = 'Willis' courseName = 'Soft. Engineering' time = '10/23/2021' imageSrc="https://picsum.photos/200" content = 'It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!'/>
-            <PostBox title = 'What is food?' userName = 'Willis' courseName = 'Soft. Engineering' time = '10/23/2021' imageSrc="https://picsum.photos/200" content = 'It means STOP CODING AND FEED HER DRIED CLOVE FISH!!!'/>
+            <h1>Post page/Home page</h1>
+            <div>
+                {(posts.map(
+                    (posts) => (
+                        <PostBox
+                            key = {posts.id}
+                            post = {posts}
+                        />
+                    )
+                ))}
+            </div>
+            <Button onClick={() => console.log('clicked')}
+                type="Button"
+                buttonStyle="btn--primary--solid"
+                buttonSize="btn--medium"
+            > Click Here  </Button>
         </div>
     )
 }
+
