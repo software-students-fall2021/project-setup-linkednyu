@@ -14,11 +14,14 @@ export default function Home() {
 
     useEffect(()=>{
         async function fetchposts(){
-            await axios.get(url).then(response =>{
-                setPosts(response.data)
-                setIsloading(false)
-            });
-            
+            try {
+                await axios.get(url).then(response =>{
+                    setPosts(response.data)
+                    setIsloading(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchposts()
     },[])
@@ -26,11 +29,14 @@ export default function Home() {
 
     useEffect(()=>{
         async function fetchpictures(){
-            await axios.get(picurl).then(response =>{
-                setPictures(response.data)
-                setIsloading1(false)
-            });
-            
+            try {
+                await axios.get(picurl).then(response =>{
+                    setPictures(response.data)
+                    setIsloading1(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
         }
         fetchpictures()
     },[])
