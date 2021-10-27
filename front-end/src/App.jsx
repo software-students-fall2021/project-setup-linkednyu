@@ -10,6 +10,7 @@ import pwReset from './pages/login/pwReset'
 import pwReset2 from './pages/login/pwReset2'
 import signUp from './pages/login/signUp'
 import DetailedPost from './pages/detailedPost/DetailedPost'
+import NewPost2 from './pages/newpost/NewPost2'
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/pwreset2" component={pwReset2} />
         <Route path="/signup" component={signUp} />
         <Route path="/account" component={Account} />
+        <Route path="/newpost2" component={NewPost2}/>
 
       </Switch>
     </BrowserRouter>
