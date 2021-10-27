@@ -58,26 +58,24 @@ const Header = props => {
 
 	return (
 		<nav>
-			<div className = "topBarAndMenu">
-				<div className="topBarContainer">
-					<div className="topBarItems">
-						<div className="hamburgerMenu">	
-							<Button onClick = {toggleMenu}>
-								<MenuIcon />
-							</Button>	
-						</div>
-						<div className="searchBox">
-							<SearchIcon className="searchIcon"/>
-							<input placeholder="Search for a channel or post" className="searchInput"/>
-						</div>
-						<div className="avatarContainer">
-							<Avatar className = "avatarIcon"
-									sx={{width: 30, height:30}}>
-							</Avatar>
-						</div>
+			{renderMenu()}
+			<div className="topBarContainer">
+				<div className="topBarItems">
+					<div className="hamburgerMenu">	
+						<Button onClick = {toggleMenu}>
+							<MenuIcon />
+						</Button>	
+					</div>
+					<div className="searchBox">
+						<SearchIcon className="searchIcon"/>
+						<input placeholder="Search for a channel or post" className="searchInput"/>
+					</div>
+					<div className="avatarContainer">
+						<Avatar className = "avatarIcon"
+								sx={{width: 30, height:30}}>
+						</Avatar>
 					</div>
 				</div>
-				{renderMenu()}
 			</div>
 			<div className = "blankbox">
 				.
