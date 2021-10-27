@@ -6,7 +6,7 @@ import { useParams } from "react-router"
 
 
 export default function Home() {
-    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+    const url = "https://my.api.mockaroo.com/posts.json?key=4c2be790"
     const picurl = "https://picsum.photos/v2/list"
     const [post,setPosts] = useState(null)
     const [pictures,setPictures] = useState(null)

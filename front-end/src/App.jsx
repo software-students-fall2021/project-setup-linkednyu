@@ -11,7 +11,7 @@ import pwReset2 from './pages/login/pwReset2'
 import DetailedPost from './pages/detailedPost/DetailedPost'
 import Channel from './pages/channel/Channel'
 import { useState } from 'react';
-import signUp from './pages/login/signUp';
+import SignUp from './pages/login/signUp';
 
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
         <Route path="/pwreset" component={pwReset} />
         <Route path="/pwreset2" component={pwReset2} />
 
-        <Route path="/signup"> <signUp></signUp> </Route>
+        <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
 
-        <Route path="/account" component={Account} />
+        <Route path="/account" > <Account setloggedIn={setloggedIn} /></Route>
 
       </Switch>
     </BrowserRouter>

@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
 
 
-export default function signUp(){
+export default function SignUp({setLoggedIn}){
     return(
         <div className = "signupPage">
             <div className = "title">
