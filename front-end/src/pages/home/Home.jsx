@@ -21,7 +21,7 @@ export default function Home() {
             
         }
         fetchposts()
-    },[url])
+    },[])
 
 
     useEffect(()=>{
@@ -33,7 +33,7 @@ export default function Home() {
             
         }
         fetchpictures()
-    },[picurl])
+    },[])
 
 
     if (!loading && !loading1){
