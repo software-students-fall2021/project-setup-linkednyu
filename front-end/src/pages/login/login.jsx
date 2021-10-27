@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
 
-export default function login(props){
+export default function login({setLoggedIn}){
     return(
         <div className = "loginPage">
             <div className = "signinTitle">
@@ -33,7 +33,7 @@ export default function login(props){
                         </div>
                     </div>
                     <div className = "loginButtonArea">
-                        <Link to="/"><Button variant = "contained" className = "loginButton">Go!</Button></Link>
+                        <Link to="/"><Button onClick={()=>setLoggedIn(true)} variant = "contained" className = "loginButton">Go!</Button></Link>
                     </div>
                 </div>
             </div>

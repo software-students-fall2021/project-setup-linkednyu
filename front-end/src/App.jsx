@@ -8,29 +8,33 @@ import Account from './pages/account/Account';
 import Login from './pages/login/login'
 import pwReset from './pages/login/pwReset'
 import pwReset2 from './pages/login/pwReset2'
-import signUp from './pages/login/signUp'
 import DetailedPost from './pages/detailedPost/DetailedPost'
+import Channel from './pages/channel/Channel'
+import { useState } from 'react';
+import SignUp from './pages/login/signUp';
 import NewPost2 from './pages/newpost/NewPost2'
 
 
 
 function App() {
+  const [loggedIn,setloggedIn] = useState(false)
+
   return (
     <BrowserRouter>
       <>
-        <Header />
+        <Header loggedIn={loggedIn} setloggedIn={setloggedIn}/>
       </>
       <Switch>
         <Route path="/" component={Home} exact/>
         <Route path="/newpost" component={NewPost}/>
         <Route path="/joinclass" component={JoinClass} />
         <Route path="/detailedpost" component={DetailedPost}/>
-        
-        <Route path="/login" component={Login} />
+        <Route path="/channel/:id" component={Channel}/>
+        <Route path="/login" > <Login setLoggedIn={setloggedIn}/> </Route>
         <Route path="/pwreset" component={pwReset} />
         <Route path="/pwreset2" component={pwReset2} />
-        <Route path="/signup" component={signUp} />
-        <Route path="/account" component={Account} />
+        <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
+        <Route path="/account" > <Account setloggedIn={setloggedIn} /></Route>
         <Route path="/newpost2" component={NewPost2}/>
 
       </Switch>

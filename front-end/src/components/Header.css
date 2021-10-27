@@ -41,6 +41,7 @@
 .searchIcon{
     font-size: 23px !important;
     margin-left: 10px ;
+    cursor: pointer;
 }
 
 .searchInput:focus{

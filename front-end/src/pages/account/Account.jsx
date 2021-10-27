@@ -1,7 +1,8 @@
 import { Button } from "../../components/Button"
 import "./account.css"
+import { Link } from "react-router-dom"
 
-export default function Account() {
+export default function Account({setloggedIn}) {
     return (
         <>
             <div className="accountPage">
@@ -41,11 +42,15 @@ export default function Account() {
                         </div>
                     </div>
                     <div className="logoutButton">
-                        <Button onClick={() => console.log('clicked')}
+                    <Link to ="/">
+                        <Button onClick={()=>{
+                            setloggedIn(false)
+                        }}
                         type="Button"
                         buttonStyle="btn--primary--solid"
                         buttonSize="btn--medium"
                     > Logout  </Button>
+                    </Link>
                     </div>
                 </div>
                 

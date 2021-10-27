@@ -10,12 +10,18 @@ import { Link } from "react-router-dom";
 
 
 
-const Header = props => {
+const Header = ({loggedIn ,setloggedIn}) => {
 	
 	const [menuShow, setMenuShow] = useState(false)
 
 	const toggleMenu = () =>{
 		setMenuShow(!menuShow);
+	}
+
+	const logout = ()=>{
+		setMenuShow(!menuShow)
+		setloggedIn(false)
+
 	}
 
 	const renderMenu = ()=>{
@@ -48,10 +54,12 @@ const Header = props => {
 							</Link>
 						</div>
 						<div className = "Menuitem">
-							<MaterialButton onClick={toggleMenu} variant = "outlined"
+						<Link to ="/">
+							<MaterialButton onClick={logout} variant = "outlined"
 											size = "large">
 								Sign out
 							</MaterialButton>
+						</Link>
 						</div>
 					</div>
 				</div>
@@ -74,11 +82,11 @@ const Header = props => {
 						<input placeholder="Search for a channel or post" className="searchInput"/>
 					</div>
 					<div className="avatarContainer">
-						<Link to="/account">
+						<Link to={loggedIn ? "/account" : "/" }>
 							<Avatar onClick={()=>{
 								setMenuShow(false);
 							}} className = "avatarIcon"
-									sx={{width: 30, height:30}} src="https://picsum.photos/200">
+									sx={{width: 30, height:30}} src={loggedIn ? "https://picsum.photos/200": ""}>
 							</Avatar>
 						</Link>
 					</div>
