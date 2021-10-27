@@ -73,6 +73,7 @@
     text-align: center;
     height: 100%;
     width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .Menuitem{
@@ -88,4 +89,14 @@
     z-index: 100;
     width: 100%;
     height: 100%;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 100;;
+    }
 }
