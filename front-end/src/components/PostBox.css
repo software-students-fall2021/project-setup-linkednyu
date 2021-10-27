@@ -1,26 +1,66 @@
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-
+ 
 .container {
-    font-family: 'Poppins', sans-serif;
+    
+    max-width: 100%;
+    
+}
+
+.task {
+    background: #f4f4f4;
+    border: 2px solid #57068c;
     max-width: 95%;
-    margin: 30px auto;
-    overflow: auto;
-    min-height: 300px;
-    border: 5px solid steelblue;
-    padding: 30px;
+    margin: 10px auto;
+    cursor: pointer;
+    height: auto;
     border-radius: 15px;
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 5px 0px;
     align-items: center;
-    margin-bottom: 20px;
 }
 
-.task {
-    background: #f4f4f4;
-    margin: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
+.userName{
+    margin-left: 7px;
+    display: flex;
+    flex:2;
+    justify-content: flex-start;
+    font-size: 0.9em;
+}
+
+.courseName{
+    display: flex;
+    flex: 7;
+    justify-content: flex-start;
+    font-size: 0.9em;
+}
+
+.time{
+    display: flex;
+    flex: 3;
+    justify-content: flex-end;
+    font-size: 0.9em;
+}
+
+.content{
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.contenttitle{
+    margin: 7px 0px;
+}
+
+.contentImg{
+    width : 100%;
+    height : 200px;
+    background-color: #57068c;
+}
+
+.privacy{
+    display: flex;
+    color: grey
 }

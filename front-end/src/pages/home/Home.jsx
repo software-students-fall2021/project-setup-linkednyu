@@ -1,11 +1,12 @@
 import { Button } from "../../components/Button"
 import { useState } from 'react'
+import { post } from "../newpost/NewPost"
 import PostBox from "../../components/PostBox"
-import NewPost from "../newpost/NewPost"
-import ListPosts from '../newpost/ListPosts'
+
 
 export default function Home() {
-    const[posts, setPosts] = useState([
+    
+    const [posts, setPosts] = useState([
         {
             id: '1',
             userName: 'foo',
@@ -17,11 +18,7 @@ export default function Home() {
         }
     ])
 
-    const onCreate = (post) => {
-        const id = Math.floor(Math.random() * 1000) + 1
-        const newPost = { id, ...post }
-        setPosts([...posts, newPost])
-    }
+    setPosts([...posts, post])
 
     return (
         <div className="homePage">
@@ -31,12 +28,17 @@ export default function Home() {
                 buttonStyle="btn--primary--solid"
                 buttonSize="btn--medium"
             > Click Here  </Button>
-
-            <NewPost onCreate = {onCreate}/>
-            {posts.length > 0 ? 
-                <listPosts 
-                    posts = {posts}
-                /> : ('No Post To Show')}
+            <div>
+                {(posts.map(
+                    (posts) => (
+                        <PostBox
+                            key = {posts.id}
+                            post = {posts}
+                        />
+                    )
+                ))}
+            </div>
         </div>
     )
 }
+

@@ -1,0 +1,59 @@
+.loginPage{
+    margin:auto;
+    width: 90%;
+    padding: 10%;
+}
+
+.signinTitle{
+    text-align: center;
+    font-weight: bold;
+    font-size:x-large;
+}
+
+.inputArea{
+    margin-top: 10%;
+    width: 100%;
+}
+
+.instruction{
+    font-size:medium;
+    margin-top: 4%;
+    margin-bottom: 2%;
+}
+
+.emailInput{
+    width: 100%;
+    height: 1%;
+    padding: 10%;
+}
+
+.passwordInput{
+    width: 100%;
+}
+
+.passwordArea{
+    margin-top:6%;
+}
+
+.underArea{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.otherOptions{
+    font-size:medium;
+    color:grey;
+    text-decoration: underline;
+    margin-top:4%;
+}
+
+.otherOptIns:link .otherOptIns:visited{
+    color:grey;
+}
+
+.loginButtonArea{
+    padding-top: 6%;
+}

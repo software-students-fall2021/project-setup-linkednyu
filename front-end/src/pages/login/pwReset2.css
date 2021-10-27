@@ -1,0 +1,17 @@
+.resetResultPage{
+    margin:auto;
+    width: 90%;
+    padding: 10%;
+}
+
+.title{
+    font-size:x-large;
+    font-weight: bold;
+    margin-top: 10%;
+}
+
+.nextButtonArea{
+    display:flex;
+    justify-content: center;
+    margin-top: 10%;
+}
