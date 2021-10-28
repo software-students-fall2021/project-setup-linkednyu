@@ -15,24 +15,34 @@ export default function Home() {
     const {id}= useParams();
 
     useEffect(()=>{
-        async function fetchposts(){
-            await axios.get(url).then(response =>{
-                setPosts(response.data)
-                setIsloading(false)
-            });
-            
-        }
+
+            async function fetchposts(){
+                try{
+                    await axios.get(url).then(response =>{
+                        setPosts(response.data)
+                        setIsloading(false)
+                    });
+
+                } catch(error){
+                    console.log(error);
+                }
+                
+             
+            }
         fetchposts()
     },[])
 
 
     useEffect(()=>{
         async function fetchpictures(){
-            await axios.get(picurl).then(response =>{
-                setPictures(response.data)
-                setIsloading1(false)
-            });
-            
+            try{
+                await axios.get(picurl).then(response =>{
+                    setPictures(response.data)
+                    setIsloading1(false)
+                });
+            } catch (error){
+                console.log(error);
+            }
         }
         fetchpictures()
     },[])

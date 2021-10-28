@@ -127,11 +127,20 @@
 
 .detailedPostAddComment{
     flex:8;
-    width: 100%;
+    width: 90%;
     height: 30px;
     background-color:white;
     border-radius: 20px;
     display: flex;
+    margin-left: 10px;
     align-items: center;
     text-align: center;
+}
+
+.commentButtonSection{
+    margin-right: 10px; 
+}
+
+.commentButton{
+    font-size: 12px !important;
 }

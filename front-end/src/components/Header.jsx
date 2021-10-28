@@ -37,14 +37,14 @@ const Header = ({loggedIn ,setloggedIn}) => {
 								</MaterialButton>	
 							</Link>
 						</div>
-						<div className = "Menuitem">
-							<Link to="/newpost">
+						{loggedIn && <div className = "Menuitem">
+							<Link to= "/newpost2" >
 								<MaterialButton onClick={toggleMenu} variant = "outlined"
 												size = "large">
 									New Post
 								</MaterialButton>
 							</Link>
-						</div>
+						</div>}
 						<div className = "Menuitem">
 							<Link to ="/login">
 								<MaterialButton onClick={toggleMenu} variant = "outlined"
@@ -82,7 +82,7 @@ const Header = ({loggedIn ,setloggedIn}) => {
 						<input placeholder="Search for a channel or post" className="searchInput"/>
 					</div>
 					<div className="avatarContainer">
-						<Link to={loggedIn ? "/account" : "/" }>
+						<Link to={loggedIn ? "/account" : "/" } onClick={ !loggedIn ?(event) => event.preventDefault():"" }>
 							<Avatar onClick={()=>{
 								setMenuShow(false);
 							}} className = "avatarIcon"

@@ -1,5 +1,5 @@
 import "./detailedPost.css"
-import { Button } from "../../components/Button"
+import { Button } from "@mui/material"
 import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
@@ -15,10 +15,15 @@ export default function DetailedPost() {
 
     useEffect(() => {
         async function fetchposts() {
-            await axios.get(url).then(response => {
-                setPosts(response.data[0])
-                setIsloading(false)
-            });
+            try{
+                await axios.get(url).then(response => {
+                    setPosts(response.data[0])
+                    setIsloading(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+           
 
         }
         fetchposts()
@@ -54,10 +59,8 @@ export default function DetailedPost() {
                         </div>
                     </div>
                     <div className="detailedPostTopRight">
-                        <Button onClick={() => console.log('clicked')}
-                            type="Button"
-                            buttonStyle="btn--primary--solid"
-                            buttonSize="btn--large"
+                        <Button className="commentButton" onClick={() => console.log('clicked')}
+                            variant="contained"
                         > Join  </Button>
                     </div>
                 </div>
@@ -76,11 +79,11 @@ export default function DetailedPost() {
                 </div>
                 <div className="detailedPostFooter">
                     <input placeholder="Comment Something..." className="detailedPostAddComment" />
-                    <Button onClick={() => console.log('clicked')}
-                        type="Button"
-                        buttonStyle="btn--primary--solid"
-                        buttonSize="btn--small"
-                    > Comment  </Button>
+                    <div className="commentButtonSection">
+                        <Button className="commentButton" onClick={() => console.log('clicked')}
+                            variant="contained"
+                        > Comment  </Button>
+                    </div>      
                 </div>
             </div>
         </div >}

@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/home/Home';
-import NewPost from './pages/newpost/NewPost';
 import JoinClass from './pages/joinClass/joinClass'
 import Account from './pages/account/Account';
 import Login from './pages/login/login'
@@ -26,7 +25,6 @@ function App() {
       </>
       <Switch>
         <Route path="/" component={Home} exact/>
-        <Route path="/newpost" component={NewPost}/>
         <Route path="/joinclass" component={JoinClass} />
         <Route path="/detailedpost" component={DetailedPost}/>
         <Route path="/channel/:id" component={Channel}/>
@@ -35,8 +33,7 @@ function App() {
         <Route path="/pwreset2" component={pwReset2} />
         <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
         <Route path="/account" > <Account setloggedIn={setloggedIn} /></Route>
-        <Route path="/newpost2" component={NewPost2}/>
-
+        <Route path="/newpost2" > <NewPost2 loggedIn={loggedIn} /></Route>
       </Switch>
     </BrowserRouter>
 
