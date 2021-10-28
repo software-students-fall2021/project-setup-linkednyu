@@ -2,6 +2,7 @@ import './joinClass.css'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
+
 import { useState } from "react";
 import { useEffect } from "react";
 

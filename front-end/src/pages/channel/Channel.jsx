@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useParams } from "react-router"
 
 
-export default function Home() {
+export default function Channel ({loggedIn}) {
     const url = "https://my.api.mockaroo.com/posts.json?key=4c2be790"
     const picurl = "https://picsum.photos/v2/list"
     const [post,setPosts] = useState(null)
@@ -61,7 +61,7 @@ export default function Home() {
             {!loading && !loading1 && <div className="channelPage">
                 <h2 className="channelHeader">{id}</h2>
                 {post.map((items) => (
-                    <PostBox key = {items.id} {...items}/>
+                    <PostBox key = {items.id} loggedIn={loggedIn} post={items}  />
                 ))}
             </div>}
         </>
