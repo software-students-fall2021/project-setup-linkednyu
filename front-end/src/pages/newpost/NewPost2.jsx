@@ -72,7 +72,7 @@ const NewPost2 = ({ loggedIn }) => {
                 </div>
 
                 <div className="buttonSection">
-                    <Button className="draftButton" >
+                    <Button className="draftButton" onClick = {() => alert('Draft saved')}>
                         Draft
                     </Button>
                     <Link to="/"><Button className="postButton" buttonStyle="btn--dark--solid">

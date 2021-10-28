@@ -4,6 +4,7 @@ import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
+//import { stepContentClasses } from "@mui/material"
 
 export default function DetailedPost() {
     const url = "https://61798eeaaa7f340017404b69.mockapi.io/post"
@@ -12,6 +13,23 @@ export default function DetailedPost() {
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
     const [loadingComment, setIsloadingComment] = useState(true)
+
+    const [content, setContent] = useState('')
+
+    const onComment = (e) => {
+        e.preventDefault()
+
+        if(!comment){
+            alert('please add a comment')
+            return
+        }
+        
+        //for mapping
+        //const id = Math.floor(Math.random() * 1000) + 1
+        setComments([...comment, content])
+
+        setContent('')
+    }
 
     useEffect(() => {
         async function fetchposts() {
@@ -30,14 +48,14 @@ export default function DetailedPost() {
     }, [])
 
     useEffect(() => {
-        async function fetchcomments() {
+        async function fetchComments() {
             await axios.get(commenturl).then(response => {
                 setComments(response.data)
                 setIsloadingComment(false)
             });
 
         }
-        fetchcomments()
+        fetchComments()
     }, [])
 
     return (
@@ -59,7 +77,7 @@ export default function DetailedPost() {
                         </div>
                     </div>
                     <div className="detailedPostTopRight">
-                        <Button className="commentButton" onClick={() => console.log('joined')}
+                        <Button className="commentButton" onClick={() => alert('successfully joined!')}
                             buttonSize="btn--medium" buttonStyle="btn--primary--solid"
                         > Join  </Button>
                     </div>
@@ -77,14 +95,14 @@ export default function DetailedPost() {
                         <Comment comment={p} />
                     ))}
                 </div>
-                <div className="detailedPostFooter">
-                    <input placeholder="Comment Something..." className="detailedPostAddComment" />
+                <form className="detailedPostFooter" onSubmit = {onComment}>
+                    <input placeholder="Comment Something..." className="detailedPostAddComment" value = {content} onChange = {(e) => setContent(e.target.value)}/>
                     <div className="commentButtonSection">
                         <Button className="commentButton" onClick={() => console.log('clicked')}
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                         > Comment  </Button>
                     </div>
-                </div>
+                </form>
             </div>
         </div >}
         </>
