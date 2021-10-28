@@ -45,22 +45,28 @@ const Header = ({loggedIn ,setloggedIn}) => {
 								</MaterialButton>
 							</Link>
 						</div>}
-						<div className = "Menuitem">
+						{
+							!loggedIn && <div className = "Menuitem">
 							<Link to ="/login">
 								<MaterialButton onClick={toggleMenu} variant = "outlined"
 												size = "large">
 									Sign in
 								</MaterialButton>
 							</Link>
-						</div>
-						<div className = "Menuitem">
-						<Link to ="/">
-							<MaterialButton onClick={logout} variant = "outlined"
-											size = "large">
-								Sign out
-							</MaterialButton>
-						</Link>
-						</div>
+							</div>
+						}
+						
+						{
+							loggedIn && <div className = "Menuitem">
+							<Link to ="/">
+								<MaterialButton onClick={logout} variant = "outlined"
+												size = "large">
+									Sign out
+								</MaterialButton>
+							</Link>
+							</div>
+						}
+						
 					</div>
 				</div>
 			)
