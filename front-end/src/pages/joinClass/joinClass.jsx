@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import axios from 'axios'
+import { Link } from "react-router-dom"
+
 
 const JoinClass = (props) => {
     
@@ -47,7 +49,7 @@ const JoinClass = (props) => {
         <div className = "joinClass">
             {genClass()}
             <div>
-                <Button variant="contained" className = "joinButton">Join Class</Button>
+                <Link to="/channel/Mathematics"><Button variant="contained" className = "joinButton">Join Class</Button></Link>
             </div>
         </div>
     )
