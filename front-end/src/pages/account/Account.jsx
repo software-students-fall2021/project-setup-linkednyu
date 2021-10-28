@@ -7,7 +7,7 @@ export default function Account({ setloggedIn }) {
     return (
         <>
             <div className="accountPage">
-                <div class="accountHeader">
+                <div className="accountHeader">
                     <h1 className="accountName">Albert Smith</h1>
                 </div>
                 <div className="accountTop">

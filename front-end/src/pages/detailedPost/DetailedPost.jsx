@@ -4,7 +4,7 @@ import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
-import { stepContentClasses } from "@mui/material"
+//import { stepContentClasses } from "@mui/material"
 
 export default function DetailedPost() {
     const url = "https://61798eeaaa7f340017404b69.mockapi.io/post"
@@ -23,9 +23,9 @@ export default function DetailedPost() {
             alert('please add a comment')
             return
         }
-
-        const id = Math.floor(Math.random() * 1000) + 1
-        console.log(comment)
+        
+        //for mapping
+        //const id = Math.floor(Math.random() * 1000) + 1
         setComments([...comment, content])
 
         setContent('')
