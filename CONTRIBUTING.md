@@ -22,6 +22,20 @@ You will need the following:
 
 - [MongoDB](https://docs.mongodb.com/manual/installation/)
 
+- CKeditor
+
+	```
+	npm install --save @ckeditor/ckeditor5-build-classic
+	# Or:
+	npm install --save @ckeditor/ckeditor5-build-inline
+	# Or:
+	npm install --save @ckeditor/ckeditor5-build-balloon
+	# Or:
+	npm install --save @ckeditor/ckeditor5-build-balloon-block
+	# Or:
+	npm install --save @ckeditor/ckeditor5-build-decoupled-document
+	```
+
 Refer to official websites for detailed instructions.
 
 # Team Norms
