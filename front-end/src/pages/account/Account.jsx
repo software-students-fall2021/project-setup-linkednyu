@@ -15,7 +15,7 @@ export default function Account({setloggedIn}) {
                     </div>
                     <div className="accountBio">
                         <h2>Bio</h2>
-                        <span className ="accountBio">Hi! I'm a typical NYU student taking classes and having a great time yay.</span>
+                        <span>Hi! I'm a typical NYU student taking classes and having a great time yay.</span>
                     </div>
                 </div>
                 <div className="accountBottom">

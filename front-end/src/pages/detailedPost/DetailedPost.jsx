@@ -15,10 +15,15 @@ export default function DetailedPost() {
 
     useEffect(() => {
         async function fetchposts() {
-            await axios.get(url).then(response => {
-                setPosts(response.data[0])
-                setIsloading(false)
-            });
+            try{
+                await axios.get(url).then(response => {
+                    setPosts(response.data[0])
+                    setIsloading(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+           
 
         }
         fetchposts()

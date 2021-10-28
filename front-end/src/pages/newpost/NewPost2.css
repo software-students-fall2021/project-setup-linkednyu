@@ -1,17 +1,90 @@
-.newpostpage{
+.newPostPage{
     width: 100%;
-    height: 100%;
+    margin-top: 50px;
     background-color: lightgrey;
 }
 
-.title{
-    margin-top: 20%;
-    margin-left: 12%;
-    text-align:left;
+.newPostCenter{
+    max-width: 95%;
+    padding: 15px 0px;
+    
+    margin: 0 auto;
 }
 
-.textbox{
-    width: 80%;
+.postPageTitle{
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    text-align:left;
+    height: 40px;
+    color: white;
+    font-size: 1.3em;
+    padding-left: 20px;
+}
+
+.channelAndUser{
+    margin: 15px 0px;
+    display: flex;
+    padding: 10px 20px;
+    border: 2px solid black;
+    width: 100%;
+    height: auto;
+}
+
+.channelSelect{
+    border: 1px solid black;
+    height: 38px;
+}
+
+.channelButton{
+    color: #FFFFFF !important;
+}
+
+
+.plusSign{
+    margin-bottom: 3px;
+    margin-left: 2px;
+}
+
+.avatarAndUser{
+    display: flex;
+    justify-content: flex-end;
+    flex: 9;
+    align-items: center;
+}
+
+.postUserName{
+   margin-left: 4px;
+}
+
+.titleAndContent{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 20px;
+    height: 300px;
+    border: 2px solid black;
+}
+
+/* .titleTextBox{
+    width: 100%;
+    height: 30px ;
+    resize: none;
+    line-height: 25px;
+} */
+
+.form-control {
+	margin: 10px 0;
+}
+       
+.form-control input {
+	width: 100%;
+	height: 40px;
+	padding: 3px 7px;
+	font-size: 17px;
+	border-radius: 5px;
+}
+/* .textbox{
+    width: 100%;
     margin-left:auto;
     margin-right:auto;
     border-width: 1%;
@@ -33,4 +106,4 @@
 .titletextbox{
     width:100%;
     resize: none;
-}
+} */
