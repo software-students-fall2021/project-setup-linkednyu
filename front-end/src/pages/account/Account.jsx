@@ -1,13 +1,13 @@
-// import {Button}  from "../../components/Button"
-import Button from "@mui/material/Button"
+import { Button } from "../../components/Button"
+//import Button from "@mui/material/Button"
 import "./account.css"
 import { Link } from "react-router-dom"
 
-export default function Account({setloggedIn}) {
+export default function Account({ setloggedIn }) {
     return (
         <>
             <div className="accountPage">
-                <div class ="accountHeader">
+                <div class="accountHeader">
                     <h1 className="accountName">Albert Smith</h1>
                 </div>
                 <div className="accountTop">
@@ -43,16 +43,16 @@ export default function Account({setloggedIn}) {
                         </div>
                     </div>
                     <div className="logoutButton">
-                    <Link to ="/">
-                        <Button onClick={()=>{
-                            setloggedIn(false)
-                        }}
-                        variant="contained"
-                    > Logout  </Button>
-                    </Link>
+                        <Link to="/">
+                            <Button onClick={() => {
+                                setloggedIn(false)
+                            }}
+                                buttonSize="btn--large"
+                            > Logout  </Button>
+                        </Link>
                     </div>
                 </div>
-                
+
             </div>
         </>
     )

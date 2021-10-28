@@ -1,6 +1,8 @@
 
 .accountPage{
     padding-top: 60px;
+    background-color: #5f5d98;
+    height: 100vh;
     
 }
 
@@ -10,6 +12,7 @@
 
 .accountTop{
     display: flex;
+    color: white;
     
 }
 
@@ -23,6 +26,7 @@
     display: flex;
     justify-content: center;
     background-color: #57068c;
+    border-radius: 5px;
     margin: 5px;
     padding-top: 2px; 
 }
@@ -50,7 +54,7 @@
 }
 
 .accountName{
-    color:#d6d6d6;
+    color:white;
 }
 
 .userClasses{
@@ -58,13 +62,15 @@
     flex-direction: column;
     margin: 10px;
     border: 10px, solid, red;
-    background-color: #f2f2f2;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .contentTitle{
     padding: 5px;
     background-color: #57068c;
-    color: #d6d6d6;
+    border-radius: 5px;
+    color:white;
 }
 
 .contentList{

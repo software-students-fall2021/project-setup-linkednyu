@@ -2,8 +2,9 @@ import "./button.css"
 
 const STYLES = [
 	"btn--primary--solid",
-	//"btn--primary--outline",
-	"btn--warning--solid",
+	"btn--primary--outline",
+	"btn--dark--solid",
+	"btn--dark--outline",
 	//"btn--warning--outline",
 	//"btn--danger--solid",
 	//"btn--danger--outline",
@@ -14,7 +15,8 @@ const STYLES = [
 const SIZES = [
 	"btn--medium",
 	"btn--small",
-	"btn--large"
+	"btn--large",
+	"btn--large--fixed"
 ]
 
 export const Button = ({
