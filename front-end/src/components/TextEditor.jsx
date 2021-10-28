@@ -22,5 +22,3 @@ export default function TextEd() {
         </div>
     )
 }
-
-// export default TextEd
