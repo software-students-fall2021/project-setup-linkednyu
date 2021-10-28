@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 export default function Home({loggedIn}) {
-    const url = "https://my.api.mockaroo.com/posts.json?key=4c2be790"
+    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
     const picurl = "https://picsum.photos/v2/list"
     const [post,setPosts] = useState(null)
     const [pictures,setPictures] = useState(null)
