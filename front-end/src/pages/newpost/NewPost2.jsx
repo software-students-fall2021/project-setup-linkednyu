@@ -4,6 +4,7 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import TextEd from "../../components/TextEditor";
 
 const NewPost2 = ({loggedIn}) => {
     const [title, setTitle] = useState("");
@@ -65,11 +66,18 @@ const NewPost2 = ({loggedIn}) => {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
-
-                    <div className="draftJs">
-
+                    <div className="ckeditor">
+                        <TextEd/>
                     </div>
+                </div>
 
+                <div className="buttonSection">
+                        <Button className="draftButton" variant="contained">
+                            Draft
+                        </Button>
+                        <Button className="postButton" variant="contained">
+                            Post
+                        </Button>
                 </div>
                 {/* <div className = "textbox">
                     <textarea placeholder="Title" name="" id="" cols="10" rows="1" className="titletextbox"></textarea>

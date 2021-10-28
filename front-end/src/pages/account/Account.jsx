@@ -1,4 +1,5 @@
-import { Button } from "../../components/Button"
+// import {Button}  from "../../components/Button"
+import Button from "@mui/material/Button"
 import "./account.css"
 import { Link } from "react-router-dom"
 
@@ -46,9 +47,7 @@ export default function Account({setloggedIn}) {
                         <Button onClick={()=>{
                             setloggedIn(false)
                         }}
-                        type="Button"
-                        buttonStyle="btn--primary--solid"
-                        buttonSize="btn--medium"
+                        variant="contained"
                     > Logout  </Button>
                     </Link>
                     </div>
