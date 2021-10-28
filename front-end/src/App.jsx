@@ -24,10 +24,10 @@ function App() {
         <Header loggedIn={loggedIn} setloggedIn={setloggedIn}/>
       </>
       <Switch>
-        <Route path="/" component={Home} exact/>
+        <Route path="/" exact><Home loggedIn={loggedIn} /></Route>
         <Route path="/joinclass" component={JoinClass} />
         <Route path="/detailedpost" component={DetailedPost}/>
-        <Route path="/channel/:id" component={Channel}/>
+        <Route path="/channel/:id"> <Channel loggedIn={loggedIn} /></Route>
         <Route path="/login" > <Login setLoggedIn={setloggedIn}/> </Route>
         <Route path="/pwreset" component={pwReset} />
         <Route path="/pwreset2" component={pwReset2} />

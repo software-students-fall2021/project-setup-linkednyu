@@ -4,7 +4,7 @@ import { useState,useEffect } from "react"
 import axios from 'axios'
 
 
-export default function Home() {
+export default function Home({loggedIn}) {
     const url = "https://my.api.mockaroo.com/posts.json?key=4c2be790"
     const picurl = "https://picsum.photos/v2/list"
     const [post,setPosts] = useState(null)
@@ -54,7 +54,7 @@ export default function Home() {
         <>
             {!loading && !loading1 && <div className="homePage">
                 {post.map((items) => (
-                    <PostBox key = {items.id} {...items}/>
+                    <PostBox key = {items.id} loggedIn={loggedIn} post={items}  />
                 ))}
             </div>}
         </>

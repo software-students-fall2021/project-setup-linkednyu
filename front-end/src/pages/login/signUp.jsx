@@ -1,5 +1,6 @@
 import "./signUp.css"
-import Button from '@mui/material/Button'
+import { Button } from "../../components/Button"
+
 import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
 
@@ -32,8 +33,7 @@ export default function SignUp({setLoggedIn}){
                 </div>
             </div>
             <div className = "nextButtonArea">
-                    <Link to="/"><Button  onClick={()=>setLoggedIn(true)}  variant = "contained" 
-                            className = "nextButton"> Next</Button></Link>
+            <Link to="/"><Button onClick={() => setLoggedIn(true)} buttonSize="btn--large" buttonStyle="btn--primary--solid" className="loginButton">Next</Button></Link>
                 </div>
         </div>
     )
