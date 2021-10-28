@@ -1,4 +1,4 @@
-import Button from "@mui/material/Button"
+import { Button } from '../../components/Button'
 import "./NewPost2.css"
 import { Avatar } from "@mui/material"
 import { useState } from "react";
@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import TextEd from "../../components/TextEditor";
 import { Link } from "react-router-dom";
 
-const NewPost2 = ({loggedIn}) => {
+const NewPost2 = ({ loggedIn }) => {
     const [title, setTitle] = useState("");
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -18,16 +18,16 @@ const NewPost2 = ({loggedIn}) => {
         setAnchorEl(null);
     };
 
-    
-    return(
-        <div className = "newPostPage">
+
+    return (
+        <div className="newPostPage">
             <div className="newPostCenter">
-                <div className = "postPageTitle">
+                <div className="postPageTitle">
                     Create a Post
                 </div>
                 <div className="channelAndUser">
                     <div className="channelSelect">
-                        <Button className="channelButton" 
+                        <Button className="channelButton"
                             id="basic-button"
                             aria-controls="basic-menu"
                             aria-haspopup="true"
@@ -41,7 +41,7 @@ const NewPost2 = ({loggedIn}) => {
                             open={open}
                             onClose={handleClose}
                             MenuListProps={{
-                            'aria-labelledby': 'basic-button',
+                                'aria-labelledby': 'basic-button',
                             }}
                         >
                             <MenuItem onClick={handleClose}>Mathematics</MenuItem>
@@ -50,8 +50,8 @@ const NewPost2 = ({loggedIn}) => {
                         </Menu>
                     </div>
                     <div className="avatarAndUser">
-                        <Avatar className = "avatarIcon"
-                                        sx={{width: 30, height:30}} src={loggedIn ? "https://picsum.photos/200": ""}>
+                        <Avatar className="avatarIcon"
+                            sx={{ width: 30, height: 30 }} src={loggedIn ? "https://picsum.photos/200" : ""}>
                         </Avatar>
                         <p className="postUserName">Edwards23</p>
                     </div>
@@ -67,20 +67,20 @@ const NewPost2 = ({loggedIn}) => {
                         />
                     </div>
                     <div className="ckeditor">
-                        <TextEd/>
+                        <TextEd />
                     </div>
                 </div>
 
                 <div className="buttonSection">
-                        <Button className="draftButton" variant="contained">
-                            Draft
-                        </Button>
-                        <Link to ="/"><Button className="postButton" variant="contained">
-                            Post
-                        </Button></Link>
+                    <Button className="draftButton" >
+                        Draft
+                    </Button>
+                    <Link to="/"><Button className="postButton" buttonStyle="btn--dark--solid">
+                        Post
+                    </Button></Link>
                 </div>
             </div>
-            
+
         </div>
     )
 }

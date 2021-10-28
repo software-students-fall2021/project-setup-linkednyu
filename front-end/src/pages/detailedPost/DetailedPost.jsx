@@ -1,5 +1,5 @@
 import "./detailedPost.css"
-import { Button } from "@mui/material"
+import { Button } from "../../components/Button"
 import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
@@ -15,7 +15,7 @@ export default function DetailedPost() {
 
     useEffect(() => {
         async function fetchposts() {
-            try{
+            try {
                 await axios.get(url).then(response => {
                     setPosts(response.data[0])
                     setIsloading(false)
@@ -23,7 +23,7 @@ export default function DetailedPost() {
             } catch (error) {
                 console.log(error)
             }
-           
+
 
         }
         fetchposts()
@@ -59,8 +59,8 @@ export default function DetailedPost() {
                         </div>
                     </div>
                     <div className="detailedPostTopRight">
-                        <Button className="commentButton" onClick={() => console.log('clicked')}
-                            variant="contained"
+                        <Button className="commentButton" onClick={() => console.log('joined')}
+                            buttonSize="btn--medium" buttonStyle="btn--primary--solid"
                         > Join  </Button>
                     </div>
                 </div>
@@ -81,9 +81,9 @@ export default function DetailedPost() {
                     <input placeholder="Comment Something..." className="detailedPostAddComment" />
                     <div className="commentButtonSection">
                         <Button className="commentButton" onClick={() => console.log('clicked')}
-                            variant="contained"
+                            buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                         > Comment  </Button>
-                    </div>      
+                    </div>
                 </div>
             </div>
         </div >}

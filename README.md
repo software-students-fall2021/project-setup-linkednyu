@@ -13,6 +13,7 @@ This will be the primary repo where development of LinkedNYU takes place.
 	- [Front-end](#front-end)
 		- [Components](#components)
 		- [Pages](#pages)
+		- [Color Theme](#color-theme)
 	- [Contributing](#contributing)
 
 ## Product Vision
@@ -94,7 +95,9 @@ During the development, we divded front-end elements into components and pages:
 5. Join Class Page
 6. Create New Post Page
 7. Log In Page
-
+### Color Theme
+We choose NYU purple to be the main color of our theme.     
+![color](images/LinkedNYU_ColorTheme.png)
 
 ## Contributing
 

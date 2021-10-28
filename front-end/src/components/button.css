@@ -1,10 +1,10 @@
 :root {
-    --primary: #4628ff;
-    --warning: #ffd028;
-    /*--danger: #eb3f27;
-    --sucess: #75fa83;*/
-    --white: #fdfdfd;
-    --dark: #181717;
+    --purple: #57068c;
+    --green: #547b51;
+    --lightpurple: #5f5d98;  
+    --white: #ffffff;
+    --black: #000000;
+    --orange: #ff9d47;
 }
 
 .btn {
@@ -21,29 +21,48 @@
 
 /* Button Colors & Styles */
 .btn--primary--solid {
-    background-color: var(--primary);
+    background-color: var(--purple);
     color: var(--white);
     border: none;
 }
 
-.btn--warning--solid {
-    background-color: var(--warning);
-    color: var(--dark);
+.btn--dark--solid {
+    background-color: var(--orange);
+    color: var(--white);
     border: none;
+}
+
+.btn--primary--outline{
+    background-color: transparent;
+    border: 2px solid var(--purple);
+    color: var(--purple);
+
+}
+
+.btn--dark--outline{
+    background-color: transparent;
+    border: 2px solid var(--orange);
+    color: var(--orange);
 }
 
 /*Button Sizes*/
 .btn--large{
-    padding:3% 10%;
-    font-size:100%;
+    padding:10px 20px;
+    font-size:18px;
 }
 
 .btn--medium{
-    padding:2% 5%;
-    font-size:90%;
+    padding:8px 15px;
+    font-size:15px;
 }
 
 .btn--small{
-    padding: 1% 2%;
-    font-size: 80%;
+    padding: 5px 10px;
+    font-size: 10px;
+}
+
+.btn--large--fixed{
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
 }
