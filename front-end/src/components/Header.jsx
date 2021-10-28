@@ -4,69 +4,69 @@ import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/core/ButtonUnstyled'
-import MaterialButton from '@mui/material/Button'
+import UnstyledButton from '@mui/core/ButtonUnstyled'
+import { Button } from "../components/Button"
 import { Link } from "react-router-dom";
 
 
 
-const Header = ({loggedIn ,setloggedIn}) => {
-	
+const Header = ({ loggedIn, setloggedIn }) => {
+
 	const [menuShow, setMenuShow] = useState(false)
 
-	const toggleMenu = () =>{
+	const toggleMenu = () => {
 		setMenuShow(!menuShow);
 	}
 
-	const logout = ()=>{
+	const logout = () => {
 		setMenuShow(!menuShow)
 		setloggedIn(false)
 
 	}
 
-	const renderMenu = ()=>{
-		if(menuShow){
+	const renderMenu = () => {
+		if (menuShow) {
 			return (
-				<div className = "menu">
-					<div className = "menuItemGroup">
-						<div className = "Menuitem">
+				<div className="menu">
+					<div className="menuItemGroup">
+						<div className="Menuitem">
 							<Link to="/">
-								<MaterialButton onClick={toggleMenu} variant = "outlined"
-												size = "large">
+								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"
+									buttonSize="btn--large--fixed">
 									Home
-								</MaterialButton>	
+								</Button>
 							</Link>
 						</div>
-						{loggedIn && <div className = "Menuitem">
-							<Link to= "/newpost2" >
-								<MaterialButton onClick={toggleMenu} variant = "outlined"
-												size = "large">
+						{loggedIn && <div className="Menuitem">
+							<Link to="/newpost2" >
+								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"
+									buttonSize="btn--large--fixed">
 									New Post
-								</MaterialButton>
+								</Button>
 							</Link>
 						</div>}
 						{
-							!loggedIn && <div className = "Menuitem">
-							<Link to ="/login">
-								<MaterialButton onClick={toggleMenu} variant = "outlined"
-												size = "large">
-									Sign in
-								</MaterialButton>
-							</Link>
+							!loggedIn && <div className="Menuitem">
+								<Link to="/login">
+									<Button onClick={toggleMenu} buttonStyle="btn--dark--outline"
+										buttonSize="btn--large--fixed">
+										Sign in
+									</Button>
+								</Link>
 							</div>
 						}
-						
+
 						{
-							loggedIn && <div className = "Menuitem">
-							<Link to ="/">
-								<MaterialButton onClick={logout} variant = "outlined"
-												size = "large">
-									Sign out
-								</MaterialButton>
-							</Link>
+							loggedIn && <div className="Menuitem">
+								<Link to="/">
+									<Button onClick={logout} buttonStyle="btn--primary--outline"
+										buttonSize="btn--large--fixed">
+										Sign out
+									</Button>
+								</Link>
 							</div>
 						}
-						
+
 					</div>
 				</div>
 			)
@@ -78,28 +78,28 @@ const Header = ({loggedIn ,setloggedIn}) => {
 			{renderMenu()}
 			<div className="topBarContainer">
 				<div className="topBarItems">
-					<div className="hamburgerMenu">	
-						<Button onClick = {toggleMenu}>
+					<div className="hamburgerMenu">
+						<UnstyledButton onClick={toggleMenu}>
 							<MenuIcon className="menuIcon" />
-						</Button>	
+						</UnstyledButton>
 					</div>
 					<div className="searchBox">
-						<SearchIcon className="searchIcon"/>
-						<input placeholder="Search for a channel or post" className="searchInput"/>
+						<SearchIcon className="searchIcon" />
+						<input placeholder="Search for a channel or post" className="searchInput" />
 					</div>
 					<div className="avatarContainer">
-						<Link to={loggedIn ? "/account" : "/" } onClick={ !loggedIn ?(event) => event.preventDefault():"" }>
-							<Avatar onClick={()=>{
+						<Link to={loggedIn ? "/account" : "/"} onClick={!loggedIn ? (event) => event.preventDefault() : ""}>
+							<Avatar onClick={() => {
 								setMenuShow(false);
-							}} className = "avatarIcon"
-									sx={{width: 30, height:30}} src={loggedIn ? "https://picsum.photos/200": ""}>
+							}} className="avatarIcon"
+								sx={{ width: 30, height: 30 }} src={loggedIn ? "https://picsum.photos/200" : ""}>
 							</Avatar>
 						</Link>
 					</div>
 				</div>
 			</div>
 		</nav>
-		)
+	)
 }
 
 export default Header
