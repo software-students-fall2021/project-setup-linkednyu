@@ -38,7 +38,7 @@ const Header = ({loggedIn ,setloggedIn}) => {
 							</Link>
 						</div>
 						{loggedIn && <div className = "Menuitem">
-							<Link to= "/" >
+							<Link to= "/newpost2" >
 								<MaterialButton onClick={toggleMenu} variant = "outlined"
 												size = "large">
 									New Post

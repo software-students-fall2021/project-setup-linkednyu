@@ -1,13 +1,13 @@
 .newPostPage{
     width: 100%;
+    height: 93vh;
     margin-top: 50px;
     background-color: lightgrey;
 }
 
 .newPostCenter{
     max-width: 95%;
-    padding: 15px 0px;
-    
+    padding: 15px 0px; 
     margin: 0 auto;
 }
 
@@ -17,7 +17,7 @@
     border: 2px solid black;
     text-align:left;
     height: 40px;
-    color: white;
+    color: black;
     font-size: 1.3em;
     padding-left: 20px;
 }
@@ -37,7 +37,7 @@
 }
 
 .channelButton{
-    color: #FFFFFF !important;
+    color: black !important;
 }
 
 

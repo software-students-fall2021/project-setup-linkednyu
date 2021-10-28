@@ -5,6 +5,7 @@ import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import TextEd from "../../components/TextEditor";
+import { Link } from "react-router-dom";
 
 const NewPost2 = ({loggedIn}) => {
     const [title, setTitle] = useState("");
@@ -52,7 +53,7 @@ const NewPost2 = ({loggedIn}) => {
                         <Avatar className = "avatarIcon"
                                         sx={{width: 30, height:30}} src={loggedIn ? "https://picsum.photos/200": ""}>
                         </Avatar>
-                        <p className="postUserName">Heyyrrrrrrrr</p>
+                        <p className="postUserName">Edwards23</p>
                     </div>
 
                 </div>
@@ -74,9 +75,9 @@ const NewPost2 = ({loggedIn}) => {
                         <Button className="draftButton" variant="contained">
                             Draft
                         </Button>
-                        <Button className="postButton" variant="contained">
+                        <Link to ="/"><Button className="postButton" variant="contained">
                             Post
-                        </Button>
+                        </Button></Link>
                 </div>
             </div>
             
