@@ -34,7 +34,6 @@ function App() {
         <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
         <Route path="/account" > <Account setloggedIn={setloggedIn} /></Route>
         <Route path="/newpost2" > <NewPost2 loggedIn={loggedIn} /></Route>
-
       </Switch>
     </BrowserRouter>
 
