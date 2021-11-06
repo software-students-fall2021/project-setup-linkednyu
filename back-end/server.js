@@ -2,7 +2,7 @@
 const server = require('./app')
 
 // which port to listen for HTTP(S) requests
-const port = 5000
+const port = 4000 //changed to 4000, OS has process on 5000
 
 // call a function to start listening to the port
 const listener = server.listen(port, function () {

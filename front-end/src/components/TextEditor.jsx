@@ -6,6 +6,7 @@ import "./texteditor.css"
 
 export default function TextEd() {
     const [text, setText] = useState("")
+    console.log(text)
 
     return (
         <div className="textEditor">
