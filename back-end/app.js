@@ -25,14 +25,9 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 
 //code goes here
 
-// This is a test code , you can delete it
-app.get('/',(req,res)=>{
-    res.send("This is working")
-})
+const routes = require("./routes/userRoutes");
 
-
-
-
+app.use('/',routes)
 
 
 
