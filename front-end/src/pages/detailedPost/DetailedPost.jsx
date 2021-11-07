@@ -73,7 +73,7 @@ export default function DetailedPost() {
                     </div>
                     <div className="detailedPostTopMiddle">
                         <div className="detailedPostTopMiddleTop">
-                            <div className="detailedPostClass">{post.course_name}</div>
+                            <div className="detailedPostClass">{post.courseName}</div>
                         </div>
                         <div className="detailedPostTopMiddleBottom">
                             <div className="detailedPostUserName">{post.userName}</div>
