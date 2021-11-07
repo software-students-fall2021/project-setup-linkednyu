@@ -4,15 +4,16 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import parse from "html-react-parser"
 import "../../components/texteditor.css"
 import axios from 'axios';
 
 const NewPost2 = ({ loggedIn }) => {
+    const url = "http://localhost:4000"
+
     const [postData, setNewPost] = useState({
         title: '',
         text: '',
@@ -23,6 +24,7 @@ const NewPost2 = ({ loggedIn }) => {
     })
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const history = useHistory()
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -32,7 +34,8 @@ const NewPost2 = ({ loggedIn }) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:4000/posts", postData)
+        axios.post(`${url}/posts`, postData)
+        history.push("/")
         console.log(postData)
     }
 
@@ -96,10 +99,7 @@ const NewPost2 = ({ loggedIn }) => {
                                 data={postData.text}
                                 onChange={(e, editor) => {
                                     const data = editor.getData()
-                                    parse(data)
                                     setNewPost({...postData, text: data})
-                                    console.log(data)
-                                    console.log(postData)
                                 }}
                             />
                         </div>

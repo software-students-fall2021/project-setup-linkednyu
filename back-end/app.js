@@ -53,15 +53,7 @@ app.get('/posts', (req, res) => {
 app.post('/posts', (req, res) => {
     const newPost = new PostMessage(req.body)
     posts.push(newPost)
-    res.redirect("/")
 })
-
-
-
-
-
-
-
 
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!
