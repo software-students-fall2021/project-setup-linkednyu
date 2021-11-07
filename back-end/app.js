@@ -22,14 +22,11 @@ app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
 
-
 //code goes here
 
 const routes = require("./routes/userRoutes");
 
 app.use('/',routes)
-
-
 
 
 // export the express app we created to make it available to other modules
