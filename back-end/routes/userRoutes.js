@@ -7,7 +7,7 @@ const routeFunctions = require("../controllers/routeFunctions");
 router.get('/homeposts', routeFunctions.viewHome)
 router.get('/channel/:id', routeFunctions.viewChannel)
 //should add an id
-router.get('/detailedposts', routeFunctions.viewDetails)
+router.get('/detailedposts/:id', routeFunctions.viewHome)
 router.get('/comments', routeFunctions.viewComment)
 
 module.exports = router;

@@ -4,10 +4,13 @@ import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
+import { useParams } from "react-router"
 
 export default function DetailedPost() {
+    const { id } = useParams()
+    //console.log(id)
     //connect to backend
-    const url = "/detailedposts"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
+    const url = "/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
     const commenturl = "/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
@@ -36,7 +39,7 @@ export default function DetailedPost() {
             try {
                 await axios.get(url).then(response => {
                     //get the id of the post
-                    setPosts(response.data[0])
+                    setPosts(response.data[id - 1])
                     setIsloading(false)
                 });
             } catch (error) {

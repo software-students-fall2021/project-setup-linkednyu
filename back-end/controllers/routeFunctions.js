@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { post } = require('../app');
 
 var postData = []
 var commentData = []
@@ -12,11 +13,11 @@ const viewHome = (req, res) => {
     if (postData.length === 0) {
         async function fetchposts() {
             try {
-
                 await axios.get(url).then(response => {
                     response.data.map(items => {
                         posts.push(items)
                     })
+
                 })
 
                 await axios.get(picurl).then(response => {
@@ -97,9 +98,10 @@ const viewChannel = (req, res) => {
 };
 
 //function for detailed posts
+/*
 const viewDetails = (req, res) => {
-    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    //const url = "https://61798eeaaa7f340017404b69.mockapi.io/post"
+    //const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+    const url = "https://61798eeaaa7f340017404b69.mockapi.io/post"
     const picurl = "https://picsum.photos/200"
 
     let posts = []
@@ -122,9 +124,11 @@ const viewDetails = (req, res) => {
                     for (let i = 0; i < posts.length; i++) {
                         posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
                     }
-                    posts.map(items => {
-                        postData.push(items)
-                    })
+                    postData = posts[req.params.id]
+                    console.log(posts[req.params.id])
+                    // posts.map(items => {
+                    //     postData.push(items)
+                    // })
                 })
 
             } catch (err) {
@@ -142,6 +146,7 @@ const viewDetails = (req, res) => {
         res.send(postData)
     }
 }
+*/
 
 //function for comments
 const viewComment = (req, res) => {
@@ -181,6 +186,6 @@ const viewComment = (req, res) => {
 module.exports = {
     viewHome,
     viewChannel,
-    viewDetails,
+    //viewDetails,
     viewComment
 }
