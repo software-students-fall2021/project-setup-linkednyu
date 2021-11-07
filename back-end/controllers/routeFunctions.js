@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { post } = require('../app');
+
 
 // using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
@@ -48,6 +48,7 @@ const viewHome = (req, res) => {
                     })
                     for (let i = 0; i < posts.length; i++) {
                         posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
+                        
                     }
                     posts.map(items => {
                         postData.push(items)
@@ -119,56 +120,7 @@ const viewChannel = (req, res) => {
 
 };
 
-//function for detailed posts
-/*
-const viewDetails = (req, res) => {
-    //const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    const url = "https://61798eeaaa7f340017404b69.mockapi.io/post"
-    const picurl = "https://picsum.photos/200"
 
-    let posts = []
-    let pictures = []
-
-    if (postData.length === 0) {
-        async function fetchdetails() {
-            try {
-
-                await axios.get(url).then(response => {
-                    response.data.map(items => {
-                        posts.push(items)
-                    })
-                })
-
-                await axios.get(picurl).then(response => {
-                    response.data.map(items => {
-                        pictures.push(items)
-                    })
-                    for (let i = 0; i < posts.length; i++) {
-                        posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
-                    }
-                    postData = posts[req.params.id]
-                    console.log(posts[req.params.id])
-                    // posts.map(items => {
-                    //     postData.push(items)
-                    // })
-                })
-
-            } catch (err) {
-                console.log(err);
-            }
-
-            res.send(postData)
-        }
-
-        fetchdetails()
-
-    }
-
-    else {
-        res.send(postData)
-    }
-}
-*/
 
 //function for comments
 const viewComment = (req, res) => {
@@ -208,6 +160,5 @@ const viewComment = (req, res) => {
 module.exports = {
     viewHome,
     viewChannel,
-    //viewDetails,
     viewComment
 }
