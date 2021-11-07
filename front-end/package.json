@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:4000",
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "html-react-parser": "^1.4.0"
   }
 }

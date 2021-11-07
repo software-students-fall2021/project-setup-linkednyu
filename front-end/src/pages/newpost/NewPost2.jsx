@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-//import parse from "html-react-parser"
+import parse from "html-react-parser"
 import "../../components/texteditor.css"
 import axios from 'axios';
 
@@ -96,6 +96,7 @@ const NewPost2 = ({ loggedIn }) => {
                                 data={postData.text}
                                 onChange={(e, editor) => {
                                     const data = editor.getData()
+                                    parse(data)
                                     setNewPost({...postData, text: data})
                                     console.log(data)
                                     console.log(postData)

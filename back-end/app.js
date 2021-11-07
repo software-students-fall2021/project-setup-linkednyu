@@ -36,7 +36,9 @@ const postSchema = mongoose.Schema({ //declare a model to store in DB
     userName: String,
     courseName: String,
     isDraft: Boolean,
-    time: String,
+    date: String,
+    avatar: String,
+    image: String,
 })
 
 const PostMessage = mongoose.model('PostMessage', postSchema)

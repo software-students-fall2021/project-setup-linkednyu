@@ -16,8 +16,8 @@ const PostBox = ( {post,loggedIn} ) => {
 				<hr/>
 				<Link className="tLink" to="/detailedpost"><div className="content">
 					<h3 className="contenttitle">{post.title}</h3>
-					<img className="contentImg" src ={post.imgSrc} alt="" ></img>
-					<p className="textContent">{post.content}</p>
+					<img className="contentImg" src ={post.image} alt="" ></img>
+					<p className="textContent">{post.text}</p>
 				</div></Link>
 			</div>
 		</div>
