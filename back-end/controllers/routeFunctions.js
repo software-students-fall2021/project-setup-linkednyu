@@ -1,6 +1,29 @@
 const axios = require('axios');
 
+// using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
+// var comments = []
+// var images = []
+// const channels = [
+//     {
+//         name : "Mathematics",
+//         posts : [],
+//     },
+//     {
+//         name: "Software Engineering",
+//         posts :[],
+//     },
+//     {
+//         name : "English",
+//         posts : [],
+//     },
+//     {
+//         name : "Biology",
+//         posts : []
+//     }
+
+// ];
+
 
 const viewHome = (req, res) => {
     const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
