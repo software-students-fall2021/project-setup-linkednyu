@@ -4,11 +4,11 @@ import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
-//import { stepContentClasses } from "@mui/material"
 
 export default function DetailedPost() {
-    const url = "https://61798eeaaa7f340017404b69.mockapi.io/post"
-    const commenturl = "https://61798eeaaa7f340017404b69.mockapi.io/comment"
+    //connect to backend
+    const url = "/detailedposts"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
+    const commenturl = "/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
@@ -19,11 +19,11 @@ export default function DetailedPost() {
     const onComment = (e) => {
         e.preventDefault()
 
-        if(!comment){
+        if (!comment) {
             alert('please add a comment')
             return
         }
-        
+
         //for mapping
         //const id = Math.floor(Math.random() * 1000) + 1
         setComments([...comment, content])
@@ -35,6 +35,7 @@ export default function DetailedPost() {
         async function fetchposts() {
             try {
                 await axios.get(url).then(response => {
+                    //get the id of the post
                     setPosts(response.data[0])
                     setIsloading(false)
                 });
@@ -42,17 +43,20 @@ export default function DetailedPost() {
                 console.log(error)
             }
 
-
         }
         fetchposts()
     }, [])
 
     useEffect(() => {
         async function fetchComments() {
-            await axios.get(commenturl).then(response => {
-                setComments(response.data)
-                setIsloadingComment(false)
-            });
+            try {
+                await axios.get(commenturl).then(response => {
+                    setComments(response.data)
+                    setIsloadingComment(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
 
         }
         fetchComments()
@@ -64,7 +68,7 @@ export default function DetailedPost() {
                 <div className="detailedPostTop">
                     <div className="detailedPostTopLeft">
                         <div className="detailedPostAvatar">
-                            <ImageAvatars />
+                            <ImageAvatars avatarSrc={post.avatar} />
                         </div>
                     </div>
                     <div className="detailedPostTopMiddle">
@@ -72,7 +76,7 @@ export default function DetailedPost() {
                             <div className="detailedPostClass">{post.course_name}</div>
                         </div>
                         <div className="detailedPostTopMiddleBottom">
-                            <div className="detailedPostUserName">{post.first_name} {post.last_name}</div>
+                            <div className="detailedPostUserName">{post.userName}</div>
                             <div className="detailedPosDate">{post.date}</div>
                         </div>
                     </div>
@@ -84,7 +88,7 @@ export default function DetailedPost() {
                 </div>
                 <div className="detailedPostCenter">
                     <span className="detailedPostTitle">{post.title}</span>
-                    <span className="detailedPostText">{post.post}</span>
+                    <span className="detailedPostText">{post.content}</span>
                     <img className="detailedPostImg" src="https://picsum.photos/200" alt="" />
                 </div>
                 <div className="detailedPostBottom">
@@ -95,8 +99,8 @@ export default function DetailedPost() {
                         <Comment comment={p} />
                     ))}
                 </div>
-                <form className="detailedPostFooter" onSubmit = {onComment}>
-                    <input placeholder="Comment Something..." className="detailedPostAddComment" value = {content} onChange = {(e) => setContent(e.target.value)}/>
+                <form className="detailedPostFooter" onSubmit={onComment}>
+                    <input placeholder="Comment Something..." className="detailedPostAddComment" value={content} onChange={(e) => setContent(e.target.value)} />
                     <div className="commentButtonSection">
                         <Button className="commentButton" onClick={() => console.log('clicked')}
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
