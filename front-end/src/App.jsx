@@ -16,19 +16,19 @@ import NewPost2 from './pages/newpost/NewPost2'
 
 
 function App() {
-  const [loggedIn,setloggedIn] = useState(false)
+  const [loggedIn, setloggedIn] = useState(false)
 
   return (
     <BrowserRouter>
       <>
-        <Header loggedIn={loggedIn} setloggedIn={setloggedIn}/>
+        <Header loggedIn={loggedIn} setloggedIn={setloggedIn} />
       </>
       <Switch>
         <Route path="/" exact><Home loggedIn={loggedIn} /></Route>
         <Route path="/joinclass" component={JoinClass} />
-        <Route path="/detailedpost" component={DetailedPost}/>
+        <Route path="/detailedposts/:id" component={DetailedPost} />
         <Route path="/channel/:id"> <Channel loggedIn={loggedIn} /></Route>
-        <Route path="/login" > <Login setLoggedIn={setloggedIn}/> </Route>
+        <Route path="/login" > <Login setLoggedIn={setloggedIn} /> </Route>
         <Route path="/pwreset" component={pwReset} />
         <Route path="/pwreset2" component={pwReset2} />
         <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
