@@ -34,8 +34,15 @@ const NewPost2 = ({ loggedIn }) => {
     var count = Math.floor(Math.random()*(100-20)+20)
 
 
-    const onPost = () => {
+    const onPost = (e) => {
+        
 
+        if (!text || !title) {
+            e.preventDefault()
+            alert('please add a Title or Content')
+            return
+        }
+        
         var content = parse(text).props.children;
         const posts = {
             "id": count,
@@ -51,10 +58,6 @@ const NewPost2 = ({ loggedIn }) => {
 
 
 
-        if (!text || !title) {
-            alert('please add a title or body')
-            return
-        }
 
         axios.post('http://localhost:5000/homeposts',posts).then(response=>{
             console.log(response);
