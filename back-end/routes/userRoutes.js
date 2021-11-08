@@ -4,9 +4,9 @@ const routeFunctions = require("../controllers/routeFunctions");
 
 
 // routes
-router.post('/homeposts',routeFunctions.sendPosts)
+// router.post('/homeposts',routeFunctions.sendPosts)
 router.get('/homeposts', routeFunctions.viewHome)
-router.post('channel/:id',routeFunctions.postChannel)
+// router.post('channel/:id',routeFunctions.postChannel)
 router.get('/channel/:id', routeFunctions.viewChannel)
 
 //should add an id

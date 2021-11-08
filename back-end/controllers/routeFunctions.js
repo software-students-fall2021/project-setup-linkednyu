@@ -129,18 +129,17 @@ const viewComment = (req, res) => {
 }
 
 const sendComment = (req, res) => {
-    console.log(req.body);
     commentData.push(req.body)
     
 }
 
-const sendPosts = (req,res) =>{
+// const sendPosts = (req,res) =>{
 
-}
+// }
 
-const postChannel = (req,res) =>{
+// const postChannel = (req,res) =>{
 
-}
+// }
 
 
 module.exports = {
