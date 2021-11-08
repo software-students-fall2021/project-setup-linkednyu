@@ -5,25 +5,11 @@ const axios = require('axios');
 var postData = []
 var commentData = []
 var pictures = []
-// const channels = [
-//     {
-//         name : "Mathematics",
-//         posts : [],
-//     },
-//     {
-//         name: "Software Engineering",
-//         posts :[],
-//     },
-//     {
-//         name : "English",
-//         posts : [],
-//     },
-//     {
-//         name : "Biology",
-//         posts : []
-//     }
 
-// ];
+
+function custom_sort(a, b) {
+    return  new Date(b.date).getTime()-new Date(a.date).getTime();
+}
 
 const viewHome = (req, res) => {
     const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
@@ -63,6 +49,7 @@ const viewHome = (req, res) => {
                 console.log(err);
             }
 
+            postData.sort(custom_sort)
             res.send(postData)
         }
 
@@ -133,13 +120,10 @@ const sendComment = (req, res) => {
     
 }
 
-// const sendPosts = (req,res) =>{
-
-// }
-
-// const postChannel = (req,res) =>{
-
-// }
+const sendPosts = (req,res) =>{
+    postData = [req.body].concat(postData)
+    postData.sort(custom_sort)
+}
 
 
 module.exports = {
@@ -147,6 +131,5 @@ module.exports = {
     viewChannel,
     viewComment,
     sendComment,
-    // sendPosts,
-    // postChannel
+    sendPosts,
 }
