@@ -26,7 +26,7 @@ const NewPost2 = ({ loggedIn }) => {
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
@@ -39,7 +39,7 @@ const NewPost2 = ({ loggedIn }) => {
         var content = parse(text).props.children;
         const posts = {
             "id": count,
-            "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
+            "avatar": "https://picsum.photos/200",
             "userName": "Adonis",
             "courseName": "Mathematics",
             "date": today,
