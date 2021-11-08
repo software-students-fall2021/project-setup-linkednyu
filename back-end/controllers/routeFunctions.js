@@ -4,8 +4,7 @@ const axios = require('axios');
 // using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
 var commentData = []
-// var comments = []
-// var images = []
+var pictures = []
 // const channels = [
 //     {
 //         name : "Mathematics",
@@ -30,7 +29,6 @@ const viewHome = (req, res) => {
     const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
     const picurl = "https://picsum.photos/v2/list"
     let posts = []
-    let pictures = []
 
     if (postData.length === 0) {
         async function fetchposts() {
@@ -40,6 +38,12 @@ const viewHome = (req, res) => {
                         posts.push(items)
                     })
 
+                    for (let i = 0; i < posts.length; i++) {
+                        for (let j= 0 ; j <5 ; j++){
+                            posts[i]["comments"].push(Math.floor(Math.random()*8))
+                        }
+                    }
+
                 })
 
                 await axios.get(picurl).then(response => {
@@ -48,7 +52,7 @@ const viewHome = (req, res) => {
                     })
                     for (let i = 0; i < posts.length; i++) {
                         posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
-                        
+
                     }
                     posts.map(items => {
                         postData.push(items)
@@ -76,46 +80,13 @@ const viewHome = (req, res) => {
 
 
 const viewChannel = (req, res) => {
-    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    const picurl = "https://picsum.photos/v2/list"
-    let posts = []
-    let pictures = []
+    let channelPosts = []
 
-    if (postData.length === 0) {
-        async function fetchChannelPosts() {
-            try {
-
-                await axios.get(url).then(response => {
-                    response.data.map(items => {
-                        posts.push(items)
-                    })
-                })
-
-                await axios.get(picurl).then(response => {
-                    response.data.map(items => {
-                        pictures.push(items)
-                    })
-                    for (let i = 0; i < posts.length; i++) {
-                        posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
-                    }
-                    posts.map(items => {
-                        postData.push(items)
-                    })
-                })
-
-            } catch (err) {
-                console.log(err);
-            }
-
-            res.send(postData)
-        }
-
-        fetchChannelPosts()
+    for (let i= 0 ; i <7; i++){
+        channelPosts.push(postData[Math.floor(Math.random()*postData.length)])
     }
 
-    else {
-        res.send(postData)
-    }
+    res.send(channelPosts)
 
 
 };
@@ -157,8 +128,25 @@ const viewComment = (req, res) => {
     }
 }
 
+const sendComment = (req, res) => {
+    commentData.push(req.body)
+    
+}
+
+// const sendPosts = (req,res) =>{
+
+// }
+
+// const postChannel = (req,res) =>{
+
+// }
+
+
 module.exports = {
     viewHome,
     viewChannel,
-    viewComment
+    viewComment,
+    sendComment,
+    sendPosts,
+    postChannel
 }
