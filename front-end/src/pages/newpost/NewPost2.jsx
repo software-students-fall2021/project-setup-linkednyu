@@ -36,7 +36,7 @@ const NewPost2 = ({ loggedIn }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         //setNewPost({...postData, id: ttlCount})
-        axios.post('http://localhost:4000/homeposts', postData)
+        axios.post('http://localhost:5000/homeposts', postData)
         history.push("/")
         console.log(postData)
     }

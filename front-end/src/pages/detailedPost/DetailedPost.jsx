@@ -11,8 +11,8 @@ export default function DetailedPost() {
     const { id } = useParams()
     
     //connect to backend
-    const url = "http://localhost:4000/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
-    const commenturl = "http://localhost:4000/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"        
+    const url = "http://localhost:5000/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
+    const commenturl = "http://localhost:5000/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"        
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
@@ -64,9 +64,8 @@ export default function DetailedPost() {
             try {
                 await axios.get(url).then(response => {
                     //get the id of the post
-                    setPosts(response.data)
+                    setPosts(response.data[id - 1])
                     setIsloading(false)
-                    console.log(response.data)
                 });
             } catch (error) {
                 console.log(error)

@@ -26,55 +26,51 @@ var pictures = []
 // ];
 
 const viewHome = (req, res) => {
-    //comment out for now
+    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+    const picurl = "https://picsum.photos/v2/list"
+    let posts = []
 
-    // const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    // const picurl = "https://picsum.photos/v2/list"
-    // let posts = []
+    if (postData.length === 0) {
+        async function fetchposts() {
+            try {
+                await axios.get(url).then(response => {
+                    response.data.map(items => {
+                        posts.push(items)
+                    })
 
-    // if (postData.length === 0) {
-    //     async function fetchposts() {
-    //         try {
-    //             await axios.get(url).then(response => {
-    //                 response.data.map(items => {
-    //                     posts.push(items)
-    //                 })
+                    for (let i = 0; i < posts.length; i++) {
+                        for (let j= 0 ; j <5 ; j++){
+                            posts[i]["comments"].push(Math.floor(Math.random()*8))
+                        }
+                    }
 
-    //                 for (let i = 0; i < posts.length; i++) {
-    //                     for (let j= 0 ; j <5 ; j++){
-    //                         posts[i]["comments"].push(Math.floor(Math.random()*8))
-    //                     }
-    //                 }
+                })
+                await axios.get(picurl).then(response => {
+                    response.data.map(items => {
+                        pictures.push(items)
+                    })
+                    for (let i = 0; i < posts.length; i++) {
+                        posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
 
-    //             })
-    //             await axios.get(picurl).then(response => {
-    //                 response.data.map(items => {
-    //                     pictures.push(items)
-    //                 })
-    //                 for (let i = 0; i < posts.length; i++) {
-    //                     posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
+                    }
+                    posts.map(items => {
+                        postData.push(items)
+                    })
+                })
 
-    //                 }
-    //                 posts.map(items => {
-    //                     postData.push(items)
-    //                 })
-    //             })
+            } catch (err) {
+                console.log(err);
+            }
 
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
+            res.send(postData)
+        }
+        fetchposts()
+    }
 
-    //         res.send(postData)
-    //     }
-    //     fetchposts()
-    // }
-
-    // else {
+    else {
         
-    //     res.send(postData)
-    //     res.send(newPost)
-    // }
-    res.send(newPost)
+        res.send(postData)
+    }
 };
 
 
@@ -91,12 +87,6 @@ const viewChannel = (req, res) => {
 
 };
 
-const viewDetailed = (req, res) => {
-    const id = req.params.id
-    console.log(id)
-    if(newPost[id] == null) res.status(403) //no post at specified id
-    else res.send(newPost[req.params.id])
-}
 
 //function for comments
 const viewComment = (req, res) => {
