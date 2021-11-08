@@ -39,8 +39,8 @@ const viewHome = (req, res) => {
                     })
 
                     for (let i = 0; i < posts.length; i++) {
-                        for (let j= 0 ; j <5 ; j++){
-                            posts[i]["comments"].push(Math.floor(Math.random()*8))
+                        for (let j = 0; j < 5; j++) {
+                            posts[i]["comments"].push(Math.floor(Math.random() * 8))
                         }
                     }
 
@@ -82,8 +82,8 @@ const viewHome = (req, res) => {
 const viewChannel = (req, res) => {
     let channelPosts = []
 
-    for (let i= 0 ; i <7; i++){
-        channelPosts.push(postData[Math.floor(Math.random()*postData.length)])
+    for (let i = 0; i < 7; i++) {
+        channelPosts.push(postData[Math.floor(Math.random() * postData.length)])
     }
 
     res.send(channelPosts)
@@ -130,7 +130,7 @@ const viewComment = (req, res) => {
 
 const sendComment = (req, res) => {
     commentData.push(req.body)
-    
+
 }
 
 // const sendPosts = (req,res) =>{
@@ -141,12 +141,17 @@ const sendComment = (req, res) => {
 
 // }
 
+const viewAccount = (req, res) => {
+
+}
+
 
 module.exports = {
     viewHome,
     viewChannel,
     viewComment,
     sendComment,
+    viewAccount
     // sendPosts,
     // postChannel
 }
