@@ -4,7 +4,8 @@
   "description": "The back-end of your project will live in this directory.",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "test": "mocha test"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,9 @@
     "multer": "^1.4.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14"
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3",
+    "nodemon": "^2.0.14",
+    "nyc": "^15.1.0"
   }
 }

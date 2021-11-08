@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const routeFunctions = require("../controllers/routeFunctions");
+const channelFunctions = require("../controllers/channelDetail");
 
 
 // routes
@@ -8,9 +9,11 @@ const routeFunctions = require("../controllers/routeFunctions");
 router.get('/homeposts', routeFunctions.viewHome)
 // router.post('channel/:id',routeFunctions.postChannel)
 router.get('/channel/:id', routeFunctions.viewChannel)
-
 //should add an id
 router.get("/detailedposts/:id", routeFunctions.viewHome)
+router.post('/channel/detail/:id', channelFunctions.channel)
+router.post('/channel/join/:id', channelFunctions.joinChannel)
+router.post('/channel/leave/:id', channelFunctions.leaveChannel)
 router.post('/comments',routeFunctions.sendComment)
 router.get('/comments', routeFunctions.viewComment)
 
