@@ -5,9 +5,8 @@ const channelFunctions = require("../controllers/channelDetail");
 
 
 // routes
-// router.post('/homeposts',routeFunctions.sendPosts)
+router.post('/homeposts',routeFunctions.sendPosts)
 router.get('/homeposts', routeFunctions.viewHome)
-// router.post('channel/:id',routeFunctions.postChannel)
 router.get('/channel/:id', routeFunctions.viewChannel)
 router.get("/detailedposts/:id", routeFunctions.viewHome)
 router.post('/channel/detail/:id', channelFunctions.channel)

@@ -4,11 +4,16 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import TextEd from "../../components/TextEditor";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import parse from "html-react-parser"
 import { Link } from "react-router-dom";
+import axios from 'axios'
+
 
 const NewPost2 = ({ loggedIn }) => {
     const [title, setTitle] = useState("");
+    const [text, setText] = useState("")
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -19,6 +24,48 @@ const NewPost2 = ({ loggedIn }) => {
     };
 
 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    var count = Math.floor(Math.random()*(100-20)+20)
+
+
+    const onPost = (e) => {
+        
+
+        if (!text || !title) {
+            e.preventDefault()
+            alert('please add a Title or Content')
+            return
+        }
+        
+        var content = parse(text).props.children;
+        const posts = {
+            "id": count,
+            "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
+            "userName": "Adonis",
+            "courseName": "Mathematics",
+            "date": today,
+            "title": title,
+            "content":content,
+            "comments": [],
+            "imgSrc": "https://picsum.photos/id/1000/5626/3635"
+        };
+
+
+
+
+        axios.post('http://localhost:5000/homeposts',posts).then(response=>{
+            console.log(response);
+        });
+        
+
+    }
+    
     return (
         <div className="newPostPage">
             <div className="newPostCenter">
@@ -53,7 +100,7 @@ const NewPost2 = ({ loggedIn }) => {
                         <Avatar className="avatarIcon"
                             sx={{ width: 30, height: 30 }} src={loggedIn ? "https://picsum.photos/200" : ""}>
                         </Avatar>
-                        <p className="postUserName">Edwards23</p>
+                        <p className="postUserName">Adonis</p>
                     </div>
 
                 </div>
@@ -67,7 +114,18 @@ const NewPost2 = ({ loggedIn }) => {
                         />
                     </div>
                     <div className="ckeditor">
-                        <TextEd />
+                        <div className="textEditor">
+                            <div className="editor">
+                                <CKEditor
+                                editor={ClassicEditor}
+                                data={text}
+                                onChange={(event, editor) => {
+                                    const data = editor.getData()
+                                    setText(data)
+                                }}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -75,7 +133,7 @@ const NewPost2 = ({ loggedIn }) => {
                     <Button className="draftButton" onClick = {() => alert('Draft saved')}>
                         Draft
                     </Button>
-                    <Link to="/"><Button className="postButton" buttonStyle="btn--dark--solid">
+                    <Link to="/"><Button onClick={onPost} className="postButton" buttonStyle="btn--dark--solid">
                         Post
                     </Button></Link>
                 </div>
