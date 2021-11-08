@@ -6,12 +6,13 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useParams } from "react-router"
 
+
 export default function DetailedPost() {
     const { id } = useParams()
-    //console.log(id)
+    
     //connect to backend
-    const url = "/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
-    const commenturl = "/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"
+    const url = "/homeposts"      
+    const commenturl = "/comments"          
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
@@ -19,19 +20,41 @@ export default function DetailedPost() {
 
     const [content, setContent] = useState('')
 
+    const articles = {
+        "date": "May",
+        "first_name": "Adonis",
+        "last_name": "Pollich",
+        "comment": "A1x)OpszI*",
+        "id": "11"
+    };
+
     const onComment = (e) => {
         e.preventDefault()
 
-        if (!comment) {
-            alert('please add a comment')
-            return
+        // if (!comment) {
+        //     alert('please add a comment')
+        //     return
+        // }
+
+        axios.post('http://localhost:5000/comments',articles).then(response=>{
+            console.log(response);
+        });
+
+
+        async function fetchComments() {
+            try {
+                await axios.get(commenturl).then(response => {
+                    setComments(response.data)
+                    setIsloadingComment(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+
         }
+        fetchComments()
 
-        //for mapping
-        //const id = Math.floor(Math.random() * 1000) + 1
-        setComments([...comment, content])
 
-        setContent('')
     }
 
     useEffect(() => {
@@ -48,7 +71,7 @@ export default function DetailedPost() {
 
         }
         fetchposts()
-    }, [])
+    }, [id])
 
     useEffect(() => {
         async function fetchComments() {
@@ -92,22 +115,22 @@ export default function DetailedPost() {
                 <div className="detailedPostCenter">
                     <span className="detailedPostTitle">{post.title}</span>
                     <span className="detailedPostText">{post.content}</span>
-                    <img className="detailedPostImg" src="https://picsum.photos/200" alt="" />
+                    <img className="detailedPostImg" src={post.imgSrc} alt="" />
                 </div>
                 <div className="detailedPostBottom">
                     <span className="detailedPostCommentCounter">{comment.length} comments</span>
                 </div>
                 <div className="detailedPostComment">
-                    {comment.map((p) => (
-                        <Comment comment={p} />
+                    {comment.map((p,index) => (
+                        <Comment key={index} comment={p} />
                     ))}
                 </div>
-                <form className="detailedPostFooter" onSubmit={onComment}>
+                <form className="detailedPostFooter" onSubmit={(e)=>{e.preventDefault()}}>
                     <input placeholder="Comment Something..." className="detailedPostAddComment" value={content} onChange={(e) => setContent(e.target.value)} />
                     <div className="commentButtonSection">
-                        <Button className="commentButton" onClick={() => console.log('clicked')}
+                    <Button className="commentButton" onClick={onComment}
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
-                        > Comment  </Button>
+                        > Comment</Button>
                     </div>
                 </form>
             </div>
