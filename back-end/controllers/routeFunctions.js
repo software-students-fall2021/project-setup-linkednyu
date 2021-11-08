@@ -71,6 +71,7 @@ const viewHome = (req, res) => {
         
         res.send(postData)
     }
+    //res.send(newPost)
 };
 
 
@@ -135,16 +136,15 @@ const sendPosts = (req, res) => {
 
 // }
 
-const viewAccount = (req, res) => {
+// const viewAccount = (req, res) => {
 
-}
+// }
 
 
 module.exports = {
     viewHome,
     viewChannel,
     viewComment,
-    viewDetailed,
     sendComment,
     sendPosts,
     // postChannel
