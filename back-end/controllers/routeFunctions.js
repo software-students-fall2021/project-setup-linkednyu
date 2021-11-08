@@ -48,7 +48,7 @@ const viewHome = (req, res) => {
                     })
                     for (let i = 0; i < posts.length; i++) {
                         posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
-                        
+
                     }
                     posts.map(items => {
                         postData.push(items)
