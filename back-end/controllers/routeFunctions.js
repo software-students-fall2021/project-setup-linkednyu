@@ -125,10 +125,6 @@ const viewComment = (req, res) => {
 
 const sendComment = (req, res) => {
     commentData.push(req.body)
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 }
 
 const sendPosts = (req, res) => {
@@ -150,11 +146,6 @@ module.exports = {
     viewComment,
     viewDetailed,
     sendComment,
-<<<<<<< HEAD
     sendPosts,
-=======
-    viewAccount
-    // sendPosts,
->>>>>>> origin/master
     // postChannel
 }
