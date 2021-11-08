@@ -6,7 +6,7 @@ export default function Comment({ comment }) {
         <div className="comment">
             <div className="commentTop">
                 <div className="commentAvatar">
-                    <ImageAvatars />
+                    <ImageAvatars id='1' />
                 </div>
                 <div className="commentUserName">{comment.first_name} {comment.last_name}</div>
                 <div className="commentDate">{comment.date}</div>
