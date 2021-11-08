@@ -80,6 +80,7 @@ export default function DetailedPost() {
         async function fetchComments() {
             try {
                 await axios.get(commenturl).then(response => {
+                    console.log(response.data)
                     setComments(response.data)
                     setIsloadingComment(false)
                 });

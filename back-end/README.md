@@ -18,4 +18,5 @@ To make a call to the backend , just specify the url in the front end and you're
 ## Unit test
 Wirte your test in `test` folder.     
 The name of your test file should be consistent with the file you want to test, with a `.spec` to classify this is a test file.     
-Type `npm run test` in terminal to run test.       
+Type `npm run test` in terminal to run test.     
+Type `npm run coverage` in terminal to see test code coverage.     
