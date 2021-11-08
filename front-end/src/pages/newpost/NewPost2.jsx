@@ -36,7 +36,6 @@ const NewPost2 = ({ loggedIn }) => {
 
     const onPost = (e) => {
         
-
         if (!text || !title) {
             e.preventDefault()
             alert('please add a Title or Content')
