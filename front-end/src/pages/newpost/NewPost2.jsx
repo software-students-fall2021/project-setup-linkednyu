@@ -4,20 +4,42 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import TextEd from "../../components/TextEditor";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from 'axios'
+
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import "../../components/texteditor.css"
 
 const NewPost2 = ({ loggedIn }) => {
-    const [title, setTitle] = useState("");
+    const [postData, setNewPost] = useState({
+        id: '',
+        title: '',
+        text: '',
+        userName: 'Edward23',
+        courseName: '',
+        date: '',
+        isDraft: false,
+        imgSrc: '',
+        avatar: 'https://picsum.photos/200',
+    })
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const history = useHistory()
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
+        //setNewPost({...postData, courseName: courseName})
     };
-
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        //setNewPost({...postData, id: ttlCount})
+        axios.post('http://localhost:4000/homeposts', postData)
+        history.push("/")
+        console.log(postData)
+    }
 
     return (
         <div className="newPostPage">
@@ -51,34 +73,48 @@ const NewPost2 = ({ loggedIn }) => {
                     </div>
                     <div className="avatarAndUser">
                         <Avatar className="avatarIcon"
-                            sx={{ width: 30, height: 30 }} src={loggedIn ? "https://picsum.photos/200" : ""}>
+                            sx={{ width: 30, height: 30 }} src={loggedIn ? postData.avatar : ""}>
                         </Avatar>
                         <p className="postUserName">Edwards23</p>
                     </div>
 
                 </div>
+                <form onSubmit = {handleSubmit}>
                 <div className="titleAndContent">
                     <div className="form-control">
                         <input
                             type="text"
                             placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            value={postData.title}
+                            onChange={(e) => setNewPost({...postData, title: e.target.value}) }
                         />
                     </div>
                     <div className="ckeditor">
-                        <TextEd />
+                    <div className="editor">
+                            <CKEditor
+                                editor={ClassicEditor}
+                                data={postData.text}
+                                onChange={(e, editor) => {
+                                    const data = editor.getData()
+                                    setNewPost({...postData, text: data})
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
-
+                
                 <div className="buttonSection">
-                    <Button className="draftButton" onClick = {() => alert('Draft saved')}>
+                    <Button className="draftButton" onClick = { () => {
+                        setNewPost({...postData, isDraft: true})
+                        alert('Draft Saved.')
+                    }}>
                         Draft
                     </Button>
-                    <Link to="/"><Button className="postButton" buttonStyle="btn--dark--solid">
+                    <Button className="postButton" buttonStyle="btn--dark--solid" type = "submit">
                         Post
-                    </Button></Link>
+                    </Button>
                 </div>
+                </form>
             </div>
 
         </div>
