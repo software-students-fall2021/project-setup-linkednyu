@@ -15,7 +15,7 @@ export default function Account({ setloggedIn }) {
                         <img className="profilePicture" alt="" src="https://picsum.photos/200"></img>
                     </div>
                     <div className="accountBio">
-                        <h2>Bio</h2>
+                        <h2>About Me</h2>
                         <span>Hi! I'm a typical NYU student taking classes and having a great time yay.</span>
                     </div>
                 </div>
