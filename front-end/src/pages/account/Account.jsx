@@ -2,17 +2,43 @@
 //import Button from "@mui/material/Button"
 import "./account.css"
 // import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import axios from 'axios'
+import { useParams } from "react-router"
 
 export default function Account({ setloggedIn }) {
+    const { id } = useParams()
+    const url = "/account/:id"
+
+    const [account, setAccount] = useState(null)
+    const [loading, setIsloading] = useState(true)
+
+    useEffect(() => {
+        async function fetchaccount() {
+            try {
+                await axios.get(url).then(response => {
+                    console.log(response.data)
+                    setAccount(response.data[id - 1])
+                    setIsloading(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+        fetchaccount()
+    }, [id])
+
+
     return (
         <>
-            <div className="accountPage">
+            {!loading && <div className="accountPage">
                 <div className="accountHeader">
-                    <h1 className="accountName">Albert Smith</h1>
+                    <h1 className="accountName">{account.userName}</h1>
                 </div>
                 <div className="accountTop">
                     <div className="accountImage">
-                        <img className="profilePicture" alt="" src="https://picsum.photos/200"></img>
+                        <img className="profilePicture" alt="" src={account.avatar}></img>
                     </div>
                     <div className="accountBio">
                         <h2>Bio</h2>
@@ -53,7 +79,7 @@ export default function Account({ setloggedIn }) {
                     </div> */}
                 </div>
 
-            </div>
+            </div>}
         </>
     )
 }
