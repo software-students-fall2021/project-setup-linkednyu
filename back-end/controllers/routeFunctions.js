@@ -147,6 +147,6 @@ module.exports = {
     viewChannel,
     viewComment,
     sendComment,
-    sendPosts,
-    postChannel
+    // sendPosts,
+    // postChannel
 }
