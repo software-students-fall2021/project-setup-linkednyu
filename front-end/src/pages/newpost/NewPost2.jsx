@@ -6,7 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import parse from "html-react-parser"
+import parse from "html-react-parser"
 import { Link } from "react-router-dom";
 
 const NewPost2 = ({ loggedIn }) => {
@@ -21,7 +21,26 @@ const NewPost2 = ({ loggedIn }) => {
         setAnchorEl(null);
     };
 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
 
+    today = mm + '/' + dd + '/' + yyyy;
+
+
+    const posts = {
+            "id": 1,
+            "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
+            "userName": "Adonis",
+            "courseName": "Mathematics",
+            "date": today,
+            "title": title,
+            "content": parse(text),
+            "comments": [],
+            "imgSrc": "https://picsum.photos/id/1000/5626/3635"
+    };
+    
     return (
         <div className="newPostPage">
             <div className="newPostCenter">
