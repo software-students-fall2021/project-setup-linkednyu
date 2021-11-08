@@ -4,11 +4,14 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import TextEd from "../../components/TextEditor";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import parse from "html-react-parser"
 import { Link } from "react-router-dom";
 
 const NewPost2 = ({ loggedIn }) => {
     const [title, setTitle] = useState("");
+    const [text, setText] = useState("")
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -67,7 +70,18 @@ const NewPost2 = ({ loggedIn }) => {
                         />
                     </div>
                     <div className="ckeditor">
-                        <TextEd />
+                        <div className="textEditor">
+                            <div className="editor">
+                                <CKEditor
+                                editor={ClassicEditor}
+                                data={text}
+                                onChange={(event, editor) => {
+                                    const data = editor.getData()
+                                    setText(data)
+                                }}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
