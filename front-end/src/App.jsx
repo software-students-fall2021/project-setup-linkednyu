@@ -32,7 +32,7 @@ function App() {
         <Route path="/pwreset" component={pwReset} />
         <Route path="/pwreset2" component={pwReset2} />
         <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
-        <Route path="/account" > <Account setloggedIn={setloggedIn} /></Route>
+        <Route path="/account/:id" > <Account setloggedIn={setloggedIn} /></Route>
         <Route path="/newpost2" > <NewPost2 loggedIn={loggedIn} /></Route>
       </Switch>
     </BrowserRouter>
