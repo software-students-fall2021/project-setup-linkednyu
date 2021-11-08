@@ -39,7 +39,7 @@ const NewPost2 = ({ loggedIn }) => {
         var content = parse(text).props.children;
         const posts = {
             "id": count,
-            "avatar": "https://picsum.photos/200",
+            "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
             "userName": "Adonis",
             "courseName": "Mathematics",
             "date": today,
