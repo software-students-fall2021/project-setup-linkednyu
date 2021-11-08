@@ -11,30 +11,31 @@ export default function DetailedPost() {
     const { id } = useParams()
     
     //connect to backend
-    const url = "/homeposts"      
-    const commenturl = "/comments"          
+    const url = "/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
+    const commenturl = "/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"        
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
     const [loadingComment, setIsloadingComment] = useState(true)
 
     const [content, setContent] = useState('')
+    var count = 12
 
     const articles = {
         "date": "May",
         "first_name": "Adonis",
         "last_name": "Pollich",
-        "comment": "A1x)OpszI*",
-        "id": "11"
+        "comment": content,
+        "id": count,
     };
 
     const onComment = (e) => {
         e.preventDefault()
 
-        // if (!comment) {
-        //     alert('please add a comment')
-        //     return
-        // }
+        if (!content) {
+            alert('please add a comment')
+            return
+        }
 
         axios.post('http://localhost:5000/comments',articles).then(response=>{
             console.log(response);
@@ -53,7 +54,8 @@ export default function DetailedPost() {
 
         }
         fetchComments()
-
+        setContent("")
+        count = count + 1
 
     }
 
@@ -125,10 +127,10 @@ export default function DetailedPost() {
                         <Comment key={index} comment={p} />
                     ))}
                 </div>
-                <form className="detailedPostFooter" onSubmit={(e)=>{e.preventDefault()}}>
+                <form className="detailedPostFooter" onSubmit={onComment}>
                     <input placeholder="Comment Something..." className="detailedPostAddComment" value={content} onChange={(e) => setContent(e.target.value)} />
                     <div className="commentButtonSection">
-                    <Button className="commentButton" onClick={onComment}
+                    <Button className="commentButton" 
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                         > Comment</Button>
                     </div>
