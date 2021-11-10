@@ -14,7 +14,7 @@ router.post('/channel/join/:id', channelFunctions.joinChannel)
 router.post('/channel/leave/:id', channelFunctions.leaveChannel)
 router.post('/comments', routeFunctions.sendComment)
 router.get('/comments', routeFunctions.viewComment)
-router.get('/account/:username', routeFunctions.viewHome)
+router.get('/account/:username', routeFunctions.viewAccount)
 
 
 module.exports = router;

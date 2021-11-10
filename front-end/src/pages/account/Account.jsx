@@ -18,6 +18,8 @@ export default function Account({ setloggedIn }) {
             try {
                 await axios.get(url).then(response => {
                     for (let i = 0; i < response.data.length; i++) {
+                        //console.log(response.data[i])
+                        //console.log(username.toString())
                         if (response.data[i]['userName'].toString() === username.toString()) {
                             setAccount(response.data[i])
                             break

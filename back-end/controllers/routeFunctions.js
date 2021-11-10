@@ -4,6 +4,7 @@ const axios = require('axios');
 // using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
 var commentData = []
+var accountData = []
 var pictures = []
 
 
@@ -103,6 +104,7 @@ const viewComment = (req, res) => {
                 console.log(err);
             }
 
+            commentData.sort(custom_sort)
             res.send(commentData)
         }
 
@@ -126,9 +128,36 @@ const sendPosts = (req, res) => {
     res.status(200).send(req.body)
 }
 
-// const viewAccount = (req, res) => {
+const viewAccount = (req, res) => {
+    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+    const picurl = "https://picsum.photos/v2/list"
+    let posts = []
 
-// }
+    const commenturl = "https://my.api.mockaroo.com/comments.json?key=500332d0"
+    let comments = []
+
+    if (accountData.length === 0) {
+        if (postData.length === 0) {
+            fetchposts()
+            accountData = accountData.concat(postData)
+        }
+        else {
+            accountData = accountData.concat(postData)
+        }
+        if (commentData.length === 0) {
+            fetchcomments()
+            accountData = accountData.concat(commentData)
+        }
+        else {
+            accountData = accountData.concat(commentData)
+        }
+        res.send(accountData)
+    }
+    else {
+        res.send(accountData)
+    }
+
+}
 
 
 module.exports = {
@@ -137,4 +166,5 @@ module.exports = {
     viewComment,
     sendComment,
     sendPosts,
+    viewAccount
 }
