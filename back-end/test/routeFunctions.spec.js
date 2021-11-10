@@ -8,8 +8,10 @@ chai.should()
 
 const assert = require('assert')
 //const { expect } = require('chai')
-const { viewComment } = require('../controllers/routeFunctions')
+// const { viewComment } = require('../controllers/routeFunctions')
 
+
+// GET
 describe('Detailed post page', () => {
     describe('Get /detailedposts/:id', () => {
         //test get post
@@ -56,13 +58,26 @@ describe('Home page', () => {
                     done()
                 })
         })
+
+
+        //test get post if wrong route is given
+        it('should return status==404 if endpoint=="homepost ', (done) => {
+            chai.request(app)
+                .get('/homepost')
+                .end((err, res) => {
+                    res.should.have.status(404)
+                    done()
+                })
+        }).timeout(4000)
+
+
     })
 })
 
 
 describe('Channel page', () => {
     describe('Get /channel/:id', () => {
-        //test get post
+        //test get channel post
         it('should get all channel posts', (done) => {
             chai.request(app)
                 .get('/channel/:id')
@@ -80,27 +95,10 @@ describe('Channel page', () => {
                     done()
                 })
         })
-    })
-})
 
 
-describe('Home page', () => {
-    describe('Get /homeposts', () => {
-        //test get post
-        it('should return status==404 if endpoint=="homepost ', (done) => {
-            chai.request(app)
-                .get('/homepost')
-                .end((err, res) => {
-                    res.should.have.status(404)
-                    done()
-                })
-        }).timeout(4000)
-    })
-})
 
-describe('Home page', () => {
-    describe('Get /channel/:id', () => {
-        //test get post
+        //test get  channel post
         it('should return status==404 if channel is without an id' , (done) => {
             chai.request(app)
                 .get('/channel')
@@ -109,5 +107,117 @@ describe('Home page', () => {
                     done()
                 })
         }).timeout(4000)
+    })
+})
+
+
+// POST
+describe('Create New Post Page', () => {
+    describe('Post /homeposts', () => {
+        //making a post request
+        it('it should send a new post to the home page', (done) => {
+
+            const posts = {
+                "id": "89",
+                "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
+                "userName": "Prince",
+                "courseName": "Mathematics",
+                "date": "11/12/2020",
+                "title": "Food",
+                "content":"I love food",
+                "comments": [1,2,3,4,5],
+                "imgSrc": "https://picsum.photos/id/1000/5626/3635"
+            };
+
+            chai.request(app)
+                .post('/homeposts')
+                .send(posts)
+                .end((err, res) => {
+                    res.should.have.status(200)
+                    res.body.should.be.a('object')
+                    res.body.should.have.property("userName").eq("Prince")
+                    res.body.should.have.property("courseName").eq("Mathematics")
+                    res.body.should.have.property("content").eq("I love food")
+                    done()
+                })
+        }).timeout(5000)
+
+
+        it('it should not send a new post to the home page if endpoint is not valid', (done) => {
+
+            const posts = {
+                "id": "89",
+                "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
+                "userName": "Prince",
+                "courseName": "Mathematics",
+                "date": "11/12/2020",
+                "title": "Food",
+                "content":"I love food",
+                "comments": [1,2,3,4,5],
+                "imgSrc": "https://picsum.photos/id/1000/5626/3635"
+            };
+
+            chai.request(app)
+                .post('/homepost')
+                .send(posts)
+                .end((err, res) => {
+                    res.should.have.status(404)
+                    
+                    done()
+                })
+        }).timeout(5000)
+
+    })
+})
+
+
+
+describe('Create New Comment', () => {
+    describe('Post /comments', () => {
+        //making a post request
+        it('it should send a new comment', (done) => {
+
+            const comment = {
+                "date": "May",
+                "first_name": "Prince",
+                "last_name": "Ampofo",
+                "comment": "I love food",
+                "id": "90",
+            };
+
+            chai.request(app)
+                .post('/comments')
+                .send(comment)
+                .end((err, res) => {
+                    res.should.have.status(200)
+                    res.body.should.be.a('object')
+                    res.body.should.have.property("date").eq("May")
+                    res.body.should.have.property("comment").eq("I love food")
+                    res.body.should.have.property("first_name").eq("Prince")
+                    done()
+                })
+        }).timeout(5000)
+
+
+        it('it should not send a new comment if endpoint is not valid', (done) => {
+
+            const comment = {
+                "date": "May",
+                "first_name": "Prince",
+                "last_name": "Ampofo",
+                "comment": "I love food",
+                "id": "90",
+            };
+
+            chai.request(app)
+                .post('/comment')
+                .send(comment)
+                .end((err, res) => {
+                    res.should.have.status(404)
+                    
+                    done()
+                })
+        }).timeout(5000)
+
     })
 })

@@ -117,17 +117,18 @@ const viewComment = (req, res) => {
 
 const sendComment = (req, res) => {
     commentData.push(req.body)
-
+    res.status(200).send(req.body)
 }
 
 const sendPosts = (req,res) =>{
     postData = [req.body].concat(postData)
     postData.sort(custom_sort)
+    res.status(200).send(req.body)
 }
 
-const viewAccount = (req, res) => {
+// const viewAccount = (req, res) => {
 
-}
+// }
 
 
 module.exports = {

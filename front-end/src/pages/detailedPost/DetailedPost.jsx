@@ -64,7 +64,13 @@ export default function DetailedPost() {
             try {
                 await axios.get(url).then(response => {
                     //get the id of the post
-                    setPosts(response.data[id - 1])
+                    for (let i =0 ; i <response.data.length ; i++){
+                        if (response.data[i]['id'].toString()===id.toString()){
+                            setPosts(response.data[i])
+                            break
+                        }
+                    }
+                    
                     setIsloading(false)
                 });
             } catch (error) {
