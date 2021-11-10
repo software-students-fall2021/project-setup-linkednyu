@@ -18,9 +18,9 @@ export default function Account({ setloggedIn }) {
             try {
                 await axios.get(url).then(response => {
                     for (let i = 0; i < response.data.length; i++) {
-                        //console.log(response.data[i])
-                        //console.log(username.toString())
-                        if (response.data[i]['userName'].toString() === username.toString()) {
+                        // console.log(response.data[i])
+                        // console.log(username.toString())
+                        if (response.data[i]['userName'] === username) {
                             setAccount(response.data[i])
                             break
                         }
@@ -57,8 +57,7 @@ export default function Account({ setloggedIn }) {
                             <h2>My Classes</h2>
                         </div>
                         <div className="contentList">
-                            <span>Class 1</span>
-
+                            <span>{account.courseName}</span>
                             <span>Class 2</span>
                             <span>Class 3</span>
                         </div>
@@ -69,7 +68,6 @@ export default function Account({ setloggedIn }) {
                         </div>
                         <div className="contentList">
                             <span>Post 1</span>
-
                             <span>Post 2</span>
                             <span>Post 3</span>
                         </div>
