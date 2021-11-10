@@ -8,7 +8,7 @@ var pictures = []
 
 
 function custom_sort(a, b) {
-    return  new Date(b.date).getTime()-new Date(a.date).getTime();
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
 }
 
 const viewHome = (req, res) => {
@@ -82,7 +82,7 @@ const viewChannel = (req, res) => {
 
 //function for comments
 const viewComment = (req, res) => {
-    const commenturl = "https://61798eeaaa7f340017404b69.mockapi.io/comment"
+    const commenturl = "https://my.api.mockaroo.com/comments.json?key=500332d0"
 
     let comments = []
 
@@ -120,7 +120,7 @@ const sendComment = (req, res) => {
     res.status(200).send(req.body)
 }
 
-const sendPosts = (req,res) =>{
+const sendPosts = (req, res) => {
     postData = [req.body].concat(postData)
     postData.sort(custom_sort)
     res.status(200).send(req.body)

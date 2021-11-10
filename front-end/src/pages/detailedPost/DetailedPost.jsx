@@ -9,7 +9,7 @@ import { useParams } from "react-router"
 
 export default function DetailedPost() {
     const { id } = useParams()
-    
+
     //connect to backend
     const url = "/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
     const commenturl = "/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"        
@@ -37,7 +37,7 @@ export default function DetailedPost() {
             return
         }
 
-        axios.post('http://localhost:5000/comments',articles).then(response=>{
+        axios.post('http://localhost:5000/comments', articles).then(response => {
             console.log(response);
         });
 
@@ -64,13 +64,13 @@ export default function DetailedPost() {
             try {
                 await axios.get(url).then(response => {
                     //get the id of the post
-                    for (let i =0 ; i <response.data.length ; i++){
-                        if (response.data[i]['id'].toString()===id.toString()){
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i]['id'].toString() === id.toString()) {
                             setPosts(response.data[i])
                             break
                         }
                     }
-                    
+
                     setIsloading(false)
                 });
             } catch (error) {
@@ -103,7 +103,7 @@ export default function DetailedPost() {
                 <div className="detailedPostTop">
                     <div className="detailedPostTopLeft">
                         <div className="detailedPostAvatar">
-                            <ImageAvatars avatarSrc={post.avatar} />
+                            <ImageAvatars id={post.id} avatarSrc={post.avatar} />
                         </div>
                     </div>
                     <div className="detailedPostTopMiddle">
@@ -130,14 +130,14 @@ export default function DetailedPost() {
                     <span className="detailedPostCommentCounter">{comment.length} comments</span>
                 </div>
                 <div className="detailedPostComment">
-                    {comment.map((p,index) => (
+                    {comment.map((p, index) => (
                         <Comment key={index} comment={p} />
                     ))}
                 </div>
                 <form className="detailedPostFooter" onSubmit={onComment}>
                     <input placeholder="Comment Something..." className="detailedPostAddComment" value={content} onChange={(e) => setContent(e.target.value)} />
                     <div className="commentButtonSection">
-                    <Button className="commentButton" 
+                        <Button className="commentButton"
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                         > Comment</Button>
                     </div>
