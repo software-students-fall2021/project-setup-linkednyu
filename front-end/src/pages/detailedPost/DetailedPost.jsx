@@ -103,7 +103,7 @@ export default function DetailedPost() {
                 <div className="detailedPostTop">
                     <div className="detailedPostTopLeft">
                         <div className="detailedPostAvatar">
-                            <ImageAvatars id={post.id} avatarSrc={post.avatar} />
+                            <ImageAvatars id={post.userName} avatarSrc={post.avatar} />
                         </div>
                     </div>
                     <div className="detailedPostTopMiddle">

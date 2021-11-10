@@ -7,8 +7,8 @@ import axios from 'axios'
 import { useParams } from "react-router"
 
 export default function Account({ setloggedIn }) {
-    const { id } = useParams()
-    const url = "/account/:id"
+    const { username } = useParams()
+    const url = "/account/:username"
 
     const [account, setAccount] = useState(null)
     const [loading, setIsloading] = useState(true)
@@ -18,7 +18,7 @@ export default function Account({ setloggedIn }) {
             try {
                 await axios.get(url).then(response => {
                     for (let i = 0; i < response.data.length; i++) {
-                        if (response.data[i]['id'].toString() === id.toString()) {
+                        if (response.data[i]['userName'].toString() === username.toString()) {
                             setAccount(response.data[i])
                             break
                         }
@@ -31,7 +31,7 @@ export default function Account({ setloggedIn }) {
 
         }
         fetchaccount()
-    }, [id])
+    }, [username])
 
 
     return (

@@ -5,7 +5,7 @@ const channelFunctions = require("../controllers/channelDetail");
 
 
 // routes
-router.post('/homeposts',routeFunctions.sendPosts)
+router.post('/homeposts', routeFunctions.sendPosts)
 router.get('/homeposts', routeFunctions.viewHome)
 router.get('/channel/:id', routeFunctions.viewChannel)
 router.get("/detailedposts/:id", routeFunctions.viewHome)
@@ -14,7 +14,7 @@ router.post('/channel/join/:id', channelFunctions.joinChannel)
 router.post('/channel/leave/:id', channelFunctions.leaveChannel)
 router.post('/comments', routeFunctions.sendComment)
 router.get('/comments', routeFunctions.viewComment)
-router.get('/account/:id', routeFunctions.viewHome)
+router.get('/account/:username', routeFunctions.viewHome)
 
 
 module.exports = router;
