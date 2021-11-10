@@ -17,8 +17,12 @@ export default function Account({ setloggedIn }) {
         async function fetchaccount() {
             try {
                 await axios.get(url).then(response => {
-                    console.log(response.data)
-                    setAccount(response.data[id - 1])
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i]['id'].toString() === id.toString()) {
+                            setAccount(response.data[i])
+                            break
+                        }
+                    }
                     setIsloading(false)
                 });
             } catch (error) {
