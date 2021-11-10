@@ -129,33 +129,9 @@ const sendPosts = (req, res) => {
 }
 
 const viewAccount = (req, res) => {
-    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    const picurl = "https://picsum.photos/v2/list"
-    let posts = []
-
-    const commenturl = "https://my.api.mockaroo.com/comments.json?key=500332d0"
-    let comments = []
-
-    if (accountData.length === 0) {
-        if (postData.length === 0) {
-            fetchposts()
-            accountData = accountData.concat(postData)
-        }
-        else {
-            accountData = accountData.concat(postData)
-        }
-        if (commentData.length === 0) {
-            fetchcomments()
-            accountData = accountData.concat(commentData)
-        }
-        else {
-            accountData = accountData.concat(commentData)
-        }
-        res.send(accountData)
-    }
-    else {
-        res.send(accountData)
-    }
+    accountData = []
+    accountData = accountData.concat(postData)
+    res.send(accountData)   
 
 }
 
