@@ -10,6 +10,44 @@ const assert = require('assert')
 
 
 // GET
+
+describe('Home page', () => {
+    describe('Get /homeposts', () => {
+        //test get post
+        it('should get all home posts', (done) => {
+            chai.request(app)
+                .get('/homeposts')
+                .end((err, res) => {
+                    res.should.have.status(200)
+                    res.body[0].should.have.property("id")
+                    res.body[1].should.have.property("avatar")
+                    res.body[4].should.have.property("userName")
+                    res.body[2].should.have.property("courseName")
+                    res.body[3].should.have.property("comments")
+                    res.body[8].should.have.property("content")
+                    res.body[5].should.have.property("date")
+                    res.body[0].should.have.property("imgSrc")
+                    res.body.should.be.a('array')
+                    done()
+                })
+        })
+
+
+        //test get post if wrong route is given
+        it('should return status==404 if endpoint=="homepost ', (done) => {
+            chai.request(app)
+                .get('/homepost')
+                .end((err, res) => {
+                    res.should.have.status(404)
+                    done()
+                })
+        }).timeout(4000)
+
+
+    })
+})
+
+
 describe('Detailed post page', () => {
     describe('Get /detailedposts/:id', () => {
         //test get post
@@ -60,43 +98,6 @@ describe('Detailed post page', () => {
 })
 
 
-describe('Home page', () => {
-    describe('Get /homeposts', () => {
-        //test get post
-        it('should get all home posts', (done) => {
-            chai.request(app)
-                .get('/homeposts')
-                .end((err, res) => {
-                    res.should.have.status(200)
-                    res.body[0].should.have.property("id")
-                    res.body[1].should.have.property("avatar")
-                    res.body[4].should.have.property("userName")
-                    res.body[2].should.have.property("courseName")
-                    res.body[3].should.have.property("comments")
-                    res.body[8].should.have.property("content")
-                    res.body[5].should.have.property("date")
-                    res.body[0].should.have.property("imgSrc")
-                    res.body.should.be.a('array')
-                    done()
-                })
-        })
-
-
-        //test get post if wrong route is given
-        it('should return status==404 if endpoint=="homepost ', (done) => {
-            chai.request(app)
-                .get('/homepost')
-                .end((err, res) => {
-                    res.should.have.status(404)
-                    done()
-                })
-        }).timeout(4000)
-
-
-    })
-})
-
-
 describe('Channel page', () => {
     describe('Get /channel/:id', () => {
         //test get channel post
@@ -131,6 +132,33 @@ describe('Channel page', () => {
         }).timeout(4000)
     })
 })
+
+//test account page
+describe('Account page', () => {
+    describe('Get /account/:id', () => {
+        //test get post
+        it('should get account info', (done) => {
+            chai.request(app)
+                .get('/account/:id')
+                .end((err, res) => {
+                    res.should.have.status(200)
+                    res.body.should.be.a('array')
+                    done()
+                })
+        })
+
+        //test get post if wrong route is given
+        it('should return status==404 if /account is without an id', (done) => {
+            chai.request(app)
+                .get('/account')
+                .end((err, res) => {
+                    res.should.have.status(404)
+                    done()
+                })
+        }).timeout(4000)
+    })
+})
+
 
 
 // POST
