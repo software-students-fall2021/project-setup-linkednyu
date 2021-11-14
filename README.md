@@ -10,6 +10,7 @@ This will be the primary repo where development of LinkedNYU takes place.
 		- [Sprint 0](#sprint-0)
 		- [Sprint 1](#sprint-1)
 		- [Sprint 2](#sprint-2)
+		- [Sprint 3](#sprint-3)
 	- [Front-end](#front-end)
 		- [Components](#components)
 		- [Pages](#pages)
@@ -65,6 +66,9 @@ Scrum Master [@AnastasiaYe](https://github.com/AnastasiaYe)
 ### Sprint 2
 Product Owner [@princeampofo](https://github.com/princeampofo)  
 Srum Master [@Comf0rTS1997](https://github.com/Comf0rTS1997)  
+### Sprint 3
+Product Owner [@princeampofo](https://github.com/princeampofo)    
+Scrum Master [@AnastasiaYe](https://github.com/AnastasiaYe)  
 
 ## Front-end
 We use `react.js` for front-end developemnt.    
