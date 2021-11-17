@@ -23,12 +23,14 @@ app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 app.use(cors())
 
+//connect to database
+const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 //code goes here
 
 const routes = require("./routes/userRoutes");
 
-app.use('/',routes)
+app.use('/', routes)
 
 
 // export the express app we created to make it available to other modules
