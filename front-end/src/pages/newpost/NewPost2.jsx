@@ -6,14 +6,21 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import parse from "html-react-parser"
-import { Link } from "react-router-dom";
 import axios from 'axios'
-
+import { useHistory } from 'react-router-dom';
+//import { post } from '../../../../back-end/app';
 
 const NewPost2 = ({ loggedIn }) => {
-    const [title, setTitle] = useState("");
-    const [text, setText] = useState("")
+    const[postData, setPostData] = useState({
+        title: '',
+        text: '',
+        date: '',
+        userName: '',
+        courseName: '',
+        avatar: '',
+        imgSrc: '',
+    })
+    
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -23,6 +30,7 @@ const NewPost2 = ({ loggedIn }) => {
         setAnchorEl(null);
     };
 
+    let history = useHistory();
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -31,38 +39,27 @@ const NewPost2 = ({ loggedIn }) => {
 
     today = mm + '/' + dd + '/' + yyyy;
 
-    var count = Math.floor(Math.random()*(100-20)+20)
+    var randomId = Math.floor(Math.random()*(100-20)+20)
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-    const onPost = (e) => {
+        console.log('submit')
+
+        if(!postData.title)
+            alert('please type in title')
+        if(!postData.text)
+            alert('please type in text')
+
+        setPostData({...postData, id: randomId})
+
+        axios.post('http://localhost:4000/homeposts',postData)
+            .then(response=>{
+                console.log(response);
+            })
+            .catch((err) => console.log(err.message))
         
-        if (!text || !title) {
-            e.preventDefault()
-            alert('please add a Title or Content')
-            return
-        }
-        
-        var content = parse(text).props.children;
-        const posts = {
-            "id": count,
-            "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
-            "userName": "Adonis",
-            "courseName": "Mathematics",
-            "date": today,
-            "title": title,
-            "content":content,
-            "comments": [],
-            "imgSrc": "https://picsum.photos/id/1000/5626/3635"
-        };
-
-
-
-
-        axios.post('http://localhost:5000/homeposts',posts).then(response=>{
-            console.log(response);
-        });
-        
-
+        history.push('/')
     }
     
     return (
@@ -103,13 +100,14 @@ const NewPost2 = ({ loggedIn }) => {
                     </div>
 
                 </div>
+                <form onSubmit = { handleSubmit }>
                 <div className="titleAndContent">
                     <div className="form-control">
                         <input
                             type="text"
                             placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            value={postData.title}
+                            onChange={(e) => setPostData({...postData, title: e.target.value})}
                         />
                     </div>
                     <div className="ckeditor">
@@ -117,10 +115,10 @@ const NewPost2 = ({ loggedIn }) => {
                             <div className="editor">
                                 <CKEditor
                                 editor={ClassicEditor}
-                                data={text}
+                                data={postData.text}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
-                                    setText(data)
+                                    setPostData({...postData, text: data})
                                 }}
                                 />
                             </div>
@@ -132,10 +130,12 @@ const NewPost2 = ({ loggedIn }) => {
                     <Button className="draftButton" onClick = {() => alert('Draft saved')}>
                         Draft
                     </Button>
-                    <Link to="/"><Button onClick={onPost} className="postButton" buttonStyle="btn--dark--solid">
+                    <Button type = "submit" className="postButton" buttonStyle="btn--dark--solid">
                         Post
-                    </Button></Link>
+                    </Button>
                 </div>
+
+                </form>
             </div>
 
         </div>

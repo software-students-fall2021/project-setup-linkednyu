@@ -1,6 +1,7 @@
 import './PostBox.css'
 import ImageAvatars from './Avatar'
 import { Link } from 'react-router-dom'
+import parser from 'html-react-parser'
 
 
 const PostBox = ({ post, loggedIn }) => {
@@ -17,11 +18,12 @@ const PostBox = ({ post, loggedIn }) => {
 				<Link className="tLink" to={`/detailedposts/${post.id}`}><div className="content">
 					<h3 className="contenttitle">{post.title}</h3>
 					<img className="contentImg" src={post.imgSrc} alt="" ></img>
-					<p className="textContent">{post.content}</p>
+					<div className="textContent">
+						{parser(post.text + '')}
+					</div>
 				</div></Link>
 			</div>
 		</div>
-
 	)
 }
 

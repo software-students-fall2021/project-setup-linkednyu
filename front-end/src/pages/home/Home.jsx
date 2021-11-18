@@ -3,10 +3,9 @@ import PostBox from "../../components/PostBox"
 import { useState, useEffect } from "react"
 import axios from 'axios'
 
-
 export default function Home({ loggedIn }) {
-    const url = "/homeposts"
-    const [post, setPosts] = useState(null)
+    const url = "http://localhost:4000/homeposts"
+    const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 
     useEffect(() => {
@@ -27,8 +26,8 @@ export default function Home({ loggedIn }) {
     return (
         <>
             {!loading && <div className="homePage">
-                {post.map((items) => (
-                    <PostBox key={items.id} loggedIn={loggedIn} post={items} />
+                {posts.map((item) => (
+                    <PostBox key={item.id} loggedIn={loggedIn} post={item} />
                 ))}
             </div>}
         </>
