@@ -7,7 +7,6 @@ var accountData = []
 var pictures = []
 
 const postSchema = mongoose.Schema({ //model for post messages
-    id: Number,
     title: String,
     text: String,
     userName: String,

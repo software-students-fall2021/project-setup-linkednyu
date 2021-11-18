@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "moment": "^2.29.1"
   }
 }

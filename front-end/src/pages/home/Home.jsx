@@ -8,6 +8,7 @@ export default function Home({ loggedIn }) {
     const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 
+    //fetch post from server
     useEffect(() => {
         async function fetchposts() {
             try {
@@ -22,12 +23,11 @@ export default function Home({ loggedIn }) {
         fetchposts()
     }, [])
 
-
     return (
         <>
             {!loading && <div className="homePage">
-                {posts.map((item) => (
-                    <PostBox key={item.id} loggedIn={loggedIn} post={item} />
+                {[...posts].reverse().map((item) => (
+                    <PostBox key={item._id} loggedIn={loggedIn} post={item} />
                 ))}
             </div>}
         </>

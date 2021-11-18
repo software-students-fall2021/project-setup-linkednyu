@@ -11,12 +11,12 @@ import { useHistory } from 'react-router-dom';
 //import { post } from '../../../../back-end/app';
 
 const NewPost2 = ({ loggedIn }) => {
-    const[postData, setPostData] = useState({
+    const[postData, setPostData] = useState({ //local post model
         title: '',
         text: '',
         date: '',
-        userName: '',
-        courseName: '',
+        userName: '', 
+        courseName: '', 
         avatar: '',
         imgSrc: '',
     })
@@ -30,35 +30,31 @@ const NewPost2 = ({ loggedIn }) => {
         setAnchorEl(null);
     };
 
-    let history = useHistory();
+    let history = useHistory(); //jump to home
 
-    var today = new Date();
+    //create date
+    var today = new Date(); 
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
 
-    var randomId = Math.floor(Math.random()*(100-20)+20)
-
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        console.log('submit')
 
         if(!postData.title)
             alert('please type in title')
         if(!postData.text)
             alert('please type in text')
 
-        setPostData({...postData, id: randomId})
-
+        //send postData to server
         axios.post('http://localhost:4000/homeposts',postData)
             .then(response=>{
                 console.log(response);
             })
             .catch((err) => console.log(err.message))
-        
+        //jump back to home
         history.push('/')
     }
     
@@ -118,7 +114,7 @@ const NewPost2 = ({ loggedIn }) => {
                                 data={postData.text}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
-                                    setPostData({...postData, text: data})
+                                    setPostData({...postData, text: data, date: today})
                                 }}
                                 />
                             </div>
@@ -127,7 +123,7 @@ const NewPost2 = ({ loggedIn }) => {
                 </div>
 
                 <div className="buttonSection">
-                    <Button className="draftButton" onClick = {() => alert('Draft saved')}>
+                    <Button type = "button" className="draftButton" onClick = {() => alert('Draft saved')}>
                         Draft
                     </Button>
                     <Button type = "submit" className="postButton" buttonStyle="btn--dark--solid">
