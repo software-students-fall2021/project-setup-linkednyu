@@ -30,7 +30,7 @@ describe('Home page', () => {
                     res.body.should.be.a('array')
                     done()
                 })
-        })
+        }).timeout(5000)
 
 
         //test get post if wrong route is given
