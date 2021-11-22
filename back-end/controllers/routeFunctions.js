@@ -1,6 +1,5 @@
 const axios = require('axios');
-
-
+const mongoose = require('mongoose')
 // using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
 var commentData = []
@@ -10,6 +9,7 @@ var pictures = []
 // function custom_sort(a, b) {
 //     return new Date(b.date).getTime() - new Date(a.date).getTime();
 // }
+
 
 // const viewHome = (req, res) => {
 //     const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
@@ -61,6 +61,7 @@ var pictures = []
 //     else {
 //         res.send(postData)
 //     }
+
 
 // };
 
@@ -121,10 +122,15 @@ const sendComment = (req, res) => {
     res.status(200).send(req.body)
 }
 
-const sendPosts = (req, res) => {
-    postData = [req.body].concat(postData)
-    postData.sort(custom_sort)
-    res.status(200).send(req.body)
+const sendPosts = async (req, res) => {
+    const post = req.body //grab the request to post
+    const newPost = new PostModel(post) //create new postmsg to store in db
+    try{
+        await newPost.save() //save into db
+        res.status(201).json(newPost)
+    }catch (err){
+        res.status(409).json({ message: err.message})
+    }
 }
 
 // const viewAccount = (req, res) => {
