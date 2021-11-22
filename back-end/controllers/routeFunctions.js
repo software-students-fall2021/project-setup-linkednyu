@@ -7,62 +7,62 @@ var commentData = []
 var pictures = []
 
 
-function custom_sort(a, b) {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-}
+// function custom_sort(a, b) {
+//     return new Date(b.date).getTime() - new Date(a.date).getTime();
+// }
 
-const viewHome = (req, res) => {
-    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    const picurl = "https://picsum.photos/v2/list"
-    let posts = []
+// const viewHome = (req, res) => {
+//     const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+//     const picurl = "https://picsum.photos/v2/list"
+//     let posts = []
 
-    if (postData.length === 0) {
-        async function fetchposts() {
-            try {
-                await axios.get(url).then(response => {
-                    response.data.map(items => {
-                        posts.push(items)
-                    })
+//     if (postData.length === 0) {
+//         async function fetchposts() {
+//             try {
+//                 await axios.get(url).then(response => {
+//                     response.data.map(items => {
+//                         posts.push(items)
+//                     })
 
-                    for (let i = 0; i < posts.length; i++) {
-                        for (let j = 0; j < 5; j++) {
-                            posts[i]["comments"].push(Math.floor(Math.random() * 8))
-                        }
-                    }
+//                     for (let i = 0; i < posts.length; i++) {
+//                         for (let j = 0; j < 5; j++) {
+//                             posts[i]["comments"].push(Math.floor(Math.random() * 8))
+//                         }
+//                     }
 
-                })
+//                 })
 
-                await axios.get(picurl).then(response => {
-                    response.data.map(items => {
-                        pictures.push(items)
-                    })
-                    for (let i = 0; i < posts.length; i++) {
-                        posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
+//                 await axios.get(picurl).then(response => {
+//                     response.data.map(items => {
+//                         pictures.push(items)
+//                     })
+//                     for (let i = 0; i < posts.length; i++) {
+//                         posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
 
-                    }
-                    posts.map(items => {
-                        postData.push(items)
-                    })
-                })
+//                     }
+//                     posts.map(items => {
+//                         postData.push(items)
+//                     })
+//                 })
 
-            } catch (err) {
-                console.log(err);
-            }
+//             } catch (err) {
+//                 console.log(err);
+//             }
 
-            postData.sort(custom_sort)
-            res.send(postData)
-        }
+//             postData.sort(custom_sort)
+//             res.send(postData)
+//         }
 
-        fetchposts()
+//         fetchposts()
 
 
-    }
+//     }
 
-    else {
-        res.send(postData)
-    }
+//     else {
+//         res.send(postData)
+//     }
 
-};
+// };
 
 
 
@@ -136,7 +136,7 @@ const sendPosts = (req, res) => {
 
 
 module.exports = {
-    viewHome,
+    // viewHome,
     viewChannel,
     viewComment,
     sendComment,

@@ -5,7 +5,7 @@ require('dotenv').config({silent:true})
 module.exports = function (req,res,next){
     const token = req.header('Token')
 
-    if (!token) return res.status(401).send('Acc Denied')
+    if (!token) return res.status(401).send('Access Denied')
 
     try{
         const authorized = jwt.verify(token,process.env.SECRET_TOKEN)
