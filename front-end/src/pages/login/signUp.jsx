@@ -42,8 +42,12 @@ export default function SignUp(){
         try{
             const res = await axios.post('http://localhost:5000/register',signUpDetails)
             if (res.status === 200){
-                setMessage("You signed up!,You will be redirected to the login page shortly")
-                history.push('/login')
+                setMessage("Account Created!,You will be redirected to the login page shortly")
+                setTimeout(()=>{
+                    setmStyle("")
+                    setMessage("")
+                    history.push('/login')
+                },1500)
             }
         }catch (err){
             e.preventDefault()

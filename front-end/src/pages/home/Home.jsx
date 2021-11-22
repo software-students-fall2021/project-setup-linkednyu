@@ -32,8 +32,8 @@ export default function Home({ loggedIn }) {
     return (
         <>
             {!loading && <div className="homePage">
-                {post.map((items) => (
-                    <PostBox key={items.id} loggedIn={loggedIn} post={items} />
+                {post.map((items,index) => (
+                    <PostBox key={index} loggedIn={loggedIn} post={items} />
                 ))}
             </div>}
         </>

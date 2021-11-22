@@ -37,7 +37,7 @@ export default function Account() {
     },[])
 
 
-    
+
 
 
     return (
@@ -48,7 +48,7 @@ export default function Account() {
                 </div>
                 <div className="accountTop">
                     <div className="accountImage">
-                        <img className="profilePicture" alt="" src={account.avatar}></img>
+                        <img className="profilePicture" alt="" src="https://robohash.org/etiustodolorum.png?size=50x50&set=set1"></img>
                     </div>
                     <div className="accountBio">
                         <h2>Welcome Back!</h2>

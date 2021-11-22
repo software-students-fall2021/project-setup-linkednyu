@@ -42,10 +42,10 @@ export default function Login({ loggedIn, setLoggedIn }) {
                 setMessage(res.data.message)
                 setLoggedIn(true)
                 setTimeout(()=>{
-                    history.push('/')
                     setmStyle("")
                     setMessage("")
-                },1000)
+                    history.push('/')
+                },1500)
                 
             }
         }catch (err){

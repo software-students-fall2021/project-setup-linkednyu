@@ -11,10 +11,10 @@ export default function DetailedPost() {
     const { id } = useParams()
 
     //connect to backend
-    const url = "/detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
+    const url = "detailedposts/:id"      //"https://61798eeaaa7f340017404b69.mockapi.io/post"
     const commenturl = "/comments"             //"https://61798eeaaa7f340017404b69.mockapi.io/comment"        
     const [post, setPosts] = useState(null)
-    const [comment, setComments] = useState(null)
+    // const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
     const [loadingComment, setIsloadingComment] = useState(true)
 
@@ -42,18 +42,18 @@ export default function DetailedPost() {
         });
 
 
-        async function fetchComments() {
-            try {
-                await axios.get(commenturl).then(response => {
-                    setComments(response.data)
-                    setIsloadingComment(false)
-                });
-            } catch (error) {
-                console.log(error)
-            }
+        // async function fetchComments() {
+        //     try {
+        //         await axios.get(commenturl).then(response => {
+        //             setComments(response.data)
+        //             setIsloadingComment(false)
+        //         });
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
 
-        }
-        fetchComments()
+        // }
+        // fetchComments()
         setContent("")
         count = count + 1
 
@@ -64,13 +64,8 @@ export default function DetailedPost() {
             try {
                 await axios.get(url).then(response => {
                     //get the id of the post
-                    for (let i = 0; i < response.data.length; i++) {
-                        if (response.data[i]['id'].toString() === id.toString()) {
-                            setPosts(response.data[i])
-                            break
-                        }
-                    }
-
+                    console.log(response.data);
+                    setPosts(response.data)
                     setIsloading(false)
                 });
             } catch (error) {
@@ -81,21 +76,21 @@ export default function DetailedPost() {
         fetchposts()
     }, [id])
 
-    useEffect(() => {
-        async function fetchComments() {
-            try {
-                await axios.get(commenturl).then(response => {
-                    console.log(response.data)
-                    setComments(response.data)
-                    setIsloadingComment(false)
-                });
-            } catch (error) {
-                console.log(error)
-            }
+    // useEffect(() => {
+    //     async function fetchComments() {
+    //         try {
+    //             await axios.get(commenturl).then(response => {
+    //                 console.log(response.data)
+    //                 setComments(response.data)
+    //                 setIsloadingComment(false)
+    //             });
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
 
-        }
-        fetchComments()
-    }, [])
+    //     }
+    //     fetchComments()
+    // }, [])
 
     return (
         <> {!loading && !loadingComment && <div className="detailedPost" >
@@ -127,12 +122,12 @@ export default function DetailedPost() {
                     <img className="detailedPostImg" src={post.imgSrc} alt="" />
                 </div>
                 <div className="detailedPostBottom">
-                    <span className="detailedPostCommentCounter">{comment.length} comments</span>
+                    <span className="detailedPostCommentCounter">{} comments</span>
                 </div>
                 <div className="detailedPostComment">
-                    {comment.map((p, index) => (
+                    {/* {comment.map((p, index) => (
                         <Comment key={index} comment={p} />
-                    ))}
+                    ))} */}
                 </div>
                 <form className="detailedPostFooter" onSubmit={onComment}>
                     <input placeholder="Comment Something..." className="detailedPostAddComment" value={content} onChange={(e) => setContent(e.target.value)} />
