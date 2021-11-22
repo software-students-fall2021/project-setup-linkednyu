@@ -27,10 +27,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const NewPost2 = ({ loggedIn }) => {
     const[postData, setPostData] = useState({ //local post model
         title: '',
-        text: '',
+        content: '',
         date: '',
-        userName: 'Adonis', 
-        courseName: '', 
+        username: 'Adonis', 
+        coursename: 'Math', 
         avatar: 'https://picsum.photos/200',
         imgSrc: '',
     })
@@ -54,11 +54,11 @@ const NewPost2 = ({ loggedIn }) => {
 
         if(!postData.title)
             alert('please type in title')
-        if(!postData.text)
+        if(!postData.content)
             alert('please type in text')
 
         //send postData to server
-        axios.post('http://localhost:5000/homeposts',postData)
+        axios.post('http://localhost:4000/homeposts',postData)
             .then(response=>{
                 console.log(response);
             })
@@ -121,10 +121,10 @@ const NewPost2 = ({ loggedIn }) => {
                                 
                             <CKEditor
                                 editor={ClassicEditor}
-                                data={postData.text}
+                                data={postData.content}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
-                                    setPostData({...postData, text: data, date: today})
+                                    setPostData({...postData, content: data, date: today})
                                 }}
                             />
                                 

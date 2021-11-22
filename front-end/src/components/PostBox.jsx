@@ -2,7 +2,6 @@ import './PostBox.css'
 import ImageAvatars from './Avatar'
 import { Link } from 'react-router-dom'
 import parser from 'html-react-parser'
-// import moment from 'moment'
 
 
 const PostBox = ({ post, loggedIn }) => {
@@ -23,7 +22,7 @@ const PostBox = ({ post, loggedIn }) => {
 					<h3 className="contenttitle">{post.title}</h3>
 					{post.imgSrc === '' ? '' : <img className="contentImg" src={post.imgSrc} alt="" ></img>}
 					<div className="textContent">
-						{post.content}
+						{parser(post.content + '')}
 					</div>
 				</div></Link>
 			</div>

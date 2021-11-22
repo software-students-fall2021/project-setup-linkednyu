@@ -7,13 +7,14 @@ const channelFunctions = require("../controllers/channelDetail");
 const authFunctions = require("../controllers/auth")
 const accountFunctions = require("../controllers/account")
 const verify = require('../controllers/tokenVerify')
+const newPostFunctions = require('../controllers/newPost')
 
 
 // routes
 router.post('/register',authFunctions.signUp)
 router.post('/login',authFunctions.login)
 router.get('/detailedposts/:id', detailedPostFunctions.viewPost)
-// router.post('/homeposts', routeFunctions.sendPosts)
+router.post('/homeposts', newPostFunctions.sendPosts)
 router.get('/homeposts', homeFunctions.viewHome)
 router.get('/userAccount', verify,  accountFunctions.viewAccount)
 // router.get('/channel/:id', routeFunctions.viewChannel)
