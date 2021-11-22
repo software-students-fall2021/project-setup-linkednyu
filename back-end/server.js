@@ -3,7 +3,7 @@ const server = require('./app')
 const mongoose = require('mongoose')
 
 // which port to listen for HTTP(S) requests
-const port = 4000
+const port = 5000
 
 // call a function to start listening to the port
 const listener = server.listen(port, function () {

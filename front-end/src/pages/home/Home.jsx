@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 
 export default function Home({ loggedIn }) {
-    const url = "http://localhost:4000/homeposts"
+    const url = "http://localhost:5000/homeposts"
     const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 

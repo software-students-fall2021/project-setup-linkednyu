@@ -4,20 +4,34 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 //import { post } from '../../../../back-end/app';
+
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter'
+// import Code from '@ckeditor/ckeditor5-basic-styles/src/code'
+// import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
+// import Image from '@ckeditor/ckeditor5-image/src/image'
+// import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload'
+// import Indent from '@ckeditor/ckeditor5-indent/src/indent'
+// import List from '@ckeditor/ckeditor5-list/src/list'
+// import Heading from '@ckeditor/ckeditor5-heading/src/heading'
 
 const NewPost2 = ({ loggedIn }) => {
     const[postData, setPostData] = useState({ //local post model
         title: '',
         text: '',
         date: '',
-        userName: '', 
+        userName: 'Adonis', 
         courseName: '', 
-        avatar: '',
+        avatar: 'https://picsum.photos/200',
         imgSrc: '',
     })
     
@@ -34,11 +48,6 @@ const NewPost2 = ({ loggedIn }) => {
 
     //create date
     var today = new Date(); 
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-    var yyyy = today.getFullYear();
-
-    today = mm + '/' + dd + '/' + yyyy;
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -49,7 +58,7 @@ const NewPost2 = ({ loggedIn }) => {
             alert('please type in text')
 
         //send postData to server
-        axios.post('http://localhost:4000/homeposts',postData)
+        axios.post('http://localhost:5000/homeposts',postData)
             .then(response=>{
                 console.log(response);
             })
@@ -109,14 +118,16 @@ const NewPost2 = ({ loggedIn }) => {
                     <div className="ckeditor">
                         <div className="textEditor">
                             <div className="editor">
-                                <CKEditor
+                                
+                            <CKEditor
                                 editor={ClassicEditor}
                                 data={postData.text}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
                                     setPostData({...postData, text: data, date: today})
                                 }}
-                                />
+                            />
+                                
                             </div>
                         </div>
                     </div>
