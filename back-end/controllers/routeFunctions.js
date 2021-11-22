@@ -4,7 +4,6 @@ const axios = require('axios');
 // using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
 var commentData = []
-var accountData = []
 var pictures = []
 
 
@@ -128,12 +127,12 @@ const sendPosts = (req, res) => {
     res.status(200).send(req.body)
 }
 
-const viewAccount = (req, res) => {
-    accountData = []
-    accountData = accountData.concat(postData)
-    res.send(accountData)   
+// const viewAccount = (req, res) => {
+//     accountData = []
+//     accountData = accountData.concat(postData)
+//     res.send(accountData)   
 
-}
+// }
 
 
 module.exports = {
@@ -142,5 +141,4 @@ module.exports = {
     viewComment,
     sendComment,
     sendPosts,
-    viewAccount
 }
