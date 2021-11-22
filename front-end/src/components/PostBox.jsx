@@ -9,7 +9,7 @@ const PostBox = ({ post, loggedIn }) => {
 			<div className='task'>
 				<div className="header">
 					<ImageAvatars className="imgAvatar" size="30px" id={post.userName} avatarSrc={post.avatar} />
-					<h3 className="userName"><Link className="tLink" to={loggedIn ? "/account" : ""}>{post.userName}</Link></h3>
+					<h3 className="userName">{post.userName}</h3>
 					<h3 className="courseName"><Link className="tLink" to={loggedIn ? "/joinclass" : ""}>{post.courseName}</Link></h3>
 					<h3 className="time">{post.date}</h3>
 				</div>

@@ -7,7 +7,7 @@ export default function ImageAvatars({ size, avatarSrc, id }) {
   const history = useHistory();
   return (
     <Stack direction="row">
-      <Avatar style={{ height: size, cursor: 'pointer' }} alt="" src={avatarSrc} onClick={() => history.push(`/account/${id}`)} />
+      <Avatar style={{ height: size, cursor: 'pointer' }} alt="" src={avatarSrc}/>
     </Stack>
   );
 }
