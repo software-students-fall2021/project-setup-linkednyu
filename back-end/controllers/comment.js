@@ -7,8 +7,9 @@ function custom_sort(a, b) {
 //function for comments
 const viewComment = async (req, res) => {
     try {
-        const commentMessages = await CommentMessage.find();
+        const commentMessages = await Comment.find({ post_id: req.params.id })
 
+        //{ _id: 5 }
         console.log(commentMessages)
         res.status(200).json(commentMessages)
     } catch (error) {
@@ -18,10 +19,12 @@ const viewComment = async (req, res) => {
 
 const sendComment = async (req, res) => {
     const comment = req.body
-    const newComment = new CommentMessage({
+    const newComment = new Comment({
         userName: comment.userName,
+        avatar: comment.avatar,
         content: comment.content,
-        date: comment.date
+        date: comment.date,
+        post_id: comment.post_id
     })
 
     try {

@@ -21,8 +21,8 @@ router.get('/userAccount', verify, accountFunctions.viewAccount)
 router.post('/channel/detail/:id', channelFunctions.channel)
 router.post('/channel/join/:id', channelFunctions.joinChannel)
 router.post('/channel/leave/:id', channelFunctions.leaveChannel)
-router.post('/comments', comment.sendComment)
-router.get('/comments', comment.viewComment)
+router.post('/comments/:id', comment.sendComment)
+router.get('/comments/:id', comment.viewComment)
 
 
 

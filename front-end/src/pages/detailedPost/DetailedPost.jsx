@@ -1,6 +1,6 @@
 import "./detailedPost.css"
 import { Button } from "../../components/Button"
-// import Comment from "../../components/Comment"
+import Comment from "../../components/Comment"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
@@ -10,12 +10,57 @@ import { useParams } from "react-router"
 export default function DetailedPost() {
     const { id } = useParams();
 
-    console.log(id);
+    //console.log(id);
     //connect to backend
     const url = `/detailedposts/${id}`
+    const commenturl = `/comments/${id}`
     const [post, setPosts] = useState(null)
-
+    const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
+    const [loadingComment, setIsloadingComment] = useState(true)
+    const [newComment, setContent] = useState({
+        userName: 'Ana Ye',
+        avatar: "https://robohash.org/etiustodolorum.png?size=50x50&set=set1",
+        content: '',
+        date: new Date(),
+        post_id: ''
+    })
+
+    const onComment = (e) => {
+        e.preventDefault()
+
+        if (!newComment) {
+            alert('please add a comment')
+            return
+        }
+
+        axios.post(`http://localhost:5000/comments/${id}`, newComment).then(response => {
+            console.log(response);
+        })
+            .catch((err) => console.log(err.message));
+
+
+        async function fetchComments() {
+            try {
+                await axios.get(commenturl).then(response => {
+                    setComments(response.data)
+                    setIsloadingComment(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+        fetchComments()
+        setContent({
+            userName: '',
+            avatar: '',
+            content: '',
+            date: new Date(),
+            post_id: ''
+        })
+
+    }
 
     useEffect(() => {
         async function fetchposts() {
@@ -33,12 +78,28 @@ export default function DetailedPost() {
         fetchposts()
     }, [url])
 
+    useEffect(() => {
+        async function fetchComments() {
+            try {
+                await axios.get(commenturl).then(response => {
+                    //console.log(response.data)
+                    setComments(response.data)
+                    setIsloadingComment(false)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+        fetchComments()
+    }, [])
+
 
 
 
 
     return (
-        <> {!loading && <div className="detailedPost" >
+        <> {!loading && !loadingComment && <div className="detailedPost" >
             <div className="detailedWrapper">
                 <div className="detailedPostTop">
                     <div className="detailedPostTopLeft">
@@ -67,15 +128,21 @@ export default function DetailedPost() {
                     <img className="detailedPostImg" src={post.imgSrc} alt="" />
                 </div>
                 <div className="detailedPostBottom">
-                    <span className="detailedPostCommentCounter">{ } comments</span>
+                    <span className="detailedPostCommentCounter">{comment.length} comments</span>
                 </div>
                 <div className="detailedPostComment">
-                    {/* {comment.map((p, index) => (
+                    {comment.map((p, index) => (
                         <Comment key={index} comment={p} />
-                    ))} */}
+                    ))}
                 </div>
-                <form className="detailedPostFooter">
-                    <input placeholder="Comment Something..." className="detailedPostAddComment" />
+                <form className="detailedPostFooter" onSubmit={onComment}>
+                    <input
+                        type="text"
+                        placeholder="Comment Something..."
+                        className="detailedPostAddComment"
+                        value={newComment.content}
+                        onChange={(e) => setContent({ ...newComment, post_id: post._id, content: e.target.value })}
+                    />
                     <div className="commentButtonSection">
                         <Button className="commentButton"
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
@@ -87,3 +154,5 @@ export default function DetailedPost() {
         </>
     )
 }
+
+

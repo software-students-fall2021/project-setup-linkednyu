@@ -12,7 +12,7 @@ export default function Comment({ comment }) {
                 <div className="commentDate">{comment.date}</div>
             </div>
             <div className="commentBottom">
-                <span className="commentText">{comment.comment}</span>
+                <span className="commentText">{comment.content}</span>
             </div>
         </div>
     )
