@@ -19,7 +19,7 @@ const signUp = async (req,res)=>{
     const salt = await bcrypt.genSalt(10)
     const hashPassword = await bcrypt.hash(req.body.password,salt);
     
-    const wMessage = "Hi!" + req.body.name + ". Welcome Back! We hope you are having a good time on LinkedNYU!"
+    const wMessage = "Hi! " + req.body.name + ". Welcome Back! We hope you are having a good time on LinkedNYU!"
 
     const user = new User({
         name:req.body.name,
