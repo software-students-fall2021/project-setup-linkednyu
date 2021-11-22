@@ -4,16 +4,37 @@ import { Avatar } from "@mui/material"
 import { useState } from "react";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
+//import { post } from '../../../../back-end/app';
+
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import parse from "html-react-parser"
-import { Link } from "react-router-dom";
-import axios from 'axios'
 
+// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter'
+// import Code from '@ckeditor/ckeditor5-basic-styles/src/code'
+// import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
+// import Image from '@ckeditor/ckeditor5-image/src/image'
+// import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload'
+// import Indent from '@ckeditor/ckeditor5-indent/src/indent'
+// import List from '@ckeditor/ckeditor5-list/src/list'
+// import Heading from '@ckeditor/ckeditor5-heading/src/heading'
 
 const NewPost2 = ({ loggedIn }) => {
-    const [title, setTitle] = useState("");
-    const [text, setText] = useState("")
+    const[postData, setPostData] = useState({ //local post model
+        title: '',
+        text: '',
+        date: '',
+        userName: 'Adonis', 
+        courseName: '', 
+        avatar: 'https://picsum.photos/200',
+        imgSrc: '',
+    })
+    
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -23,46 +44,27 @@ const NewPost2 = ({ loggedIn }) => {
         setAnchorEl(null);
     };
 
+    let history = useHistory(); //jump to home
 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-    var yyyy = today.getFullYear();
+    //create date
+    var today = new Date(); 
 
-    today = mm + '/' + dd + '/' + yyyy;
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-    var count = Math.floor(Math.random()*(100-20)+20)
+        if(!postData.title)
+            alert('please type in title')
+        if(!postData.text)
+            alert('please type in text')
 
-
-    const onPost = (e) => {
-        
-        if (!text || !title) {
-            e.preventDefault()
-            alert('please add a Title or Content')
-            return
-        }
-        
-        var content = parse(text).props.children;
-        const posts = {
-            "id": count,
-            "avatar": "https://robohash.org/utanimioccaecati.png?size=50x50&set=set1",
-            "userName": "Adonis",
-            "courseName": "Mathematics",
-            "date": today,
-            "title": title,
-            "content":content,
-            "comments": [],
-            "imgSrc": "https://picsum.photos/id/1000/5626/3635"
-        };
-
-
-
-
-        axios.post('http://localhost:5000/homeposts',posts).then(response=>{
-            console.log(response);
-        });
-        
-
+        //send postData to server
+        axios.post('http://localhost:5000/homeposts',postData)
+            .then(response=>{
+                console.log(response);
+            })
+            .catch((err) => console.log(err.message))
+        //jump back to home
+        history.push('/')
     }
     
     return (
@@ -103,39 +105,44 @@ const NewPost2 = ({ loggedIn }) => {
                     </div>
 
                 </div>
+                <form onSubmit = { handleSubmit }>
                 <div className="titleAndContent">
                     <div className="form-control">
                         <input
                             type="text"
                             placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            value={postData.title}
+                            onChange={(e) => setPostData({...postData, title: e.target.value})}
                         />
                     </div>
                     <div className="ckeditor">
                         <div className="textEditor">
                             <div className="editor">
-                                <CKEditor
+                                
+                            <CKEditor
                                 editor={ClassicEditor}
-                                data={text}
+                                data={postData.text}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
-                                    setText(data)
+                                    setPostData({...postData, text: data, date: today})
                                 }}
-                                />
+                            />
+                                
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="buttonSection">
-                    <Button className="draftButton" onClick = {() => alert('Draft saved')}>
+                    <Button type = "button" className="draftButton" onClick = {() => alert('Draft saved')}>
                         Draft
                     </Button>
-                    <Link to="/"><Button onClick={onPost} className="postButton" buttonStyle="btn--dark--solid">
+                    <Button type = "submit" className="postButton" buttonStyle="btn--dark--solid">
                         Post
-                    </Button></Link>
+                    </Button>
                 </div>
+
+                </form>
             </div>
 
         </div>

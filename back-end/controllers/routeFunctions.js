@@ -1,67 +1,90 @@
 const axios = require('axios');
-
-
+const mongoose = require('mongoose')
 // using arrays to mimic database , uncomment which one of these arrays you might be using
 var postData = []
 var commentData = []
 var accountData = []
 var pictures = []
 
+const postSchema = mongoose.Schema({ //model for post messages
+    title: String,
+    text: String,
+    userName: String,
+    courseName: String,
+    avatar: String,
+    imgSrc: String,
+    comments: [String],
+    selectedFile: String,
+    date: {
+        type: Date,
+        default: new Date()
+    },
+})
+
+const PostModel = mongoose.model('PostModel', postSchema) //set the model
 
 function custom_sort(a, b) {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
 }
 
-const viewHome = (req, res) => {
-    const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
-    const picurl = "https://picsum.photos/v2/list"
-    let posts = []
-
-    if (postData.length === 0) {
-        async function fetchposts() {
-            try {
-                await axios.get(url).then(response => {
-                    response.data.map(items => {
-                        posts.push(items)
-                    })
-
-                    for (let i = 0; i < posts.length; i++) {
-                        for (let j = 0; j < 5; j++) {
-                            posts[i]["comments"].push(Math.floor(Math.random() * 8))
-                        }
-                    }
-
-                })
-
-                await axios.get(picurl).then(response => {
-                    response.data.map(items => {
-                        pictures.push(items)
-                    })
-                    for (let i = 0; i < posts.length; i++) {
-                        posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
-
-                    }
-                    posts.map(items => {
-                        postData.push(items)
-                    })
-                })
-
-            } catch (err) {
-                console.log(err);
-            }
-
-            postData.sort(custom_sort)
-            res.send(postData)
-        }
-
-        fetchposts()
-
-
+const viewHome = async (req, res) => {
+    try{
+        const postMessages = await PostModel.find() //async since find postmessage takes time
+        console.log(postMessages)
+        res.status(200).json(postMessages) //success
+    }catch (err) {
+        res.status(404).json({ message: err.message }) //failed
+        console.log(err)
     }
+    // const url = "https://my.api.mockaroo.com/posts.json?key=2ae40da0"
+    // const picurl = "https://picsum.photos/v2/list"
+    // let posts = []
 
-    else {
-        res.send(postData)
-    }
+    // if (postData.length === 0) {
+    //     async function fetchposts() {
+    //         try {
+    //             await axios.get(url).then(response => {
+    //                 response.data.map(items => {
+    //                     posts.push(items)
+    //                 })
+
+    //                 for (let i = 0; i < posts.length; i++) {
+    //                     for (let j = 0; j < 5; j++) {
+    //                         posts[i]["comments"].push(Math.floor(Math.random() * 8))
+    //                     }
+    //                 }
+
+    //             })
+
+    //             await axios.get(picurl).then(response => {
+    //                 response.data.map(items => {
+    //                     pictures.push(items)
+    //                 })
+    //                 for (let i = 0; i < posts.length; i++) {
+    //                     posts[i]["imgSrc"] = pictures[Math.floor(Math.random() * 29)].download_url
+
+    //                 }
+    //                 posts.map(items => {
+    //                     postData.push(items)
+    //                 })
+    //             })
+
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+
+    //         postData.sort(custom_sort)
+    //         res.send(postData)
+    //     }
+
+    //     fetchposts()
+
+
+    // }
+
+    // else {
+    //     res.send(postData)
+    // }
 
 };
 
@@ -122,10 +145,15 @@ const sendComment = (req, res) => {
     res.status(200).send(req.body)
 }
 
-const sendPosts = (req, res) => {
-    postData = [req.body].concat(postData)
-    postData.sort(custom_sort)
-    res.status(200).send(req.body)
+const sendPosts = async (req, res) => {
+    const post = req.body //grab the request to post
+    const newPost = new PostModel(post) //create new postmsg to store in db
+    try{
+        await newPost.save() //save into db
+        res.status(201).json(newPost)
+    }catch (err){
+        res.status(409).json({ message: err.message})
+    }
 }
 
 const viewAccount = (req, res) => {

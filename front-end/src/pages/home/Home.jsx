@@ -3,12 +3,12 @@ import PostBox from "../../components/PostBox"
 import { useState, useEffect } from "react"
 import axios from 'axios'
 
-
 export default function Home({ loggedIn }) {
-    const url = "/homeposts"
-    const [post, setPosts] = useState(null)
+    const url = "http://localhost:5000/homeposts"
+    const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 
+    //fetch post from server
     useEffect(() => {
         async function fetchposts() {
             try {
@@ -23,12 +23,11 @@ export default function Home({ loggedIn }) {
         fetchposts()
     }, [])
 
-
     return (
         <>
             {!loading && <div className="homePage">
-                {post.map((items) => (
-                    <PostBox key={items.id} loggedIn={loggedIn} post={items} />
+                {[...posts].reverse().map((item) => (
+                    <PostBox key={item._id} loggedIn={loggedIn} post={item} />
                 ))}
             </div>}
         </>
