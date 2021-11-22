@@ -12,18 +12,18 @@ export default function DetailedPost() {
 
     console.log(id);
     //connect to backend
-    const url =  `/detailedposts/${id}`
+    const url = `/detailedposts/${id}`
     const [post, setPosts] = useState(null)
 
     const [loading, setIsloading] = useState(true)
- 
+
     useEffect(() => {
         async function fetchposts() {
             try {
                 await axios.get(url).then(response => {
                     setPosts(response.data)
                     setIsloading(false)
-                   
+
                 });
             } catch (error) {
                 console.log(error)
@@ -31,11 +31,11 @@ export default function DetailedPost() {
 
         }
         fetchposts()
-    },[url])
+    }, [url])
 
-    
 
-    
+
+
 
     return (
         <> {!loading && <div className="detailedPost" >
@@ -52,7 +52,7 @@ export default function DetailedPost() {
                         </div>
                         <div className="detailedPostTopMiddleBottom">
                             <div className="detailedPostUserName">{post.username}</div>
-                            <div className="detailedPosDate">{new Date(post.date).toISOString().slice(0,10)}</div>
+                            <div className="detailedPosDate">{new Date(post.date).toISOString().slice(0, 10)}</div>
                         </div>
                     </div>
                     <div className="detailedPostTopRight">
@@ -67,7 +67,7 @@ export default function DetailedPost() {
                     <img className="detailedPostImg" src={post.imgSrc} alt="" />
                 </div>
                 <div className="detailedPostBottom">
-                    <span className="detailedPostCommentCounter">{} comments</span>
+                    <span className="detailedPostCommentCounter">{ } comments</span>
                 </div>
                 <div className="detailedPostComment">
                     {/* {comment.map((p, index) => (

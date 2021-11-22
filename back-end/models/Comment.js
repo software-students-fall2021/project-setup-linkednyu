@@ -1,22 +1,25 @@
+
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-    avatar:{
-        type:String,
-        default:'https://robohash.org/etiustodolorum.png?size=50x50&set=set1'
+const commentSchema = mongoose.Schema({
+    userName: {
+        type: String,
+        required: true
     },
-    username:{
-        type:String,
-        required:true
+    avatar: {
+        type: String,
+        default: 'https://robohash.org/etiustodolorum.png?size=50x50&set=set1'
     },
-    comments:{
-        type:String,
-        required:true,
+    content: {
+        type: String,
+        required: true
     },
-    date:{
-        type:Date,
-        default:Date.now
+    date: {
+        type: Date,
+        default: new Date()
     }
 })
 
-module.exports = mongoose.model('comments',userSchema)
+const Comment = mongoose.model('Comment', commentSchema)
+
+module.exports = Comment;
