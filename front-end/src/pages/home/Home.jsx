@@ -10,18 +10,23 @@ export default function Home({ loggedIn }) {
     const [loading, setIsloading] = useState(true)
 
     useEffect(() => {
+        let isMounted = true;
         async function fetchposts() {
             try {
                 await axios.get(url).then(response => {
-                    setPosts(response.data)
-                    setIsloading(false)
+                    if(isMounted){
+                        setPosts(response.data)
+                        setIsloading(false)
+                    }
                 });
             } catch (error) {
                 console.log(error)
             }
         }
         fetchposts()
-    }, [])
+
+        return () => {isMounted=false};
+    }, [url])
 
 
     return (

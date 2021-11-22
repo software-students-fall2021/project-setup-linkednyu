@@ -3,8 +3,64 @@ import "./login.css"
 import { Button } from '../../components/Button'
 import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
+import { useState } from "react"
+import axios from 'axios'
+import { useHistory } from "react-router"
 
-export default function login({ setLoggedIn }) {
+
+
+export default function Login({ loggedIn, setLoggedIn }) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+    const [message,setMessage] = useState("")
+    const [mStyle, setmStyle] = useState("")
+    const history = useHistory()
+
+    const onLogin = async (e) => {
+        
+        if (!email || !password) {
+            e.preventDefault()
+            setmStyle("messageShow")
+            setMessage("Email or password fields are missing!")
+            setTimeout(()=>{
+                setmStyle("")
+                setMessage("")
+            },4000);
+            return
+        }
+        
+        const loginDetails = {
+            "email":email,
+            "password":password
+        };
+
+        try{
+            const res = await axios.post('http://localhost:5000/login',loginDetails)
+            if (res.status === 200){
+                localStorage.setItem('token',res.data.token)
+                setmStyle("messageShow")
+                setMessage(res.data.message)
+                setLoggedIn(true)
+                setTimeout(()=>{
+                    history.push('/')
+                    setmStyle("")
+                    setMessage("")
+                },1000)
+                
+            }
+        }catch (err){
+            e.preventDefault()
+            setmStyle("messageShow")
+            setMessage(err.response.data.message)
+            setTimeout(()=>{
+                setmStyle("")
+                setMessage("")
+            },4000);
+        }
+
+    }
+
+    
     return (
         <div className="loginPage">
             <div className="signinTitle">
@@ -15,14 +71,23 @@ export default function login({ setLoggedIn }) {
                     <TextField variant="outlined"
                         label="Email"
                         required
-                        className="emailInput"></TextField>
+                        className="emailInput" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}>
+                        </TextField>
                 </div>
                 <div className="passwordArea">
                     <TextField variant="outlined"
                         label="Password"
                         type="Password"
                         required
-                        className="passwordInput"></TextField>
+                        className="passwordInput" 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}>       
+                        </TextField>
+                </div>
+                <div className={mStyle}>
+                    <p className="errMessage">{message}</p>
                 </div>
                 <div className="underArea">
                     <div className="otherOptions">
@@ -34,7 +99,7 @@ export default function login({ setLoggedIn }) {
                         </div>
                     </div>
                     <div className="loginButtonArea">
-                        <Link to="/"><Button onClick={() => setLoggedIn(true)} buttonSize="btn--large" buttonStyle="btn--primary--solid" className="loginButton">Go!</Button></Link>
+                        <Button onClick={onLogin} buttonSize="btn--large" buttonStyle="btn--primary--solid" className="loginButton">Go!</Button>
                     </div>
                 </div>
             </div>
