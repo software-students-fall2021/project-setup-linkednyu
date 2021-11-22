@@ -1,14 +1,14 @@
 import './PostBox.css'
 import ImageAvatars from './Avatar'
 import { Link } from 'react-router-dom'
-import parser from 'html-react-parser'
+//parser from 'html-react-parser'
 // import moment from 'moment'
 
 
 const PostBox = ({ post, loggedIn }) => {
 
 	let newDate = new Date(post.date)
-	let mDate = newDate.toISOString().slice(0,10)
+	let mDate = newDate.toISOString().slice(0, 10)
 	return (
 		<div className="container">
 			<div className='task'>

@@ -19,7 +19,7 @@ export default function DetailedPost() {
     const [loading, setIsloading] = useState(true)
     const [loadingComment, setIsloadingComment] = useState(true)
     const [newComment, setContent] = useState({
-        userName: 'Ana Ye',
+        userName: 'Anastasia Ye',
         avatar: "https://robohash.org/etiustodolorum.png?size=50x50&set=set1",
         content: '',
         date: new Date(),
@@ -53,8 +53,8 @@ export default function DetailedPost() {
         }
         fetchComments()
         setContent({
-            userName: '',
-            avatar: '',
+            userName: 'Anastasia Ye',
+            avatar: 'https://robohash.org/etiustodolorum.png?size=50x50&set=set1',
             content: '',
             date: new Date(),
             post_id: ''
@@ -92,10 +92,7 @@ export default function DetailedPost() {
 
         }
         fetchComments()
-    }, [])
-
-
-
+    }, [commenturl])
 
 
     return (

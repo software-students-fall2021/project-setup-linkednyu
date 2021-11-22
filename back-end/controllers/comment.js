@@ -1,4 +1,5 @@
 const Comment = require('../models/Comment');
+const { commentValidation } = require('./validation')
 
 function custom_sort(a, b) {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -19,6 +20,11 @@ const viewComment = async (req, res) => {
 
 const sendComment = async (req, res) => {
     const comment = req.body
+    const error = commentValidation(comment).error;
+    if (error) {
+        return res.status(409).json({ errors: error.details[0].message })
+    }
+
     const newComment = new Comment({
         userName: comment.userName,
         avatar: comment.avatar,
@@ -29,7 +35,6 @@ const sendComment = async (req, res) => {
 
     try {
         const savedComment = await newComment.save()
-
         res.status(201).json(savedComment)
     } catch (error) {
         res.status(409).json({ message: error.message })
