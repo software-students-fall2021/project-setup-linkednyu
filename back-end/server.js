@@ -6,9 +6,10 @@ const mongoose = require('mongoose')
 const port = 5000
 
 //connect to database
-const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-mongoose.connect(CONNECTION_URL, { useNewURLParser: true, useUnifiedTopology: true })
+
+mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnifiedTopology: true })
   .then(() => server.listen(port, function () {
+    console.log("connected to db");
     console.log(`Server running on port: ${port}`)
   }))
   .catch((error) => console.log(error.message))

@@ -88,11 +88,11 @@ const Header = ({ loggedIn, setloggedIn }) => {
 						<input placeholder="Search for a channel or post" className="searchInput" />
 					</div>
 					<div className="avatarContainer">
-						<Link to={loggedIn ? "/account" : ""} onClick={!loggedIn ? (event) => event.preventDefault() : ""}>
+						<Link to={loggedIn ? "/account" : ""}>
 							<Avatar onClick={() => {
 								setMenuShow(false);
 							}} className="avatarIcon"
-								sx={{ width: 30, height: 30 }} src={loggedIn ? "https://picsum.photos/200" : ""}>
+								sx={{ width: 30, height: 30 }} src={loggedIn ? "https://robohash.org/etiustodolorum.png?size=50x50&set=set1" : ""}>
 							</Avatar>
 						</Link>
 					</div>

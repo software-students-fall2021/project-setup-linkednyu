@@ -28,11 +28,11 @@ function App() {
         <Route path="/joinclass" component={JoinClass} />
         <Route path="/detailedposts/:id" component={DetailedPost} />
         <Route path="/channel/:id"> <Channel loggedIn={loggedIn} /></Route>
-        <Route path="/login" > <Login setLoggedIn={setloggedIn} /> </Route>
+        <Route path="/login" > <Login loggedIn={loggedIn} setLoggedIn={setloggedIn} /> </Route>
         <Route path="/pwreset" component={pwReset} />
         <Route path="/pwreset2" component={pwReset2} />
-        <Route path="/signup"> <SignUp setLoggedIn={setloggedIn} /> </Route>
-        <Route path="/account/:username" > <Account setloggedIn={setloggedIn} /></Route>
+        <Route path="/signup"> <SignUp /> </Route>
+        <Route path="/account" > <Account /></Route>
         <Route path="/newpost2" > <NewPost2 loggedIn={loggedIn} /></Route>
       </Switch>
     </BrowserRouter>

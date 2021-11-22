@@ -31,6 +31,14 @@
     width: 100%;
 }
 
+.messageShow{
+    margin-top: 1em;
+}
+
+.errMessage{
+    font-size:large;
+    color: red;
+}
 .passwordArea{
     margin-top:6%;
 }

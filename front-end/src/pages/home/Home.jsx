@@ -10,24 +10,29 @@ export default function Home({ loggedIn }) {
 
     //fetch post from server
     useEffect(() => {
+        let isMounted = true;
         async function fetchposts() {
             try {
                 await axios.get(url).then(response => {
-                    setPosts(response.data)
-                    setIsloading(false)
+                    if(isMounted){
+                        setPosts(response.data)
+                        setIsloading(false)
+                    }
                 });
             } catch (error) {
                 console.log(error)
             }
         }
         fetchposts()
-    }, [])
+
+        return () => {isMounted=false};
+    }, [url])
 
     return (
         <>
             {!loading && <div className="homePage">
-                {[...posts].reverse().map((item) => (
-                    <PostBox key={item._id} loggedIn={loggedIn} post={item} />
+                {posts.map((items,index) => (
+                    <PostBox key={index} loggedIn={loggedIn} post={items} />
                 ))}
             </div>}
         </>

@@ -12,10 +12,21 @@
     margin-top:10%;
 }
 
+
+
 .emailInputArea, .pwInputArea{
     margin-top: 5%;
 }
 
 .unInput, .emailInput, .pwInput{
     width : 100%;
+}
+
+.messageShow{
+    margin-top: 1em;
+}
+
+.errMessage{
+    font-size:large;
+    color: red;
 }

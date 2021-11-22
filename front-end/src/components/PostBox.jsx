@@ -2,26 +2,28 @@ import './PostBox.css'
 import ImageAvatars from './Avatar'
 import { Link } from 'react-router-dom'
 import parser from 'html-react-parser'
-import moment from 'moment'
+// import moment from 'moment'
 
 
 const PostBox = ({ post, loggedIn }) => {
-	const date = moment(post.date).format("MMM DD, YYYY") //date format convert
+
+	let newDate = new Date(post.date)
+	let mDate = newDate.toISOString().slice(0,10)
 	return (
 		<div className="container">
 			<div className='task'>
 				<div className="header">
-					<ImageAvatars className="imgAvatar" size="30px" id={post.userName} avatarSrc={post.avatar} />
-					<h3 className="userName"><Link className="tLink" to={loggedIn ? "/account" : ""}>{post.userName}</Link></h3>
-					<h3 className="courseName"><Link className="tLink" to={loggedIn ? "/joinclass" : ""}>{post.courseName}</Link></h3>
-					<h3 className="time">{date}</h3>
+					<ImageAvatars className="imgAvatar" size="30px" id={post.username} avatarSrc={post.avatar} />
+					<h3 className="userName">{post.username}</h3>
+					<h3 className="courseName"><Link className="tLink" to={loggedIn ? "/joinclass" : ""}>{post.coursename}</Link></h3>
+					<h3 className="time">{mDate}</h3>
 				</div>
 				<hr />
-				<Link className="tLink" to={`/detailedposts/${post.id}`}><div className="content">
+				<Link className="tLink" to={`/detailedposts/${post._id}`}><div className="content">
 					<h3 className="contenttitle">{post.title}</h3>
 					{post.imgSrc === '' ? '' : <img className="contentImg" src={post.imgSrc} alt="" ></img>}
 					<div className="textContent">
-						{parser(post.text + '')}
+						{post.content}
 					</div>
 				</div></Link>
 			</div>

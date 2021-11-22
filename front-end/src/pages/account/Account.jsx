@@ -4,28 +4,27 @@ import "./account.css"
 // import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from 'axios'
-import { useParams } from "react-router"
 
-export default function Account({ setloggedIn }) {
-    const { username } = useParams()
-    const url = "/account/:username"
 
+export default function Account() {
+    const url = "/userAccount"
+
+    
     const [account, setAccount] = useState(null)
     const [loading, setIsloading] = useState(true)
 
     useEffect(() => {
+        let isMounted = true;
         async function fetchaccount() {
+            let token = localStorage.getItem('token')
+            
             try {
-                await axios.get(url).then(response => {
-                    for (let i = 0; i < response.data.length; i++) {
-                        // console.log(response.data[i])
-                        // console.log(username.toString())
-                        if (response.data[i]['userName'] === username) {
-                            setAccount(response.data[i])
-                            break
-                        }
+                await axios.get(url, {headers:{'Token':token}}).then(response => {
+                    if(isMounted){
+                        setAccount(response.data)
+                        setIsloading(false)
                     }
-                    setIsloading(false)
+                    
                 });
             } catch (error) {
                 console.log(error)
@@ -33,22 +32,27 @@ export default function Account({ setloggedIn }) {
 
         }
         fetchaccount()
-    }, [username])
+        
+        return () => {isMounted=false};
+    },[])
+
+
+
 
 
     return (
         <>
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
-                    <h1 className="accountName">{account.userName}</h1>
+                    <h1 className="accountName">{account.username}</h1>
                 </div>
                 <div className="accountTop">
                     <div className="accountImage">
-                        <img className="profilePicture" alt="" src={account.avatar}></img>
+                        <img className="profilePicture" alt="" src="https://robohash.org/etiustodolorum.png?size=50x50&set=set1"></img>
                     </div>
                     <div className="accountBio">
-                        <h2>Bio</h2>
-                        <span>Hi! I'm a typical NYU student taking classes and having a great time yay.</span>
+                        <h2>Welcome Back!</h2>
+                        <span>{account.message}</span>
                     </div>
                 </div>
                 <div className="accountBottom">
@@ -57,9 +61,10 @@ export default function Account({ setloggedIn }) {
                             <h2>My Classes</h2>
                         </div>
                         <div className="contentList">
-                            <span>{account.courseName}</span>
-                            <span>Class 2</span>
-                            <span>Class 3</span>
+                        {account.channel.map((item,index)=>{
+                           return <span key={index}>{item}</span>
+                            
+                        })}
                         </div>
                     </div>
                     <div className="userClasses">
@@ -67,20 +72,13 @@ export default function Account({ setloggedIn }) {
                             <h2>Recent Posts</h2>
                         </div>
                         <div className="contentList">
-                            <span>Post 1</span>
-                            <span>Post 2</span>
-                            <span>Post 3</span>
+                        {account.post.map((item,index)=>{
+                           return <span key={index}>{item}</span>
+                            
+                        })}
                         </div>
                     </div>
-                    {/* <div className="logoutButton">
-                        <Link to="/">
-                            <Button onClick={() => {
-                                setloggedIn(false)
-                            }}
-                                buttonSize="btn--large"
-                            > Logout  </Button>
-                        </Link>
-                    </div> */}
+                   
                 </div>
 
             </div>}
