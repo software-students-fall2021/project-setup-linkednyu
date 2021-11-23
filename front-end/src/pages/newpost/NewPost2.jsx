@@ -2,6 +2,7 @@ import { Button } from '../../components/Button'
 import "./NewPost2.css"
 import { Avatar } from "@mui/material"
 import { useState } from "react";
+import { useEffect } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios'
@@ -25,29 +26,60 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import Heading from '@ckeditor/ckeditor5-heading/src/heading'
 
 const NewPost2 = ({ loggedIn }) => {
+    const url = 'http://localhost:4000/userAccount'
+
     const[postData, setPostData] = useState({ //local post model
         title: '',
         content: '',
         date: '',
-        username: 'Adonis', 
-        coursename: 'Math', 
-        avatar: 'https://picsum.photos/200',
+        username: '', 
+        coursename: '', 
+        avatar: '',
         imgSrc: '',
     })
     
+    const[loading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        let isMounted = true;
+        async function fetchaccount() {
+            let token = localStorage.getItem('token')
+            
+            try {
+                await axios.get(url, {headers:{'Token':token}}).then(response => {
+                    if(isMounted){
+                        setPostData({
+                            username: response.data.username,
+                            avatar: response.data.avatar,
+                        })
+                        setIsLoading(false)
+                    }
+                });
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+        fetchaccount()
+        
+        return () => {isMounted=false};
+    },[])
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleClose = (course) => {
         setAnchorEl(null);
+        setPostData({...postData, coursename: course})
     };
 
     let history = useHistory(); //jump to home
 
     //create date
     var today = new Date(); 
+    var course = '';
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -56,6 +88,8 @@ const NewPost2 = ({ loggedIn }) => {
             alert('please type in title')
         if(!postData.content)
             alert('please type in text')
+        if(!postData.coursename)
+            alert('please select a channel')
 
         //send postData to server
         axios.post('http://localhost:4000/homeposts',postData)
@@ -68,7 +102,8 @@ const NewPost2 = ({ loggedIn }) => {
     }
     
     return (
-        <div className="newPostPage">
+        <>
+        {!loading && <div className="newPostPage">
             <div className="newPostCenter">
                 <div className="postPageTitle">
                     Create a Post
@@ -92,16 +127,25 @@ const NewPost2 = ({ loggedIn }) => {
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
-                            <MenuItem onClick={handleClose}>Mathematics</MenuItem>
-                            <MenuItem onClick={handleClose}>Engineering</MenuItem>
-                            <MenuItem onClick={handleClose}>English</MenuItem>
+                            <MenuItem onClick={() =>
+                                handleClose('Mathmatics')
+                            }>Mathematics</MenuItem>
+                            <MenuItem onClick={() =>
+                                handleClose('Engineering')
+                            }>Engineering</MenuItem>
+                            <MenuItem onClick={() => 
+                                handleClose('English')
+                            }>English</MenuItem>
+                            <MenuItem onClick={() =>
+                                handleClose('Neuroscience')
+                            }>Neuroscience</MenuItem>
                         </Menu>
                     </div>
                     <div className="avatarAndUser">
                         <Avatar className="avatarIcon"
-                            sx={{ width: 30, height: 30 }} src={loggedIn ? "https://picsum.photos/200" : ""}>
+                            sx={{ width: 30, height: 30 }} src = 'https://robohash.org/etiustodolorum.png?size=50x50&set=set1' >
                         </Avatar>
-                        <p className="postUserName">Adonis</p>
+                        <p className="postUserName">{postData.username}</p>
                     </div>
 
                 </div>
@@ -111,7 +155,7 @@ const NewPost2 = ({ loggedIn }) => {
                         <input
                             type="text"
                             placeholder="Title"
-                            value={postData.title}
+                            value={postData.title || ''}
                             onChange={(e) => setPostData({...postData, title: e.target.value})}
                         />
                     </div>
@@ -145,7 +189,8 @@ const NewPost2 = ({ loggedIn }) => {
                 </form>
             </div>
 
-        </div>
+        </div>}
+        </>
     )
 }
 

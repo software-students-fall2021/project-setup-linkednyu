@@ -13,7 +13,6 @@ const signUp = async (req,res)=>{
 
     const emailExist = await User.findOne({email:req.body.email});
 
-    
     if (emailExist) return res.status(400).send("Email already exists")
 
     const salt = await bcrypt.genSalt(10)
