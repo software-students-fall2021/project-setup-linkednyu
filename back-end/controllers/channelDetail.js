@@ -1,31 +1,17 @@
+require('dotenv').config();
+const mongoose = require('mongoose');
 const axios = require('axios');
+const channelModel = require('../models/Channel');
+let dbconnected = false;
 
-// a list of user enrolled course id
-let user_enrolled = [];
-
-const channel = (req, res) => {
-    let source = "https://618931ccd0821900178d784f.mockapi.io/channel";
-    
-    let id = req.params.id;
-    let icon;
-    let avg_grade;
-    let rating;
-    let detail;
-    let enrolled = user_enrolled.includes(id);
-
-
-    axios.get(source + "/" + id)
-        .then(function(response){
-            icon = response.data.icon;
-            avg_grade = response.data.avg_grade;
-            rating = response.data.rating;
-            detail = response.data.detail;
-            let r = {id, icon, avg_grade, rating, detail, enrolled};
-            res.send(r);
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+async const channel = (req, res) => {
+    mongoose.connect(process.env.CHANNELDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+    let db = mongoose.connection;
+    db.on('error', (err)=>{console.log('mongoose error' + err)});
+    let filter = req.params.id;
+    let result = await channelModel.find({id:filter}).lean();
+    mongoose.connection.close();
+    res.send(result);
 };
 
 const joinChannel = (req, res) => {
