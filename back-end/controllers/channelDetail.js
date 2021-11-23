@@ -1,59 +1,74 @@
 require('dotenv').config();
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose');
 const axios = require('axios');
-//const channelModel = require('../models/Channel');
-let dbconnected = false;
+const channelModel = require('../models/Channel');
+const userModel = require('../models/User')
 
-//model
-const channelSchema = new mongoose.Schema({
-    id:{
-        type:String,
-        default:0
-    },
-    icon:{
-        type:String,
-        default: 'https://img.icons8.com/external-photo3ideastudio-solid-photo3ideastudio/64/000000/external-channel-digital-business-photo3ideastudio-solid-photo3ideastudio.png'
-    },
-    detail:{
-        type:String,
-        default:'No Detail Provided'
-    },
-    avg_grade:{
-        type:Number,
-        default:0
-    },
-    rating:{
-        type:Number,
-        default:0
-    }
-})
+
 
 const channel = async(req, res) =>{
     console.log("[Channel Function]Get channel Detail");
-    let db = mongoose.createConnection(process.env.CHANNELDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-    db.on('error', (err)=>{console.log('mongoose error' + err)});
-    let channelModel  = db.model('channel', channelSchema, 'channel_detail');
     let filter = req.params.id;
     let result = await channelModel.find({id:filter}).lean();
     res.send(result);
-    db.close();
 };
 
-const joinChannel = (req, res) => {
+const joinChannel = async(req, res) => {
     console.log("[Channel Function] joinChannel");
-    let db = mongoose.createConnection(process.env.CHANNELDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-    db.on('error', (err)=>{console.log('mongoose error' + err)});
-    let channelModel  = db.model('channel', channelSchema, 'channel_detail');
-    res.send("joined");
-};
+    //authorize user
 
-const leaveChannel = (req, res) =>{
-    for(let i = 0; i < user_enrolled.length; i++){
-        if(user_enrolled[i] == req.params.id){
-            user_enrolled.splice(i,1);
+    // query database
+    let userDoc = await userModel.findOne({email:req.body.email});
+    if(!userDoc){
+        return res.status(404).json({message:"Can't find User"});
+    }
+    let subscribedArray = userDoc.channel.toObject();
+
+    let newChannel = req.body.channelId;
+    
+    for(let i = 0; i < subscribedArray.length; i++){
+        if(subscribedArray[i] == newChannel){
+            return res.status(409).json({message:"Already Joined"});
         }
     }
-    res.send("done");
+    
+    userDoc.channel.push(newChannel);
+    await userDoc.save(function(){});
+    
+    return res.status(200).json({message:"Done"});
+}; 
+
+const leaveChannel = async(req, res) =>{
+    console.log("[Channel Function] leave Channel");
+    //authorize user
+
+    // query database
+    let userDoc = await userModel.findOne({email:req.body.email});
+    if(!userDoc){
+        return res.status(404).json({message:"Can't find User"});
+    }
+    let subscribedArray = userDoc.channel.toObject();
+    let newArray = [];
+
+    let newChannel = req.body.channelId;
+    let modfied = false;
+    for(let i = 0; i < subscribedArray.length; i++){
+        if(subscribedArray[i] == newChannel){
+            modified = true;
+        }else{
+            newArray.push(subscribedArray[i]);
+        }
+    }
+    
+    if(modified){
+        userDoc.channel = newArray;
+        await userDoc.save(function(){});
+        return res.status(200).json({message:"Done"});
+    }else{
+        return res.status(409).json({message:"Not Joined"});
+    }
 }
 
 module.exports = {
