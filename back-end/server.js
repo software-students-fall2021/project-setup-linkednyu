@@ -16,14 +16,14 @@ mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnified
 
 
 // call a function to start listening to the port
-const listener = server.listen(port, function () {
-   console.log(`Server running on port: ${port}`)
-})
+// const listener = server.listen(port, function () {
+//    console.log(`Server running on port: ${port}`)
+// })
 
 const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }) //connect project to atlas and set some default settings
-        .then(listener)
+        //.then(listener)
         .catch((err) => {
             console.log(err.message)
         })

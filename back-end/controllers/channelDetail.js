@@ -1,23 +1,49 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const axios = require('axios');
-const channelModel = require('../models/Channel');
+//const channelModel = require('../models/Channel');
 let dbconnected = false;
 
-async const channel = (req, res) => {
-    mongoose.connect(process.env.CHANNELDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-    let db = mongoose.connection;
+//model
+const channelSchema = new mongoose.Schema({
+    id:{
+        type:String,
+        default:0
+    },
+    icon:{
+        type:String,
+        default: 'https://img.icons8.com/external-photo3ideastudio-solid-photo3ideastudio/64/000000/external-channel-digital-business-photo3ideastudio-solid-photo3ideastudio.png'
+    },
+    detail:{
+        type:String,
+        default:'No Detail Provided'
+    },
+    avg_grade:{
+        type:Number,
+        default:0
+    },
+    rating:{
+        type:Number,
+        default:0
+    }
+})
+
+const channel = async(req, res) =>{
+    console.log("[Channel Function]Get channel Detail");
+    let db = mongoose.createConnection(process.env.CHANNELDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
     db.on('error', (err)=>{console.log('mongoose error' + err)});
+    let channelModel  = db.model('channel', channelSchema, 'channel_detail');
     let filter = req.params.id;
     let result = await channelModel.find({id:filter}).lean();
-    mongoose.connection.close();
     res.send(result);
+    db.close();
 };
 
 const joinChannel = (req, res) => {
-    if(!user_enrolled.includes(req.params.id)){
-        user_enrolled.push(req.params.id);
-    }
+    console.log("[Channel Function] joinChannel");
+    let db = mongoose.createConnection(process.env.CHANNELDB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
+    db.on('error', (err)=>{console.log('mongoose error' + err)});
+    let channelModel  = db.model('channel', channelSchema, 'channel_detail');
     res.send("joined");
 };
 
