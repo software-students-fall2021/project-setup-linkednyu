@@ -35,7 +35,7 @@ export default function Login({ loggedIn, setLoggedIn }) {
         };
 
         try{
-            const res = await axios.post('http://localhost:4000/login',loginDetails)
+            const res = await axios.post('http://localhost:5000/login',loginDetails)
             if (res.status === 200){
                 localStorage.setItem('token',res.data.token)
                 setmStyle("messageShow")

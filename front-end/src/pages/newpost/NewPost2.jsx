@@ -12,7 +12,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 
 const NewPost2 = ({ loggedIn }) => {
-    const url = 'http://localhost:4000/userAccount'
+    const url = 'http://localhost:5000/userAccount'
 
     const[postData, setPostData] = useState({ //local post model
         title: '',
@@ -77,7 +77,7 @@ const NewPost2 = ({ loggedIn }) => {
             alert('please select a channel')
 
         //send postData to server
-        axios.post('http://localhost:4000/homeposts',postData)
+        axios.post('http://localhost:5000/homeposts',postData)
             .then(response=>{
                 console.log(response);
             })
