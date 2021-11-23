@@ -9,8 +9,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Editor from '@ckeditor/ckeditor5-build-classic';
 
 const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:5000/userAccount'
@@ -150,7 +149,7 @@ const NewPost2 = ({ loggedIn }) => {
                             <div className="editor">
                                 
                             <CKEditor
-                                editor={ClassicEditor}
+                                editor={Editor}
                                 data={postData.content}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()

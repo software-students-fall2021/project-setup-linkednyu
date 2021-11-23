@@ -1,51 +1,97 @@
-const axios = require('axios');
-
-// a list of user enrolled course id
-let user_enrolled = [];
-
-const channel = (req, res) => {
-    let source = "https://618931ccd0821900178d784f.mockapi.io/channel";
-    
-    let id = req.params.id;
-    let icon;
-    let avg_grade;
-    let rating;
-    let detail;
-    let enrolled = user_enrolled.includes(id);
+require('dotenv').config();
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const mongoose = require('mongoose');
+const channelModel = require('../models/Channel');
+const userModel = require('../models/User')
 
 
-    axios.get(source + "/" + id)
-        .then(function(response){
-            icon = response.data.icon;
-            avg_grade = response.data.avg_grade;
-            rating = response.data.rating;
-            detail = response.data.detail;
-            let r = {id, icon, avg_grade, rating, detail, enrolled};
-            res.send(r);
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+
+const channel = async(req, res) =>{
+    console.log("[Channel Function]Get channel Detail");
+    let filter = req.params.id;
+    let result = await channelModel.find({id:filter}).lean();
+    res.send(result);
 };
 
-const joinChannel = (req, res) => {
-    if(!user_enrolled.includes(req.params.id)){
-        user_enrolled.push(req.params.id);
+const isJoined = async(req, res)=>{
+    console.log("[Channel Function] checkJoin");
+    let userDoc = await userModel.findOne({email:req.body.email});
+    if(!userDoc){
+        return res.status(404).json({message:"Can't find User"});
     }
-    res.send("joined");
-};
+    let subscribedArray = userDoc.channel.toObject();
 
-const leaveChannel = (req, res) =>{
-    for(let i = 0; i < user_enrolled.length; i++){
-        if(user_enrolled[i] == req.params.id){
-            user_enrolled.splice(i,1);
+    let newChannel = req.body.channelId;
+    
+    for(let i = 0; i < subscribedArray.length; i++){
+        if(subscribedArray[i] == newChannel){
+            return res.status(200).json({joined:true});
         }
     }
-    res.send("done");
+
+    return res.status(200).json({joined:false});
+}
+
+const joinChannel = async(req, res) => {
+    console.log("[Channel Function] joinChannel");
+    //authorize user
+
+    // query database
+    let userDoc = await userModel.findOne({email:req.body.email});
+    if(!userDoc){
+        return res.status(404).json({message:"Can't find User"});
+    }
+    let subscribedArray = userDoc.channel.toObject();
+
+    let newChannel = req.body.channelId;
+    
+    for(let i = 0; i < subscribedArray.length; i++){
+        if(subscribedArray[i] == newChannel){
+            return res.status(409).json({message:"Already Joined"});
+        }
+    }
+    
+    userDoc.channel.push(newChannel);
+    await userDoc.save(function(){});
+    
+    return res.status(200).json({message:"Done"});
+}; 
+
+const leaveChannel = async(req, res) =>{
+    console.log("[Channel Function] leave Channel");
+    //authorize user
+
+    // query database
+    let userDoc = await userModel.findOne({email:req.body.email});
+    if(!userDoc){
+        return res.status(404).json({message:"Can't find User"});
+    }
+    let subscribedArray = userDoc.channel.toObject();
+    let newArray = [];
+
+    let newChannel = req.body.channelId;
+    let modfied = false;
+    for(let i = 0; i < subscribedArray.length; i++){
+        if(subscribedArray[i] == newChannel){
+            modified = true;
+        }else{
+            newArray.push(subscribedArray[i]);
+        }
+    }
+    
+    if(modified){
+        userDoc.channel = newArray;
+        await userDoc.save(function(){});
+        return res.status(200).json({message:"Done"});
+    }else{
+        return res.status(409).json({message:"Not Joined"});
+    }
 }
 
 module.exports = {
     channel,
     joinChannel,
-    leaveChannel
+    leaveChannel,
+    isJoined
 };

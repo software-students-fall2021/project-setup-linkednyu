@@ -9,8 +9,7 @@ describe('channel detail function test', ()=>{
     it('Channel detail', (done)=> {
         for(let i = 1; i < 5; i++){
             chai.request(app)
-            .post('/channel/detail/' + i)
-            .send("abc")
+            .get('/channel/detail/' + i)
             .end((err, res) =>{
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -26,36 +25,53 @@ describe('channel detail function test', ()=>{
     }).timeout(10000);
 
     it('Channel join/leave function', (done)=> {
+        //join
         chai.request(app)
-            .post('/channel/join/1')
-            .send("abc")
+            .post('/channel/join')
+            .send({email:'tw2198@nyu.edu', channelId:'1'})
+            .end((err, res) =>{
+                res.should.have.status(200);
+            })
+        // check is joined
+        chai.request(app)
+            .post('/channel/isJoined')
+            .send({email:"tw2198@nyu.edu", channelId:"1"})
+            .end((err, res) =>{
+                res.should.have.status(200);
+                res.body.should.have.property('joined').eq(true);
+            })
+        
+        //leave
+        chai.request(app)
+            .post('/channel/leave/')
+            .send({email:"tw2198@nyu.edu", channelId:"1"})
             .end((err, res) =>{
                 res.should.have.status(200);
             })
 
-            chai.request(app)
-            .post('/channel/detail/1')
-            .send("abc")
+        //check
+        chai.request(app)
+            .post('/channel/isJoined')
+            .send({email:"tw2198@nyu.edu", channelId:"1"})
             .end((err, res) =>{
                 res.should.have.status(200);
-                res.body.should.have.property('enrolled').eq(true);
+                res.body.should.have.property('joined').eq(false);
+            })
+
+        //check nonexistence username
+        chai.request(app)
+            .post('/channel/join')
+            .send({email:"abc", channelId:"100"})
+            .end((err, res) =>{
+                res.should.have.status(404);
             })
 
         chai.request(app)
-            .post('/channel/leave/1')
-            .send("abc")
+            .post('/channel/leave')
+            .send({email:"abc", channelId:"100"})
             .end((err, res) =>{
-                res.should.have.status(200);
+                res.should.have.status(404);
             })
-
-        chai.request(app)
-            .post('/channel/detail/1')
-            .send("abc")
-            .end((err, res) =>{
-                res.should.have.status(200);
-                res.body.should.have.property('enrolled').eq(false);
-            })
-
             done();
     })
 });
