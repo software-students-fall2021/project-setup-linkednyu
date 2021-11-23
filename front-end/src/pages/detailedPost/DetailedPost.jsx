@@ -5,6 +5,7 @@ import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useParams } from "react-router"
+import parser from 'html-react-parser'
 
 
 export default function DetailedPost() {
@@ -121,7 +122,7 @@ export default function DetailedPost() {
                 </div>
                 <div className="detailedPostCenter">
                     <span className="detailedPostTitle">{post.title}</span>
-                    <span className="detailedPostText">{post.content}</span>
+                    <span className="detailedPostText">{parser(post.content + '')}</span>
                     <img className="detailedPostImg" src={post.imgSrc} alt="" />
                 </div>
                 <div className="detailedPostBottom">

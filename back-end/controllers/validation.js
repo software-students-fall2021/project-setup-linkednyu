@@ -22,9 +22,18 @@ const loginValidation = (data) => {
         password: Joi.string().min(6).required()
     })
 
+   return schema.validate(data)
+}
+
+const postValidation = (data) => {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        content: Joi.string().required(),
+        coursename: Joi.string().required()
+    }).options({allowUnknown: true})
+
+
     return schema.validate(data)
-
-
 }
 
 const commentValidation = (data) => {
@@ -44,3 +53,5 @@ const commentValidation = (data) => {
 module.exports.signUpValidation = signUpValidation
 module.exports.loginValidation = loginValidation
 module.exports.commentValidation = commentValidation
+module.exports.postValidation = postValidation
+

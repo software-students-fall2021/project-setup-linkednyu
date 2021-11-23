@@ -14,13 +14,6 @@ mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnified
   }))
   .catch((error) => console.log(error.message))
 
-// const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-// mongoose.connect(CONNECTION_URL, { useNewURLParser: true, useUnifiedTopology: true })
-//   .then(() => server.listen(port, function () {
-//     console.log(`Server running on port: ${port}`)
-//   }))
-//   .catch((error) => console.log(error.message))
-
 
 // a function to stop listening to the port
 const close = () => {
@@ -31,4 +24,6 @@ const close = () => {
 module.exports = {
   close: close,
 }
+
+
 
