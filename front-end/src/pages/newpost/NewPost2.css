@@ -81,6 +81,15 @@
     
 }
 
+
+.selectForm{
+    height: 50px !important;
+}
+
+.iColor{
+    color: black !important;
+}
+
 .ck-editor__editable_inline {
     height: 30vh;
 }

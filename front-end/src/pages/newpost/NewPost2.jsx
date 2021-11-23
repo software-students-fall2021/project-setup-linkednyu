@@ -9,10 +9,12 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Editor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:5000/userAccount'
+    const [channel,setChannel] = useState("Channel")
 
     const[postData, setPostData] = useState({ //local post model
         title: '',
@@ -58,6 +60,7 @@ const NewPost2 = ({ loggedIn }) => {
     };
     const handleClose = (course) => {
         setAnchorEl(null);
+        setChannel(course)
         setPostData({...postData, coursename: course})
     };
 
@@ -69,13 +72,23 @@ const NewPost2 = ({ loggedIn }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(!postData.title)
+        if(!postData.title){
             alert('please type in title')
-        if(!postData.content)
+            return
+        }
+            
+        if(!postData.content){
             alert('please type in text')
-        if(!postData.coursename)
-            alert('please select a channel')
+            return
 
+        }
+            
+        if(!postData.coursename){
+            alert('please select a channel')
+            return
+
+        }
+            
         //send postData to server
         axios.post('http://localhost:5000/homeposts',postData)
             .then(response=>{
@@ -101,7 +114,7 @@ const NewPost2 = ({ loggedIn }) => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClick}>
-                            Channel <span className="plusSign">+</span>
+                            {channel} <span className="plusSign">+</span>
                         </Button>
                         <Menu
                             id="basic-menu"
@@ -112,8 +125,8 @@ const NewPost2 = ({ loggedIn }) => {
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
-                            <MenuItem onClick={() =>
-                                handleClose('Mathmatics')
+                            <MenuItem  onClick={() =>
+                                handleClose('Mathematics')
                             }>Mathematics</MenuItem>
                             <MenuItem onClick={() =>
                                 handleClose('Engineering')
@@ -149,14 +162,15 @@ const NewPost2 = ({ loggedIn }) => {
                             <div className="editor">
                                 
                             <CKEditor
-                                editor={Editor}
+                                editor={ClassicEditor}
                                 data={postData.content}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
                                     setPostData({...postData, content: data, date: today})
                                 }}
+                                config={ {toolbar: {items: ['heading','|','bold','italic','link','bulletedList','numberedList','|','outdent','indent','|','blockQuote','undo','redo']
+                                 }}}
                             />
-                                
                             </div>
                         </div>
                     </div>
