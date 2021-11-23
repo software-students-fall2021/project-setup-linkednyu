@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import parser from 'html-react-parser'
 
 
+
 const PostBox = ({ post, loggedIn }) => {
 
 	let newDate = new Date(post.date)
