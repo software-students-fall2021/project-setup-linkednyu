@@ -19,8 +19,8 @@ const morgan = require("morgan") // middleware for nice logging of incoming HTTP
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
 
 // use express's builtin body-parser middleware to parse any data included in a request
-app.use(express.json()) // decode JSON-formatted incoming POST data
-app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+app.use(express.json({limit: '10mb'})) // decode JSON-formatted incoming POST data
+app.use(express.urlencoded({ limit: '10mb', extended: true })) // decode url-encoded incoming POST data
 app.use(cors())
 
 //connect to database

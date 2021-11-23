@@ -15,7 +15,6 @@ mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnified
   .catch((error) => console.log(error.message))
 
 
-
 // a function to stop listening to the port
 const close = () => {
   listener.close()
@@ -25,4 +24,6 @@ const close = () => {
 module.exports = {
   close: close,
 }
+
+
 
