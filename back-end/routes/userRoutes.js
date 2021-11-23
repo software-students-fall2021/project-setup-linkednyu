@@ -7,22 +7,23 @@ const channelFunctions = require("../controllers/channelDetail");
 const authFunctions = require("../controllers/auth")
 const accountFunctions = require("../controllers/account")
 const verify = require('../controllers/tokenVerify')
+const comment = require('../controllers/comment')
 const newPostFunctions = require('../controllers/newPost')
 
 
 // routes
-router.post('/register',authFunctions.signUp)
-router.post('/login',authFunctions.login)
+router.post('/register', authFunctions.signUp)
+router.post('/login', authFunctions.login)
 router.get('/detailedposts/:id', detailedPostFunctions.viewPost)
 router.post('/homeposts', newPostFunctions.sendPosts)
 router.get('/homeposts', homeFunctions.viewHome)
-router.get('/userAccount', verify,  accountFunctions.viewAccount)
+router.get('/userAccount', verify, accountFunctions.viewAccount)
 // router.get('/channel/:id', routeFunctions.viewChannel)
 router.post('/channel/detail/:id', channelFunctions.channel)
 router.post('/channel/join/:id', channelFunctions.joinChannel)
 router.post('/channel/leave/:id', channelFunctions.leaveChannel)
-// router.post('/comments', routeFunctions.sendComment)
-// router.get('/comments', routeFunctions.viewComment)
+router.post('/comments/:id', comment.sendComment)
+router.get('/comments/:id', comment.viewComment)
 
 
 
