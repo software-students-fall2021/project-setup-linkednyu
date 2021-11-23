@@ -20,7 +20,7 @@ const PostBox = ({ post, loggedIn }) => {
 				<hr />
 				<Link className="tLink" to={`/detailedposts/${post._id}`}><div className="content">
 					<h3 className="contenttitle">{post.title}</h3>
-					{post.imgSrc === '' ? '' : <img className="contentImg" src={post.imgSrc} alt="" ></img>}
+					{!post.imgSrc ? <div></div> : <img className="contentImg" src={post.imgSrc} alt="" ></img>}
 					<div className="textContent">
 						{parser(post.content + '')}
 					</div>

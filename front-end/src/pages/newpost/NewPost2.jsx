@@ -7,23 +7,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
-//import { post } from '../../../../back-end/app';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-// import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-// import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-// import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-// import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter'
-// import Code from '@ckeditor/ckeditor5-basic-styles/src/code'
-// import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
-// import Image from '@ckeditor/ckeditor5-image/src/image'
-// import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload'
-// import Indent from '@ckeditor/ckeditor5-indent/src/indent'
-// import List from '@ckeditor/ckeditor5-list/src/list'
-// import Heading from '@ckeditor/ckeditor5-heading/src/heading'
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
 
 const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:4000/userAccount'
@@ -79,7 +65,6 @@ const NewPost2 = ({ loggedIn }) => {
 
     //create date
     var today = new Date(); 
-    var course = '';
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -164,7 +149,7 @@ const NewPost2 = ({ loggedIn }) => {
                             <div className="editor">
                                 
                             <CKEditor
-                                editor={ClassicEditor}
+                                editor={Editor}
                                 data={postData.content}
                                 onChange={(event, editor) => {
                                     const data = editor.getData()
