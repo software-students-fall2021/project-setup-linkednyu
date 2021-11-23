@@ -16,13 +16,12 @@ mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnified
 
 
 
+
+const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
+
 // a function to stop listening to the port
-const close = () => {
-  listener.close()
-}
 
 // export the close function
-module.exports = {
-  close: close,
-}
+
 
