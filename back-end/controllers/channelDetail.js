@@ -2,7 +2,6 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose');
-const axios = require('axios');
 const channelModel = require('../models/Channel');
 const userModel = require('../models/User')
 
@@ -14,6 +13,25 @@ const channel = async(req, res) =>{
     let result = await channelModel.find({id:filter}).lean();
     res.send(result);
 };
+
+const isJoined = async(req, res)=>{
+    console.log("[Channel Function] checkJoin");
+    let userDoc = await userModel.findOne({email:req.body.email});
+    if(!userDoc){
+        return res.status(404).json({message:"Can't find User"});
+    }
+    let subscribedArray = userDoc.channel.toObject();
+
+    let newChannel = req.body.channelId;
+    
+    for(let i = 0; i < subscribedArray.length; i++){
+        if(subscribedArray[i] == newChannel){
+            return res.status(200).json({joined:true});
+        }
+    }
+
+    return res.status(200).json({joined:false});
+}
 
 const joinChannel = async(req, res) => {
     console.log("[Channel Function] joinChannel");
@@ -74,5 +92,6 @@ const leaveChannel = async(req, res) =>{
 module.exports = {
     channel,
     joinChannel,
-    leaveChannel
+    leaveChannel,
+    isJoined
 };
