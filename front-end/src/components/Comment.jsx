@@ -9,7 +9,7 @@ export default function Comment({ comment }) {
                     <ImageAvatars id={comment.userName} avatarSrc={comment.avatar} />
                 </div>
                 <div className="commentUserName">{comment.userName}</div>
-                <div className="commentDate">{comment.date}</div>
+                <div className="commentDate">{new Date(comment.date).toISOString().slice(0, 10)}</div>
             </div>
             <div className="commentBottom">
                 <span className="commentText">{comment.content}</span>

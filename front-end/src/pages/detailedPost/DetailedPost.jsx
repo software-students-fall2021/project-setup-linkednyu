@@ -10,8 +10,7 @@ import parser from 'html-react-parser'
 
 export default function DetailedPost() {
     const { id } = useParams();
-
-    //console.log(id);
+    
     //connect to backend
     const url = `/detailedposts/${id}`
     const commenturl = `/comments/${id}`
@@ -60,6 +59,7 @@ export default function DetailedPost() {
             date: new Date(),
             post_id: ''
         })
+
 
     }
 
