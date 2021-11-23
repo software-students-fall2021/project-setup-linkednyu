@@ -6,16 +6,15 @@ import { useParams } from "react-router"
 
 
 export default function Channel ({loggedIn}) {
-    const url = "/channel/Mathematics"
     const [post,setPosts] = useState(null)
     const [loading , setIsloading] = useState(true)
-    const {id}= useParams();
+    const { coursename }= useParams();
 
     useEffect(()=>{
 
             async function fetchposts(){
                 try{
-                    await axios.get(url).then(response =>{
+                    await axios.get(`http://localhost:4000/channel/${coursename}`).then(response =>{
                         setPosts(response.data)
                         setIsloading(false)
                     });
