@@ -1,10 +1,10 @@
 require('dotenv').config();
+
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
+
 const mongoose = require('mongoose');
 const channelModel = require('../models/Channel');
-const userModel = require('../models/User')
-
+const userModel = require('../models/User');
 
 
 const channel = async(req, res) =>{
@@ -16,76 +16,94 @@ const channel = async(req, res) =>{
 
 const isJoined = async(req, res)=>{
     console.log("[Channel Function] checkJoin");
-    let userDoc = await userModel.findOne({email:req.body.email});
-    if(!userDoc){
-        return res.status(404).json({message:"Can't find User"});
-    }
-    let subscribedArray = userDoc.channel.toObject();
-
-    let newChannel = req.body.channelId;
-    
-    for(let i = 0; i < subscribedArray.length; i++){
-        if(subscribedArray[i] == newChannel){
-            return res.status(200).json({joined:true});
+    try{
+        //get user info
+        let userObj = jwt.verify(req.header('Token'), process.env.SECRET_TOKEN);
+        let userDoc = await userModel.findById(userObj._id);
+        if(!userDoc){
+            return res.status(404).json({message:"Can't find User"});
         }
-    }
+         // find suscrib array
+        let subscribedArray = userDoc.channel.toObject();
+        let newChannel = req.body.channelId;
+        for(let i = 0; i < subscribedArray.length; i++){
+            if(subscribedArray[i] == newChannel){
+                return res.status(200).json({joined:true});
+            }
+        }
+        return res.status(200).json({joined:false});
 
-    return res.status(200).json({joined:false});
+    }catch(err){
+        console.log(err);
+        return res.status(400).json({message:"Bad Request"});
+    }
 }
 
 const joinChannel = async(req, res) => {
     console.log("[Channel Function] joinChannel");
-    //authorize user
-
-    // query database
-    let userDoc = await userModel.findOne({email:req.body.email});
-    if(!userDoc){
-        return res.status(404).json({message:"Can't find User"});
-    }
-    let subscribedArray = userDoc.channel.toObject();
-
-    let newChannel = req.body.channelId;
-    
-    for(let i = 0; i < subscribedArray.length; i++){
-        if(subscribedArray[i] == newChannel){
-            return res.status(409).json({message:"Already Joined"});
+    try{
+        // find user info
+        let userObj = jwt.verify(req.header('Token'), process.env.SECRET_TOKEN);
+        let userDoc = await userModel.findById(userObj._id);
+        if(!userDoc){
+            return res.status(404).json({message:"Can't find User"});
         }
+        // query database
+        let subscribedArray = userDoc.channel.toObject();
+
+        let newChannel = req.body.channelId;
+        
+        for(let i = 0; i < subscribedArray.length; i++){
+            if(subscribedArray[i] == newChannel){
+                return res.status(409).json({message:"Already Joined"});
+            }
+        }
+        
+        userDoc.channel.push(newChannel);
+        await userDoc.save(function(){});
+        return res.status(200).json({});
+
+    }catch(err){
+        console.log(err);
+        return res.status(400).json({message:"Bad Request"});
     }
-    
-    userDoc.channel.push(newChannel);
-    await userDoc.save(function(){});
-    
-    return res.status(200).json({message:"Done"});
 }; 
 
 const leaveChannel = async(req, res) =>{
     console.log("[Channel Function] leave Channel");
-    //authorize user
-
-    // query database
-    let userDoc = await userModel.findOne({email:req.body.email});
-    if(!userDoc){
-        return res.status(404).json({message:"Can't find User"});
-    }
-    let subscribedArray = userDoc.channel.toObject();
-    let newArray = [];
-
-    let newChannel = req.body.channelId;
-    let modfied = false;
-    for(let i = 0; i < subscribedArray.length; i++){
-        if(subscribedArray[i] == newChannel){
-            modified = true;
-        }else{
-            newArray.push(subscribedArray[i]);
+    try {
+        //authorize user
+        let userObj = jwt.verify(req.header('Token'), process.env.SECRET_TOKEN);
+        let userDoc = await userModel.findById(userObj._id);
+        if(!userDoc){
+            return res.status(404).json({message:"Can't find User"});
         }
-    }
-    
-    if(modified){
-        userDoc.channel = newArray;
-        await userDoc.save(function(){});
-        return res.status(200).json({message:"Done"});
-    }else{
-        return res.status(409).json({message:"Not Joined"});
+
+        // query database
+        let subscribedArray = userDoc.channel.toObject();
+        let newArray = [];
+
+        let newChannel = req.body.channelId;
+        let modfied = false;
+        for(let i = 0; i < subscribedArray.length; i++){
+            if(subscribedArray[i] == newChannel){
+                modified = true;
+            }else{
+                newArray.push(subscribedArray[i]);
+            }
+        }
+        
+        if(modified){
+            userDoc.channel = newArray;
+            await userDoc.save(function(){});
+            return res.status(200).json({message:"Done"});
+        }else{
+            return res.status(409).json({message:"Not Joined"});
+        }
+           
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json({message:"Bad Request"});
     }
 }
 

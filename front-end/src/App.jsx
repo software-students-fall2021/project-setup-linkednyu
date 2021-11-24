@@ -25,7 +25,7 @@ function App() {
       </>
       <Switch>
         <Route path="/" exact><Home loggedIn={loggedIn} /></Route>
-        <Route path="/joinclass" component={JoinClass} />
+        <Route path="/joinclass/:id" component={JoinClass} />
         <Route path="/detailedposts/:id" component={DetailedPost} />
         <Route path="/channel/:id"> <Channel loggedIn={loggedIn} /></Route>
         <Route path="/login" > <Login loggedIn={loggedIn} setLoggedIn={setloggedIn} /> </Route>
