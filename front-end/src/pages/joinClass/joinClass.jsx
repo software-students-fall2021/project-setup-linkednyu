@@ -12,30 +12,78 @@ import { Link } from "react-router-dom"
 
 const JoinClass = (props) => {
     
-    const url = "/channel/"
-    const [course, setCourse] = useState(null)
+    const url = "/channel/";
+    const [loading, setLoading] = useState(true);
+    const [course, setCourse] = useState(null);
     const [isJoined, setIsJoined] = useState(false);
 
-    let classId = props.match.params.id;
-    let postObj = {
-        email:"tw2198@nyu.edu",
-        channelId: classId
-    }
 
     useEffect(() =>{
+        // make api query obj
+        let classId = props.match.params.id;
+
         //get class info
-        axios.get(url + "detail/" +classId)
+        try{
+            axios.get(url + "detail/" + classId)
             .then((res) =>{
                 if(res.data.length >= 0){
                     setCourse(res.data[0]);
-                    axios.post(url + "isJoined/", postObj)
+                    let body = {
+                        channelId:classId
+                    }
+                    let config = {
+                        headers:{
+                            'Token':localStorage.getItem('token'),
+                        }
+                    }
+                    axios.post(url + "isJoined/", body, config)
                         .then((res1) =>{
                             setIsJoined(res1.data.joined);
                         })  
                 }
             })
+            setLoading(false);
+        }catch(err){
+            console.log(err);
+        } 
+        
+    }, [props]);
 
-    }, []);
+    const joinClass = () => {
+        let config = {
+            headers:{
+                'Token':localStorage.getItem('token'),
+            }
+        }
+        let postObj = {
+            channelId:course.id
+            }
+        axios.post(url + "join/", postObj, config)
+                        .then((res) =>{
+                            axios.post(url + "isJoined/", postObj, config)
+                                .then((res1) =>{
+                                setIsJoined(res1.data.joined);
+                            })
+                        })    
+    }
+
+    const leaveClass = () => {
+        let config = {
+            headers:{
+                'Token':localStorage.getItem('token'),
+            }
+        }
+        let postObj = {
+            channelId:course.id
+        }
+        axios.post(url + "leave/", postObj, config)
+                        .then((res) =>{
+                            axios.post(url + "isJoined/", postObj, config)
+                                .then((res1) =>{
+                                setIsJoined(res1.data.joined);
+                            })
+                        })   
+    }
 
     const genClass= ()=>{
         if(course){
@@ -68,28 +116,6 @@ const JoinClass = (props) => {
         }
     }
 
-    const joinClass = () => {
-        console.log("join class button click")
-        axios.post(url + "join/", postObj)
-                        .then((res) =>{
-                            axios.post(url + "isJoined/", postObj)
-                                .then((res1) =>{
-                                setIsJoined(res1.data.joined);
-                            })
-                        })    
-    }
-
-    const leaveClass = () => {
-        console.log("leave class button click")
-        axios.post(url + "leave/", postObj)
-                        .then((res) =>{
-                            axios.post(url + "isJoined/", postObj)
-                                .then((res1) =>{
-                                setIsJoined(res1.data.joined);
-                            })
-                        })   
-    }
-
     const genButton = ()=>{
         return (
             <div>
@@ -102,8 +128,8 @@ const JoinClass = (props) => {
 
     return (
         <div className = "joinClass">
-            {genClass()}
-            {genButton()}
+            {!loading && genClass()}
+            {!loading && genButton()}
         </div>
     )
 }
