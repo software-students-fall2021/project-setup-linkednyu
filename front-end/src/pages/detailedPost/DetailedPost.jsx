@@ -6,10 +6,12 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useParams } from "react-router"
 import parser from 'html-react-parser'
+import { useHistory } from "react-router"
 
 
 export default function DetailedPost() {
     const { id } = useParams();
+    const History = useHistory()
     
     //connect to backend
     const url = `/detailedposts/${id}`
@@ -19,30 +21,34 @@ export default function DetailedPost() {
     const [loading, setIsloading] = useState(true)
     const [loadingComment, setIsloadingComment] = useState(true)
     const [newComment, setContent] = useState({
-        userName: 'Anastasia Ye',
-        avatar: "https://robohash.org/etiustodolorum.png?size=50x50&set=set1",
+        userName: '',
+        avatar: "",
         content: '',
         date: new Date(),
         post_id: ''
     })
 
-    const onComment = (e) => {
+
+
+    const onComment = async (e) => {
         e.preventDefault()
 
-        if (!newComment) {
+        
+        if (!newComment.content) {
             alert('please add a comment')
             return
         }
 
-        axios.post(`http://localhost:5000/comments/${id}`, newComment).then(response => {
-            console.log(response);
+        await axios.post(`http://localhost:5000/comments/${id}`, newComment).then(response => {
+            console.log("sent");
         })
             .catch((err) => console.log(err.message));
 
 
         async function fetchComments() {
+            let token = localStorage.getItem('token')
             try {
-                await axios.get(commenturl).then(response => {
+                await axios.get(commenturl, {headers:{'Token':token}}).then(response => {
                     setComments(response.data)
                     setIsloadingComment(false)
                 });
@@ -53,8 +59,8 @@ export default function DetailedPost() {
         }
         fetchComments()
         setContent({
-            userName: 'Anastasia Ye',
-            avatar: 'https://robohash.org/etiustodolorum.png?size=50x50&set=set1',
+            userName: '',
+            avatar: '',
             content: '',
             date: new Date(),
             post_id: ''
@@ -63,29 +69,41 @@ export default function DetailedPost() {
 
     }
 
-    useEffect(() => {
-        async function fetchposts() {
-            try {
-                await axios.get(url).then(response => {
-                    setPosts(response.data)
-                    setIsloading(false)
 
+    useEffect(() => {
+        let isMounted = true;
+        async function fetchposts() {
+            let token = localStorage.getItem('token')
+            try {
+                await axios.get(url, {headers:{'Token':token}}).then(response => {
+                    if (isMounted){
+                        setPosts(response.data)
+                        setIsloading(false)
+                    }
                 });
             } catch (error) {
-                console.log(error)
+                History.push('/login')
             }
 
         }
         fetchposts()
-    }, [url])
 
+        return () => {isMounted=false};
+        // eslint-disable-next-line 
+    }, [])
+
+    
     useEffect(() => {
+        let isMounted1 = true;
         async function fetchComments() {
+            let token = localStorage.getItem('token')
             try {
-                await axios.get(commenturl).then(response => {
-                    //console.log(response.data)
-                    setComments(response.data)
-                    setIsloadingComment(false)
+                await axios.get(commenturl, {headers:{'Token':token}}).then(response => {
+                    if(isMounted1){
+                        setComments(response.data)
+                        setIsloadingComment(false)
+                    }
+                    
                 });
             } catch (error) {
                 console.log(error)
@@ -93,6 +111,8 @@ export default function DetailedPost() {
 
         }
         fetchComments()
+
+        return () => {isMounted1=false};
     }, [commenturl])
 
 
@@ -139,7 +159,7 @@ export default function DetailedPost() {
                         placeholder="Comment Something..."
                         className="detailedPostAddComment"
                         value={newComment.content}
-                        onChange={(e) => setContent({ ...newComment, post_id: post._id, content: e.target.value })}
+                        onChange={(e) => setContent({ ...newComment, userName :post.username , avatar:post.avatar, post_id: post._id, content: e.target.value })}
                     />
                     <div className="commentButtonSection">
                         <Button className="commentButton"

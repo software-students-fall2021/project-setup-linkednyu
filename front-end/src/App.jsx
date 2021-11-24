@@ -18,6 +18,8 @@ import NewPost2 from './pages/newpost/NewPost2'
 function App() {
   const [loggedIn, setloggedIn] = useState(false)
 
+  
+
   return (
     <BrowserRouter>
       <>

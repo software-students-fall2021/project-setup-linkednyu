@@ -2,7 +2,7 @@ import './PostBox.css'
 import ImageAvatars from './Avatar'
 import { Link } from 'react-router-dom'
 import parser from 'html-react-parser'
-// import moment from 'moment'
+
 
 
 const PostBox = ({ post, loggedIn }) => {
@@ -19,9 +19,9 @@ const PostBox = ({ post, loggedIn }) => {
 					<h3 className="time">{mDate}</h3>
 				</div>
 				<hr />
-				<Link className="tLink" to={`/detailedposts/${post._id}`}><div className="content">
+				<Link className="tLink" to={loggedIn ?`/detailedposts/${post._id}`:"/login"}><div className="content">
 					<h3 className="contenttitle">{post.title}</h3>
-					{post.imgSrc === '' ? '' : <img className="contentImg" src={post.imgSrc} alt="" ></img>}
+					{post.imgSrc === '' ? <img className="contentImg" src='https://picsum.photos/id/1004/5616/3744' alt="" ></img> : <img className="contentImg" src={post.imgSrc} alt="" ></img>}
 					<div className="textContent">
 						{parser(post.content+'')}
 					</div>

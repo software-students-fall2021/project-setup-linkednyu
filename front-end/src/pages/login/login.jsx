@@ -9,7 +9,7 @@ import { useHistory } from "react-router"
 
 
 
-export default function Login({ loggedIn, setLoggedIn }) {
+export default function Login({ setLoggedIn }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const [message,setMessage] = useState("")
@@ -63,6 +63,9 @@ export default function Login({ loggedIn, setLoggedIn }) {
     
     return (
         <div className="loginPage">
+            <div className='signinTitle1'>
+                <h2>LinkedNYU</h2>
+            </div>
             <div className="signinTitle">
                 Sign in
             </div>
@@ -91,9 +94,6 @@ export default function Login({ loggedIn, setLoggedIn }) {
                 </div>
                 <div className="underArea">
                     <div className="otherOptions">
-                        <div>
-                            <Link to="/pwreset" className="otherOptIns">Having trouble?</Link>
-                        </div>
                         <div>
                             <Link to="/signup" className="otherOptIns">I'm new, Sign me up!</Link>
                         </div>

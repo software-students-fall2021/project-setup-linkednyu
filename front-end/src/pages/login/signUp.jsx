@@ -65,6 +65,9 @@ export default function SignUp(){
 
     return(
         <div className = "signupPage">
+            <div className='signupTitle1'>
+                <h2>LinkedNYU</h2>
+            </div>
             <div className = "title">
                 Sign up
             </div>
