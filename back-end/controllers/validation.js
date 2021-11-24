@@ -39,9 +39,9 @@ const postValidation = (data) => {
 const commentValidation = (data) => {
 
     const schema = Joi.object({
-        userName: Joi.string().min(6).required(),
+        userName: Joi.string().required(),
         avatar: Joi.string().required(),
-        content: Joi.string().min(5).required(),
+        content: Joi.string().required(),
         date: Joi.string().required(),
         post_id: Joi.string().required()
     })

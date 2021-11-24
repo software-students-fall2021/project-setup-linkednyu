@@ -19,14 +19,11 @@ const userSchema = new mongoose.Schema({
     },
     imgSrc :{
         type:String,
+        default:''
     },
     content:{
         type:String,
         required:true,
-    },
-    comments:{
-        type:Array,
-        default:[]
     },
     date:{
         type:Date,

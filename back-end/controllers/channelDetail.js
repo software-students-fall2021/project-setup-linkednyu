@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose');
 const channelModel = require('../models/Channel');
 const userModel = require('../models/User')
-
+const Post = require('../models/Post')
 
 
 const channel = async(req, res) =>{
@@ -71,7 +71,7 @@ const leaveChannel = async(req, res) =>{
     let newArray = [];
 
     let newChannel = req.body.channelId;
-    let modfied = false;
+    let modified = false;
     for(let i = 0; i < subscribedArray.length; i++){
         if(subscribedArray[i] == newChannel){
             modified = true;
@@ -89,9 +89,21 @@ const leaveChannel = async(req, res) =>{
     }
 }
 
+
+const viewChannel = async (req, res) => {
+    
+    const courseFound = await Post.find({coursename:req.params.id}).sort({date:-1})
+
+    if (!courseFound) return res.status(409).json({message:"User not found"});
+
+    res.status(200).send(courseFound)
+
+};
+
 module.exports = {
     channel,
     joinChannel,
     leaveChannel,
-    isJoined
+    isJoined,
+    viewChannel
 };

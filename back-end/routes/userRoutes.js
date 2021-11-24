@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const routeFunctions = require("../controllers/routeFunctions");
 const homeFunctions = require('../controllers/homePage')
 const detailedPostFunctions = require('../controllers/detailedPost')
 const channelFunctions = require("../controllers/channelDetail");
@@ -14,17 +13,17 @@ const newPostFunctions = require('../controllers/newPost')
 // routes
 router.post('/register', authFunctions.signUp)
 router.post('/login', authFunctions.login)
-router.get('/detailedposts/:id', detailedPostFunctions.viewPost)
+router.get('/detailedposts/:id', verify, detailedPostFunctions.viewPost)
 router.post('/homeposts', newPostFunctions.sendPosts)
 router.get('/homeposts', homeFunctions.viewHome)
 router.get('/userAccount', verify, accountFunctions.viewAccount)
-// router.get('/channel/:id', routeFunctions.viewChannel)
+router.get('/channel/:id', channelFunctions.viewChannel)
 router.get('/channel/detail/:id', channelFunctions.channel)
 router.post('/channel/join', channelFunctions.joinChannel)
 router.post('/channel/leave', channelFunctions.leaveChannel)
 router.post('/channel/isJoined', channelFunctions.isJoined)
 router.post('/comments/:id', comment.sendComment)
-router.get('/comments/:id', comment.viewComment)
+router.get('/comments/:id',verify, comment.viewComment)
 
 
 

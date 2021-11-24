@@ -14,6 +14,7 @@ const viewHome = async (req, res) => {
 
 };
 
+
 module.exports = {
-    viewHome
+    viewHome,
 }
