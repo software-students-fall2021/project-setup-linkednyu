@@ -12,46 +12,124 @@ import { Link } from "react-router-dom"
 
 const JoinClass = (props) => {
     
-    const url = "https://617844e8bb979200171ff63e.mockapi.io/class/detail/"
-    const [course, setCourse] = useState(null)
+    const url = "/channel/";
+    const [loading, setLoading] = useState(true);
+    const [course, setCourse] = useState(null);
+    const [isJoined, setIsJoined] = useState(false);
+
 
     useEffect(() =>{
-        let num = Math.floor(Math.random() * 49 + 1)
-        console.log(num)
-        axios.get(url + num).then((res) =>{
-            setCourse(res.data);
-        })
-    }, []);
+        // make api query obj
+        let classId = props.match.params.id;
+
+        //get class info
+        try{
+            axios.get(url + "detail/" + classId)
+            .then((res) =>{
+                if(res.data.length >= 0){
+                    setCourse(res.data[0]);
+                    let body = {
+                        channelId:classId
+                    }
+                    let config = {
+                        headers:{
+                            'Token':localStorage.getItem('token'),
+                        }
+                    }
+                    axios.post(url + "isJoined/", body, config)
+                        .then((res1) =>{
+                            setIsJoined(res1.data.joined);
+                        })  
+                }
+            })
+            setLoading(false);
+        }catch(err){
+            console.log(err);
+        } 
+        
+    }, [props]);
+
+    const joinClass = () => {
+        let config = {
+            headers:{
+                'Token':localStorage.getItem('token'),
+            }
+        }
+        let postObj = {
+            channelId:course.id
+            }
+        axios.post(url + "join/", postObj, config)
+                        .then((res) =>{
+                            axios.post(url + "isJoined/", postObj, config)
+                                .then((res1) =>{
+                                setIsJoined(res1.data.joined);
+                            })
+                        })    
+    }
+
+    const leaveClass = () => {
+        let config = {
+            headers:{
+                'Token':localStorage.getItem('token'),
+            }
+        }
+        let postObj = {
+            channelId:course.id
+        }
+        axios.post(url + "leave/", postObj, config)
+                        .then((res) =>{
+                            axios.post(url + "isJoined/", postObj, config)
+                                .then((res1) =>{
+                                setIsJoined(res1.data.joined);
+                            })
+                        })   
+    }
 
     const genClass= ()=>{
-        if(course != null){
+        if(course){
             return (
                 <div>
                     <div className = "classTitle">
-                        <Avatar src = {course.avatar}>CL</Avatar>
+                        <Avatar src = {course.icon}></Avatar>
                         <div className = "classTitleInstructor">
                             <div className = "className">{course.name}</div>
-                            <div className = "instructorName">Prof.{course.instructor}</div>
+                            <div className = "instructorName">{course.instructor}</div>
                         </div>
                     </div>
                     <div className = "classDescription">
                         <br />
                         <div>
-                            {course.description}
+                            {course.detail}
                         </div>
                         <br />
                     </div>
                 </div>
             )
+        }else{
+            return (
+                <div>
+                    <br />
+                    <div className = "classDescription">Sorry, We can't find the information about this course</div>
+                    <br />
+                </div>
+            )
         }
+    }
+
+    const genButton = ()=>{
+        return (
+            <div>
+                {course && isJoined && <Button variant="contained" className = "joinButton" onClick={leaveClass}>Leave</Button>}
+                {course && !isJoined && <Button variant="contained" className = "joinButton" onClick={joinClass}>Join</Button>}
+                {!course && <Link to="/"><Button variant="contained" className = "joinButton">Return Home</Button></Link>}                
+            </div>
+        )
     }
 
     return (
         <div className = "joinClass">
-            {genClass()}
-            <div>
-                <Link to="/channel/Mathematics"><Button variant="contained" className = "joinButton">Join Class</Button></Link>
-            </div>
+            {!loading && genClass()}
+            {!loading && genButton()}
         </div>
     )
 }
