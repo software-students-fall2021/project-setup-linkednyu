@@ -16,6 +16,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:5000/userAccount'
     const [channel,setChannel] = useState("Channel")
+    const [userChannels,setUserChannels] = useState([])
     let history = useHistory(); //jump to home
 
     const[postData, setPostData] = useState({ //local post model
@@ -43,6 +44,7 @@ const NewPost2 = ({ loggedIn }) => {
                             username: response.data.username,
                             avatar: response.data.avatar,
                         })
+                        setUserChannels(response.data.channel)
                         setIsLoading(false)
                     }
                 });
@@ -129,18 +131,11 @@ const NewPost2 = ({ loggedIn }) => {
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
-                            <MenuItem  onClick={() =>
-                                handleClose('Mathematics')
-                            }>Mathematics</MenuItem>
-                            <MenuItem onClick={() =>
-                                handleClose('Engineering')
-                            }>Engineering</MenuItem>
-                            <MenuItem onClick={() => 
-                                handleClose('English')
-                            }>English</MenuItem>
-                            <MenuItem onClick={() =>
-                                handleClose('Neuroscience')
-                            }>Neuroscience</MenuItem>
+                            {userChannels.map((item,index) => (
+                                <MenuItem key={index} onClick={() =>
+                                    handleClose(`${item}`)
+                                }>{item}</MenuItem>
+                            ))}
                         </Menu>
                     </div>
                     <div className="avatarAndUser">
