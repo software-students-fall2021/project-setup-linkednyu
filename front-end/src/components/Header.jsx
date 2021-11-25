@@ -140,24 +140,6 @@ const Header = ({ loggedIn, setloggedIn }) => {
 		
 	}
 
-	// useEffect(() => {
-    //     let isMounted = true;
-    //     async function fetchchannels() {
-    //         try {
-    //             await axios.get(url).then(response => {
-    //                 if(isMounted){
-    //                     setPosts(response.data)
-    //                     setIsloading(false)
-    //                 }
-    //             });
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     fetchposts()
-
-    //     return () => {isMounted=false};
-    // }, [url])
 
 	return (
 		<nav>
@@ -171,7 +153,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 						</UnstyledButton>
 					</div>
 					<div className="searchBox">
-						<input placeholder="Search for a channel" value={wordEntered} className="searchInput" onChange={handleFilter} />
+						<input placeholder="Search for channel details" value={wordEntered} className="searchInput" onChange={handleFilter} />
 						{filteredData.length===0 ? <SearchIcon className="searchIcon" /> : <CloseIcon className="closeIcon" onClick={clearSearch}/>}
 					</div>
 					<div className="avatarContainer">
