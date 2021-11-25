@@ -1,5 +1,3 @@
-// import { Button } from "../../components/Button"
-//import Button from "@mui/material/Button"
 import "./account.css"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"

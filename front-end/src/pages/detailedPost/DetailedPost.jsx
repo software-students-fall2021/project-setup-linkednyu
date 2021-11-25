@@ -134,11 +134,6 @@ export default function DetailedPost() {
                             <div className="detailedPosDate">{new Date(post.date).toISOString().slice(0, 10)}</div>
                         </div>
                     </div>
-                    {/* <div className="detailedPostTopRight">
-                        <Button className="commentButton" onClick={() => alert('successfully joined!')}
-                            buttonSize="btn--medium" buttonStyle="btn--primary--solid"
-                        > Join  </Button>
-                    </div> */}
                 </div>
                 <div className="detailedPostCenter">
                     <span className="detailedPostTitle">{post.title}</span>

@@ -1,8 +1,4 @@
-/* Props:
-        label
-        icon
-        style
-*/
+
 
 const TextBox = (props) => {
 	return (
