@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     imgSrc :{
         type:String,
-        default:''
+        default:'https://picsum.photos/id/1004/5616/3744'
     },
     content:{
         type:String,
