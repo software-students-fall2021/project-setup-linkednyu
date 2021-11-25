@@ -7,6 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+import FileBase64 from 'react-file-base64';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -15,6 +16,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:5000/userAccount'
     const [channel,setChannel] = useState("Channel")
+    let history = useHistory(); //jump to home
 
     const[postData, setPostData] = useState({ //local post model
         title: '',
@@ -27,6 +29,7 @@ const NewPost2 = ({ loggedIn }) => {
     })
     
     const[loading, setIsLoading] = useState(true)
+
 
     useEffect(() => {
         let isMounted = true;
@@ -44,13 +47,14 @@ const NewPost2 = ({ loggedIn }) => {
                     }
                 });
             } catch (error) {
-                console.log(error)
+                history.push('/login')
             }
 
         }
         fetchaccount()
         
         return () => {isMounted=false};
+        // eslint-disable-next-line 
     },[])
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -64,12 +68,12 @@ const NewPost2 = ({ loggedIn }) => {
         setPostData({...postData, coursename: course})
     };
 
-    let history = useHistory(); //jump to home
 
     //create date
     var today = new Date(); 
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         if(!postData.title){
@@ -90,7 +94,7 @@ const NewPost2 = ({ loggedIn }) => {
         }
             
         //send postData to server
-        axios.post('http://localhost:5000/homeposts',postData)
+        await axios.post('http://localhost:5000/homeposts',postData)
             .then(response=>{
                 console.log(response);
             })
@@ -159,8 +163,7 @@ const NewPost2 = ({ loggedIn }) => {
                     </div>
                     <div className="ckeditor">
                         <div className="textEditor">
-                            <div className="editor">
-                                
+                            <div className="editor">  
                             <CKEditor
                                 editor={ClassicEditor}
                                 data={postData.content}
@@ -177,14 +180,20 @@ const NewPost2 = ({ loggedIn }) => {
                 </div>
 
                 <div className="buttonSection">
-                    <Button type = "button" className="draftButton" onClick = {() => alert('Draft saved')}>
-                        Draft
-                    </Button>
-                    <Button type = "submit" className="postButton" buttonStyle="btn--dark--solid">
-                        Post
-                    </Button>
+                    <div>
+                        <p class="imgUpload">Upload an image</p>
+                        <FileBase64
+                        multiple={ false} 
+                        onDone={ ({base64}) =>{
+                            setPostData({...postData, date: today ,imgSrc:base64})
+                            } }/>
+                    </div> 
+                    <div className="postButton">
+                        <Button type = "submit"  buttonStyle="btn--dark--solid">
+                            Post
+                        </Button>
+                    </div>
                 </div>
-
                 </form>
             </div>
 

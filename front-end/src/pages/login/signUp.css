@@ -4,8 +4,16 @@
     padding: 15% 10%;
 }
 
+.signupTitle1{
+    text-align: center;
+    font-weight: bold;
+    font-size:x-large;
+    color:#57068c;
+}
+
 .title{
     text-align:center;
+   
 }
 
 .form{

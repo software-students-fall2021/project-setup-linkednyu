@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useState } from "react";
 import { useEffect } from "react";
 
+import { useHistory } from "react-router"
 import axios from 'axios'
 import { Link } from "react-router-dom"
 
@@ -16,18 +17,18 @@ const JoinClass = (props) => {
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState(null);
     const [isJoined, setIsJoined] = useState(false);
+    const history = useHistory()
 
 
     useEffect(() =>{
         // make api query obj
         let classId = props.match.params.id;
-
         //get class info
         try{
             axios.get(url + "detail/" + classId)
             .then((res) =>{
-                if(res.data.length >= 0){
-                    setCourse(res.data[0]);
+                if(res.data){
+                    setCourse(res.data);
                     let body = {
                         channelId:classId
                     }
@@ -56,7 +57,7 @@ const JoinClass = (props) => {
             }
         }
         let postObj = {
-            channelId:course.id
+            channelId:course.name
             }
         axios.post(url + "join/", postObj, config)
                         .then((res) =>{
@@ -64,6 +65,7 @@ const JoinClass = (props) => {
                                 .then((res1) =>{
                                 setIsJoined(res1.data.joined);
                             })
+                            history.push(`/channel/${course.name}`)
                         })    
     }
 
@@ -74,7 +76,7 @@ const JoinClass = (props) => {
             }
         }
         let postObj = {
-            channelId:course.id
+            channelId:course.name
         }
         axios.post(url + "leave/", postObj, config)
                         .then((res) =>{
@@ -82,6 +84,7 @@ const JoinClass = (props) => {
                                 .then((res1) =>{
                                 setIsJoined(res1.data.joined);
                             })
+                            history.push("/")
                         })   
     }
 

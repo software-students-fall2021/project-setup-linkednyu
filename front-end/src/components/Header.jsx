@@ -1,18 +1,46 @@
 import React from "react"
 import "./Header.css"
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar'
 import UnstyledButton from '@mui/core/ButtonUnstyled'
 import { Button } from "../components/Button"
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 
 const Header = ({ loggedIn, setloggedIn }) => {
 
 	const [menuShow, setMenuShow] = useState(false)
+	const [filteredData , setFilteredData] = useState([])
+	const [wordEntered,setWordEntered] = useState("")
+	const [data, setData]= useState([])
+	const url = "/channels"
+
+	useEffect(() => {
+        let isMounted = true;
+        async function fetchchannel() {
+            let token = localStorage.getItem('token')
+            try {
+                await axios.get(url, {headers:{'Token':token}}).then(response => {
+                    if(isMounted){
+                        setData(response.data)
+                    }
+                    
+                });
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+        fetchchannel()
+        return () => {isMounted=false};
+        // eslint-disable-next-line 
+    },[loggedIn])
+	
 
 	const toggleMenu = () => {
 		setMenuShow(!menuShow);
@@ -20,7 +48,10 @@ const Header = ({ loggedIn, setloggedIn }) => {
 
 	const logout = () => {
 		setMenuShow(!menuShow)
+		localStorage.removeItem('token')
+		localStorage.removeItem('loggedIn')
 		setloggedIn(false)
+		setData([])
 
 	}
 
@@ -73,9 +104,47 @@ const Header = ({ loggedIn, setloggedIn }) => {
 		}
 	}
 
+	const handleFilter = (e)=>{
+		const searchWord = e.target.value
+		setWordEntered(searchWord)
+		const newFilter = data.filter((item)=>{
+			return item.name.toLowerCase().includes(searchWord.toLowerCase())
+		})
+		if (searchWord === ""){
+			setFilteredData([])
+		}
+		else{
+			setFilteredData(newFilter)
+		}
+		
+	}
+
+	const clearSearch = ()=>{
+		setFilteredData([])
+		setWordEntered("")
+	}
+
+	const searchResults = ()=>{
+		
+		return (
+		<>{ 
+			filteredData.length!==0 && <div className="dataResult">
+			{filteredData.map((item,index)=>{
+				return (
+					<Link key= {index} className="dataItem" to={loggedIn?`/joinclass/${item.name}`:'/login'}>{item.name}</Link>
+				);
+			})}	
+			</div>}
+		</>
+		)
+		
+	}
+
+
 	return (
 		<nav>
 			{renderMenu()}
+			{searchResults()}
 			<div className="topBarContainer">
 				<div className="topBarItems">
 					<div className="hamburgerMenu">
@@ -84,11 +153,11 @@ const Header = ({ loggedIn, setloggedIn }) => {
 						</UnstyledButton>
 					</div>
 					<div className="searchBox">
-						<SearchIcon className="searchIcon" />
-						<input placeholder="Search for a channel or post" className="searchInput" />
+						<input placeholder="Search for channel details" value={wordEntered} className="searchInput" onChange={handleFilter} />
+						{filteredData.length===0 ? <SearchIcon className="searchIcon" /> : <CloseIcon className="closeIcon" onClick={clearSearch}/>}
 					</div>
 					<div className="avatarContainer">
-						<Link to={loggedIn ? "/account" : ""}>
+						<Link to={loggedIn ? "/account" : "/login"}>
 							<Avatar onClick={() => {
 								setMenuShow(false);
 							}} className="avatarIcon"

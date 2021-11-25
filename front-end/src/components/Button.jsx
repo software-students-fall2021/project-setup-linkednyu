@@ -5,11 +5,6 @@ const STYLES = [
 	"btn--primary--outline",
 	"btn--dark--solid",
 	"btn--dark--outline",
-	//"btn--warning--outline",
-	//"btn--danger--solid",
-	//"btn--danger--outline",
-	//"btn--success--solid",
-	//"btn--success--outline",
 ]
 
 const SIZES = [

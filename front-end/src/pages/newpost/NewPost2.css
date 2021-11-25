@@ -75,12 +75,25 @@
 }
 
 .buttonSection{
+    display: flex;
+    justify-content: space-between;
     margin-top: 10px;
     padding: 5px 5px;
-    text-align: right;
     
 }
 
+.uploadFile{
+    display: flex;
+    flex-direction: column;
+}
+
+.imgUpload{
+    margin-bottom: 0.5em;
+}
+
+.postButton{
+    margin-top: 1.2em;
+}
 
 .selectForm{
     height: 50px !important;

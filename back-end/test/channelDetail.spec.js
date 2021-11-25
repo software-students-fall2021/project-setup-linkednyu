@@ -7,9 +7,10 @@ const assert = require('assert')
 //channel detail test
 describe('channel detail function test', ()=>{
     it('Channel detail', (done)=> {
+        const posts = ["Mathematics","English","Neuroscience","Engineering"]
         for(let i = 1; i < 5; i++){
             chai.request(app)
-            .get('/channel/detail/' + i)
+            .get('/channel/detail/' + posts[i])
             .end((err, res) =>{
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -25,17 +26,17 @@ describe('channel detail function test', ()=>{
     }).timeout(10000);
 
     it('Channel join/leave function', (done)=> {
-        //join
+        // join
         chai.request(app)
             .post('/channel/join')
-            .send({email:'tw2198@nyu.edu', channelId:'1'})
+            .send({email:'tw2198@nyu.edu', channelname:'Mathematics'})
             .end((err, res) =>{
                 res.should.have.status(200);
             })
         // check is joined
         chai.request(app)
             .post('/channel/isJoined')
-            .send({email:"tw2198@nyu.edu", channelId:"1"})
+            .send({email:"tw2198@nyu.edu", channelname:"Mathematics"})
             .end((err, res) =>{
                 res.should.have.status(200);
                 res.body.should.have.property('joined').eq(true);
@@ -44,7 +45,7 @@ describe('channel detail function test', ()=>{
         //leave
         chai.request(app)
             .post('/channel/leave/')
-            .send({email:"tw2198@nyu.edu", channelId:"1"})
+            .send({email:"tw2198@nyu.edu", channelname:"Mathematics"})
             .end((err, res) =>{
                 res.should.have.status(200);
             })
@@ -52,7 +53,7 @@ describe('channel detail function test', ()=>{
         //check
         chai.request(app)
             .post('/channel/isJoined')
-            .send({email:"tw2198@nyu.edu", channelId:"1"})
+            .send({email:"tw2198@nyu.edu", channelname:"Mathematics"})
             .end((err, res) =>{
                 res.should.have.status(200);
                 res.body.should.have.property('joined').eq(false);
@@ -61,14 +62,14 @@ describe('channel detail function test', ()=>{
         //check nonexistence username
         chai.request(app)
             .post('/channel/join')
-            .send({email:"abc", channelId:"100"})
+            .send({email:"abc", channelname:"Engineering"})
             .end((err, res) =>{
                 res.should.have.status(404);
             })
 
         chai.request(app)
             .post('/channel/leave')
-            .send({email:"abc", channelId:"100"})
+            .send({email:"abc", channelId:"Engineering"})
             .end((err, res) =>{
                 res.should.have.status(404);
             })

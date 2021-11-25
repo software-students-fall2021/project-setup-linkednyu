@@ -10,6 +10,14 @@
     font-size:x-large;
 }
 
+.signinTitle1{
+    text-align: center;
+    font-weight: bold;
+    font-size:x-large;
+    color:#57068c;
+    margin-bottom: 0.5em;
+}
+
 .inputArea{
     margin-top: 10%;
     width: 100%;

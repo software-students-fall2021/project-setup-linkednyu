@@ -16,8 +16,21 @@
     margin-top:3%;
 }
 
+.passwordField{
+    margin-top: 1em;
+}
+
 .nextButtonArea{
     margin-top: 5%;
     display: flex;
     justify-content: flex-end;
+}
+
+.messageShow{
+    margin-top: 1em;
+}
+
+.errMessage{
+    font-size:large;
+    color: red;
 }

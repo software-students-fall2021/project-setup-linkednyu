@@ -1,17 +1,20 @@
-// import { Button } from "../../components/Button"
-//import Button from "@mui/material/Button"
 import "./account.css"
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from 'axios'
+import { useHistory } from "react-router"
+import parser from 'html-react-parser'
 
 
 export default function Account() {
     const url = "/userAccount"
-
+    const posturl = "http://localhost:5000/homeposts"
+    const History = useHistory()
+    var postArray = []
     
-    const [account, setAccount] = useState(null)
+    const [account, setAccount] = useState(undefined)
     const [loading, setIsloading] = useState(true)
+    const [posts,setPosts] = useState(undefined)
 
     useEffect(() => {
         let isMounted = true;
@@ -22,20 +25,58 @@ export default function Account() {
                 await axios.get(url, {headers:{'Token':token}}).then(response => {
                     if(isMounted){
                         setAccount(response.data)
-                        setIsloading(false)
                     }
                     
                 });
             } catch (error) {
-                console.log(error)
+                History.push('/login')
             }
 
         }
         fetchaccount()
-        
         return () => {isMounted=false};
+        // eslint-disable-next-line 
     },[])
 
+    useEffect(()=>{
+        if(account !== undefined && posts !== undefined) setIsloading(false);
+        // eslint-disable-next-line 
+    }, [posts])
+
+    useEffect(() => {
+        let isMounted1 = true;
+        async function fetchposts() {
+            try {
+                await axios.get(posturl).then(response => {
+                    if(isMounted1){
+                        for (let i = 0 ;i <response.data.length ;i++){
+                            let newArray = []
+                            if (account.username === response.data[i].username){
+                                newArray = response.data[i].content.split(" ")
+                                let newSentence = ""
+                                if (newArray.length>10){
+                                    newSentence =parser(newArray.slice(0,12).join(" ")+ "...")
+                                }
+                                else{
+                                    newSentence =parser(response.data[i].content)
+                                }
+                                postArray.push({content:newSentence,link:response.data[i]._id})
+                                if (postArray.length===3){
+                                    break
+                                }
+                            }
+                        }
+                        setPosts(postArray)
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchposts()
+        return () => {isMounted1=false};
+        // eslint-disable-next-line 
+    },[account])
 
 
 
@@ -62,7 +103,7 @@ export default function Account() {
                         </div>
                         <div className="contentList">
                         {account.channel.map((item,index)=>{
-                           return <span key={index}>{item}</span>
+                           return <Link className="classStyle" key={index} to={`/channel/${item}`}>{item}</Link>
                             
                         })}
                         </div>
@@ -72,8 +113,8 @@ export default function Account() {
                             <h2>Recent Posts</h2>
                         </div>
                         <div className="contentList">
-                        {account.post.map((item,index)=>{
-                           return <span key={index}>{item}</span>
+                        {posts.map((item,index)=>{
+                           return <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index+1}.{item.content}</Link>
                             
                         })}
                         </div>
