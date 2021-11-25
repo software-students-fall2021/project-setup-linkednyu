@@ -15,7 +15,7 @@ const PostBox = ({ post, loggedIn }) => {
 				<div className="header">
 					<ImageAvatars className="imgAvatar" size="30px" id={post.username} avatarSrc={post.avatar} />
 					<h3 className="userName">{post.username}</h3>
-					<h3 className="courseName"><Link className="tLink" to={loggedIn ? "/joinclass" : ""}>{post.coursename}</Link></h3>
+					<h3 className="courseName"><Link className="tLink" to={loggedIn ? `/joinclass/${post.coursename}` : ""}>{post.coursename}</Link></h3>
 					<h3 className="time">{mDate}</h3>
 				</div>
 				<hr />

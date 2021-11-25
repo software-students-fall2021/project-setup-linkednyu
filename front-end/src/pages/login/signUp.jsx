@@ -1,6 +1,5 @@
 import "./signUp.css"
 import { Button } from "../../components/Button"
-
 import TextField from '@mui/material/TextField'
 import { useState } from "react"
 import axios from 'axios'
@@ -42,7 +41,7 @@ export default function SignUp(){
         try{
             const res = await axios.post('http://localhost:5000/register',signUpDetails)
             if (res.status === 200){
-                setMessage("Account Created!,You will be redirected to the login page shortly")
+                setMessage("Account Created! You will be redirected to the login page shortly")
                 setTimeout(()=>{
                     setmStyle("")
                     setMessage("")

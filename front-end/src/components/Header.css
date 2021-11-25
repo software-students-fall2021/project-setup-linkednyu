@@ -72,7 +72,7 @@
 
 .dataResult{
     position: fixed;
-    top:6vh ;
+    top:5.8vh ;
     left: 15.5%;
     display: flex;
     flex-direction: column;

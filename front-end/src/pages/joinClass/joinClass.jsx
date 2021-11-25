@@ -21,13 +21,12 @@ const JoinClass = (props) => {
     useEffect(() =>{
         // make api query obj
         let classId = props.match.params.id;
-
         //get class info
         try{
             axios.get(url + "detail/" + classId)
             .then((res) =>{
-                if(res.data.length >= 0){
-                    setCourse(res.data[0]);
+                if(res.data){
+                    setCourse(res.data);
                     let body = {
                         channelId:classId
                     }
@@ -56,7 +55,7 @@ const JoinClass = (props) => {
             }
         }
         let postObj = {
-            channelId:course.id
+            channelId:course.name
             }
         axios.post(url + "join/", postObj, config)
                         .then((res) =>{
@@ -74,7 +73,7 @@ const JoinClass = (props) => {
             }
         }
         let postObj = {
-            channelId:course.id
+            channelId:course.name
         }
         axios.post(url + "leave/", postObj, config)
                         .then((res) =>{

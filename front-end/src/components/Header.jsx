@@ -1,6 +1,6 @@
 import React from "react"
 import "./Header.css"
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar'
 import UnstyledButton from '@mui/core/ButtonUnstyled'
 import { Button } from "../components/Button"
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -16,24 +17,30 @@ const Header = ({ loggedIn, setloggedIn }) => {
 	const [menuShow, setMenuShow] = useState(false)
 	const [filteredData , setFilteredData] = useState([])
 	const [wordEntered,setWordEntered] = useState("")
-	// const [channel, setChannel]= useState("")
-	// const url = "/channels"
+	const [data, setData]= useState([])
+	const url = "/channels"
 
-	const data =[
-		{
-			name:"Mathematics",
-			id: "1"
-		},
-		{
-			name :"English",
-			id : "2"
-		},
-		{
-			name: "Literature",
-			id : '3'
-		},
+	useEffect(() => {
+        let isMounted = true;
+        async function fetchchannel() {
+            let token = localStorage.getItem('token')
+            try {
+                await axios.get(url, {headers:{'Token':token}}).then(response => {
+                    if(isMounted){
+                        setData(response.data)
+                    }
+                    
+                });
+            } catch (error) {
+                console.log(error);
+            }
 
-	]
+        }
+        fetchchannel()
+        return () => {isMounted=false};
+        // eslint-disable-next-line 
+    },[loggedIn])
+	
 
 	const toggleMenu = () => {
 		setMenuShow(!menuShow);
@@ -42,8 +49,9 @@ const Header = ({ loggedIn, setloggedIn }) => {
 	const logout = () => {
 		setMenuShow(!menuShow)
 		localStorage.removeItem('token')
+		localStorage.removeItem('loggedIn')
 		setloggedIn(false)
-
+		setData([])
 
 	}
 
@@ -123,7 +131,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 			filteredData.length!==0 && <div className="dataResult">
 			{filteredData.map((item,index)=>{
 				return (
-					<Link key= {index} className="dataItem" to={loggedIn?`channel/detail/${item.id}`:'/login'}>{item.name}</Link>
+					<Link key= {index} className="dataItem" to={loggedIn?`/joinclass/${item.name}`:'/login'}>{item.name}</Link>
 				);
 			})}	
 			</div>}

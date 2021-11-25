@@ -3,7 +3,7 @@ import "./login.css"
 import { Button } from '../../components/Button'
 import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState} from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
 
@@ -41,6 +41,7 @@ export default function Login({ setLoggedIn }) {
                 setmStyle("messageShow")
                 setMessage(res.data.message)
                 setLoggedIn(true)
+                localStorage.setItem('loggedIn',"True")
                 setTimeout(()=>{
                     setmStyle("")
                     setMessage("")
@@ -94,6 +95,9 @@ export default function Login({ setLoggedIn }) {
                 </div>
                 <div className="underArea">
                     <div className="otherOptions">
+                        <div>
+                            <Link to="/pwreset" className="otherOptIns">Forgotten Password?</Link>
+                        </div>
                         <div>
                             <Link to="/signup" className="otherOptIns">I'm new, Sign me up!</Link>
                         </div>
