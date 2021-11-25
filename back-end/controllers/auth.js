@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const User = require('../models/User')
-const {signUpValidation, loginValidation} = require('./validation')
+const {signUpValidation, loginValidation , resetValidate} = require('./validation')
 const dotenv = require('dotenv')
 dotenv.config({silent:true})
 
@@ -9,7 +9,7 @@ dotenv.config({silent:true})
 const signUp = async (req,res)=>{
     const {error} = signUpValidation(req.body)
 
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send({message:error.details[0].message});
 
     const emailExist = await User.findOne({email:req.body.email});
 
@@ -59,9 +59,29 @@ const login = async (req,res)=>{
 
 }
 
+const resetPassword = async (req,res) =>{
+    const {error} = resetValidate(req.body)
+
+    if (error) return res.status(400).send({message:error.details[0].message});
+
+    const salt = await bcrypt.genSalt(10)
+    const hashPassword = await bcrypt.hash(req.body.newPassword,salt);
+
+    const userFound = await User.findOneAndUpdate({email:req.body.email},{password:hashPassword},{
+        new:true
+    });
+
+    if (!userFound) return res.status(409).send({message:"User not found"});
+
+    res.status(200).send({message:"Updated Successfully!"})
+
+
+}
+
 
 
 module.exports = {
     signUp,
-    login
+    login,
+    resetPassword
 }

@@ -9,6 +9,14 @@ const channelSchema = new mongoose.Schema({
         type:String,
         default: 'https://img.icons8.com/external-photo3ideastudio-solid-photo3ideastudio/64/000000/external-channel-digital-business-photo3ideastudio-solid-photo3ideastudio.png'
     },
+    name:{
+        type:String,
+        default:""
+    },
+    instructor:{
+        type:String,
+        default :""
+    },
     detail:{
         type:String,
         default:'No Detail Provided'
@@ -23,4 +31,4 @@ const channelSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('channel', channelSchema, 'channel_detail')
+module.exports = mongoose.model('channel', channelSchema,'channel_detail')

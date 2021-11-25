@@ -25,6 +25,15 @@ const loginValidation = (data) => {
    return schema.validate(data)
 }
 
+const resetValidate = (data)=>{
+    const schema = Joi.object({
+        email: Joi.string().min(6).email().required(),
+        newPassword: Joi.string().min(6).required()
+    })
+
+    return schema.validate(data)
+}
+
 const postValidation = (data) => {
     const schema = Joi.object({
         title: Joi.string().required(),
@@ -54,4 +63,5 @@ module.exports.signUpValidation = signUpValidation
 module.exports.loginValidation = loginValidation
 module.exports.commentValidation = commentValidation
 module.exports.postValidation = postValidation
+module.exports.resetValidate = resetValidate
 

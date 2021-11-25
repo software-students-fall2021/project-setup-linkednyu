@@ -5,13 +5,14 @@ const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const channelModel = require('../models/Channel');
 const userModel = require('../models/User');
+const Post = require('../models/Post')
 
 
-const channel = async(req, res) =>{
+const oneChannel = async(req, res) =>{
     console.log("[Channel Function]Get channel Detail");
-    let filter = req.params.id;
-    let result = await channelModel.find({id:filter}).lean();
-    res.send(result);
+    let filter = req.params.id.toString();
+    let result = await channelModel.findOne({name:filter});
+    res.status(200).send(result);
 };
 
 const isJoined = async(req, res)=>{
@@ -84,7 +85,7 @@ const leaveChannel = async(req, res) =>{
         let newArray = [];
 
         let newChannel = req.body.channelId;
-        let modfied = false;
+        let modified = false;
         for(let i = 0; i < subscribedArray.length; i++){
             if(subscribedArray[i] == newChannel){
                 modified = true;
@@ -109,19 +110,37 @@ const leaveChannel = async(req, res) =>{
 
 
 const viewChannel = async (req, res) => {
-    
+   
     const courseFound = await Post.find({coursename:req.params.id}).sort({date:-1})
 
-    if (!courseFound) return res.status(409).json({message:"User not found"});
+    const userFound = await userModel.findOne({_id:req.user._id})
 
-    res.status(200).send(courseFound)
+    if (!courseFound) return res.status(409).json({message:"Course not found"});
+
+    if (!userFound) return res.status(409).json({message:"User not found"});
+
+    if (userFound.channel.includes(req.params.id)){
+        res.status(200).send(courseFound)
+    }
+
+    else{
+        res.status(402).send()
+    }
 
 };
 
+const allChannels = async (req,res) =>{
+    const allChannel = await channelModel.find({})
+    if (!allChannel) return res.status(409).json({message:"No channels found"});
+
+    res.status(200).send(allChannel)
+}
+
 module.exports = {
-    channel,
+    oneChannel,
     joinChannel,
     leaveChannel,
     isJoined,
-    viewChannel
+    viewChannel,
+    allChannels
 };
