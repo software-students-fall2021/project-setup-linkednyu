@@ -9,7 +9,7 @@ dotenv.config({silent:true})
 const signUp = async (req,res)=>{
     const {error} = signUpValidation(req.body)
 
-    if (error) return res.status(400).send({message:error.details[0].message});
+    if (error) return res.status(409).send({message:error.details[0].message});
 
     const emailExist = await User.findOne({email:req.body.email});
 
