@@ -11,9 +11,9 @@ const sendPosts = async (req, res) => {
     )
 
     try{
-        await newPost.save()
+        const newData = await newPost.save()
         
-        res.status(201).json(newPost)
+        res.status(200).json(newData)
     }catch(err){
         res.status(409).json({ message: err.message})
     }

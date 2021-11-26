@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     title:{
         type:String,
-        default:[]
+        required:true,
     },
     coursename:{
         type:String,

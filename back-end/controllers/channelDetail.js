@@ -19,14 +19,13 @@ const isJoined = async(req, res)=>{
     console.log("[Channel Function] checkJoin");
     try{
         //get user info
-        let userObj = jwt.verify(req.header('Token'), process.env.SECRET_TOKEN);
-        let userDoc = await userModel.findById(userObj._id);
+        let userDoc = await userModel.findById(req.user._id);
         if(!userDoc){
             return res.status(404).json({message:"Can't find User"});
         }
          // find suscrib array
         let subscribedArray = userDoc.channel.toObject();
-        let newChannel = req.body.channelId;
+        let newChannel = req.body.channelname;
         for(let i = 0; i < subscribedArray.length; i++){
             if(subscribedArray[i] == newChannel){
                 return res.status(200).json({joined:true});
@@ -44,15 +43,14 @@ const joinChannel = async(req, res) => {
     console.log("[Channel Function] joinChannel");
     try{
         // find user info
-        let userObj = jwt.verify(req.header('Token'), process.env.SECRET_TOKEN);
-        let userDoc = await userModel.findById(userObj._id);
+        let userDoc = await userModel.findById(req.user._id);
         if(!userDoc){
             return res.status(404).json({message:"Can't find User"});
         }
         // query database
         let subscribedArray = userDoc.channel.toObject();
 
-        let newChannel = req.body.channelId;
+        let newChannel = req.body.channelname;
         
         for(let i = 0; i < subscribedArray.length; i++){
             if(subscribedArray[i] == newChannel){
@@ -74,8 +72,7 @@ const leaveChannel = async(req, res) =>{
     console.log("[Channel Function] leave Channel");
     try {
         //authorize user
-        let userObj = jwt.verify(req.header('Token'), process.env.SECRET_TOKEN);
-        let userDoc = await userModel.findById(userObj._id);
+        let userDoc = await userModel.findById(req.user._id);
         if(!userDoc){
             return res.status(404).json({message:"Can't find User"});
         }
@@ -84,7 +81,7 @@ const leaveChannel = async(req, res) =>{
         let subscribedArray = userDoc.channel.toObject();
         let newArray = [];
 
-        let newChannel = req.body.channelId;
+        let newChannel = req.body.channelname;
         let modified = false;
         for(let i = 0; i < subscribedArray.length; i++){
             if(subscribedArray[i] == newChannel){
