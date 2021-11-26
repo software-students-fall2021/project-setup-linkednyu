@@ -439,14 +439,14 @@ after(done => {
         await Post.deleteOne({'_id': postId})
         await Comment.deleteOne({'post_id': postId})
         console.log("Deleted user and details from db");
+        done();
       }
-      
       deleteUser()
     }catch(err){
       console.log(err);
     }
 
-    done();
+    
 });
 
 

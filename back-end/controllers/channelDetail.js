@@ -1,8 +1,5 @@
 require('dotenv').config();
 
-const jwt = require('jsonwebtoken')
-
-const mongoose = require('mongoose');
 const channelModel = require('../models/Channel');
 const userModel = require('../models/User');
 const Post = require('../models/Post')
@@ -23,7 +20,7 @@ const isJoined = async(req, res)=>{
         if(!userDoc){
             return res.status(404).json({message:"Can't find User"});
         }
-         // find suscrib array
+         // find suscribe array
         let subscribedArray = userDoc.channel.toObject();
         let newChannel = req.body.channelname;
         for(let i = 0; i < subscribedArray.length; i++){
