@@ -29,8 +29,8 @@ export default function Login({ setLoggedIn }) {
         }
         
         const loginDetails = {
-            "email":email,
-            "password":password
+            email:email,
+            password:password
         };
 
         try{

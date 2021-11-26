@@ -12,6 +12,7 @@ import { useHistory } from "react-router"
 export default function DetailedPost() {
     const { id } = useParams();
     const History = useHistory()
+    let token = localStorage.getItem('token')
     
     //connect to backend
     const url = `/detailedposts/${id}`
@@ -39,14 +40,14 @@ export default function DetailedPost() {
             return
         }
 
-        await axios.post(`http://localhost:5000/comments/${id}`, newComment).then(response => {
+        await axios.post(`http://localhost:5000/comments/${id}`, newComment, {headers:{'Token':token}}).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));
 
 
         async function fetchComments() {
-            let token = localStorage.getItem('token')
+            
             try {
                 await axios.get(commenturl, {headers:{'Token':token}}).then(response => {
                     setComments(response.data)

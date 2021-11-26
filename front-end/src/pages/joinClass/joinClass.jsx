@@ -18,26 +18,22 @@ const JoinClass = (props) => {
     const [course, setCourse] = useState(null);
     const [isJoined, setIsJoined] = useState(false);
     const history = useHistory()
+    let token = localStorage.getItem('token')
 
 
     useEffect(() =>{
         // make api query obj
-        let classId = props.match.params.id;
+        let classname = props.match.params.id;
         //get class info
         try{
-            axios.get(url + "detail/" + classId)
+            axios.get(url + "detail/" + classname,{headers:{'Token':token}})
             .then((res) =>{
                 if(res.data){
                     setCourse(res.data);
                     let body = {
-                        channelId:classId
+                        channelname:classname
                     }
-                    let config = {
-                        headers:{
-                            'Token':localStorage.getItem('token'),
-                        }
-                    }
-                    axios.post(url + "isJoined/", body, config)
+                    axios.post(url + "isJoined/", body, {headers:{'Token':token}})
                         .then((res1) =>{
                             setIsJoined(res1.data.joined);
                         })  
@@ -47,21 +43,16 @@ const JoinClass = (props) => {
         }catch(err){
             console.log(err);
         } 
-        
+        // eslint-disable-next-line
     }, [props]);
 
     const joinClass = () => {
-        let config = {
-            headers:{
-                'Token':localStorage.getItem('token'),
-            }
-        }
         let postObj = {
-            channelId:course.name
+            channelname:course.name
             }
-        axios.post(url + "join/", postObj, config)
+        axios.post(url + "join/", postObj, {headers:{'Token':token}})
                         .then((res) =>{
-                            axios.post(url + "isJoined/", postObj, config)
+                            axios.post(url + "isJoined/", postObj, {headers:{'Token':token}})
                                 .then((res1) =>{
                                 setIsJoined(res1.data.joined);
                             })
@@ -70,17 +61,12 @@ const JoinClass = (props) => {
     }
 
     const leaveClass = () => {
-        let config = {
-            headers:{
-                'Token':localStorage.getItem('token'),
-            }
-        }
         let postObj = {
-            channelId:course.name
+            channelname:course.name
         }
-        axios.post(url + "leave/", postObj, config)
+        axios.post(url + "leave/", postObj, {headers:{'Token':token}})
                         .then((res) =>{
-                            axios.post(url + "isJoined/", postObj, config)
+                            axios.post(url + "isJoined/", postObj, {headers:{'Token':token}})
                                 .then((res1) =>{
                                 setIsJoined(res1.data.joined);
                             })

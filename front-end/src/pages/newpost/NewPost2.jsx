@@ -18,6 +18,7 @@ const NewPost2 = ({ loggedIn }) => {
     const [channel,setChannel] = useState("Channel")
     const [userChannels,setUserChannels] = useState([])
     let history = useHistory(); //jump to home
+    let token = localStorage.getItem('token')
 
     const[postData, setPostData] = useState({ //local post model
         title: '',
@@ -35,7 +36,6 @@ const NewPost2 = ({ loggedIn }) => {
     useEffect(() => {
         let isMounted = true;
         async function fetchaccount() {
-            let token = localStorage.getItem('token')
             
             try {
                 await axios.get(url, {headers:{'Token':token}}).then(response => {
@@ -96,7 +96,7 @@ const NewPost2 = ({ loggedIn }) => {
         }
             
         //send postData to server
-        await axios.post('http://localhost:5000/homeposts',postData)
+        await axios.post('http://localhost:5000/homeposts',postData,{headers:{'Token':token}})
             .then(response=>{
                 console.log(response);
             })
