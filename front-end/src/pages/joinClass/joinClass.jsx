@@ -26,14 +26,14 @@ const JoinClass = (props) => {
         let classname = props.match.params.id;
         //get class info
         try{
-            axios.get(url + "detail/" + classname,{headers:{'Token':token}})
-            .then((res) =>{
+           axios.get(url + "detail/" + classname,{headers:{'Token':token}})
+            .then(async (res) =>{
                 if(res.data){
                     setCourse(res.data);
                     let body = {
                         channelname:classname
                     }
-                    axios.post(url + "isJoined/", body, {headers:{'Token':token}})
+                   await axios.post(url + "isJoined/", body, {headers:{'Token':token}})
                         .then((res1) =>{
                             setIsJoined(res1.data.joined);
                         })  
@@ -46,13 +46,13 @@ const JoinClass = (props) => {
         // eslint-disable-next-line
     }, [props]);
 
-    const joinClass = () => {
+    const joinClass = async () => {
         let postObj = {
             channelname:course.name
             }
-        axios.post(url + "join/", postObj, {headers:{'Token':token}})
-                        .then((res) =>{
-                            axios.post(url + "isJoined/", postObj, {headers:{'Token':token}})
+       await axios.post(url + "join/", postObj, {headers:{'Token':token}})
+                        .then(async (res) =>{
+                            await axios.post(url + "isJoined/", postObj, {headers:{'Token':token}})
                                 .then((res1) =>{
                                 setIsJoined(res1.data.joined);
                             })
@@ -60,13 +60,13 @@ const JoinClass = (props) => {
                         })    
     }
 
-    const leaveClass = () => {
+    const leaveClass = async () => {
         let postObj = {
             channelname:course.name
         }
-        axios.post(url + "leave/", postObj, {headers:{'Token':token}})
-                        .then((res) =>{
-                            axios.post(url + "isJoined/", postObj, {headers:{'Token':token}})
+        await axios.post(url + "leave/", postObj, {headers:{'Token':token}})
+                        .then(async (res) =>{
+                            await axios.post(url + "isJoined/", postObj, {headers:{'Token':token}})
                                 .then((res1) =>{
                                 setIsJoined(res1.data.joined);
                             })
