@@ -28,14 +28,14 @@ export default function SignUp(){
         }
 
         let newName = name.split(" ");
-        let randNumber = Math.floor(Math.random()*300)
+        let randNumber = Math.floor(Math.random()*10) + 1
         let uName = newName[0] + randNumber.toString()
         
         const signUpDetails = {
-            "name":name,
-            "username":uName,
-            "email":email,
-            "password":password
+            name:name,
+            username:uName,
+            email:email,
+            password:password
         };
 
         try{

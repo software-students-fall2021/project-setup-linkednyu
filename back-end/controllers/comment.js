@@ -20,7 +20,7 @@ const sendComment = async (req, res) => {
 
     try {
         const savedComment = await newComment.save()
-        res.status(201).json(savedComment)
+        res.status(200).json(savedComment)
     } catch (error) {
        
         res.status(409).json({ message: error.message })

@@ -15,9 +15,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:5000/userAccount'
-    const [channel,setChannel] = useState("Channel")
+    const [channel,setChannel] = useState({name:"Channel"})
     const [userChannels,setUserChannels] = useState([])
     let history = useHistory(); //jump to home
+    let token = localStorage.getItem('token')
 
     const[postData, setPostData] = useState({ //local post model
         title: '',
@@ -35,7 +36,6 @@ const NewPost2 = ({ loggedIn }) => {
     useEffect(() => {
         let isMounted = true;
         async function fetchaccount() {
-            let token = localStorage.getItem('token')
             
             try {
                 await axios.get(url, {headers:{'Token':token}}).then(response => {
@@ -61,12 +61,15 @@ const NewPost2 = ({ loggedIn }) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+    const handleClick = (event) => {  
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = (course) => {
+    const Close = ()=>{
         setAnchorEl(null);
-        setChannel(course)
+    }
+    const handleClose = (course) => {
+        setChannel({name:course})
+        setAnchorEl(null);
         setPostData({...postData, coursename: course})
     };
 
@@ -77,6 +80,12 @@ const NewPost2 = ({ loggedIn }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if (userChannels.length===0){
+            alert('Subscribe to a channel to make a post, Use the search bar to find a channel')
+            return
+
+        }
 
         if(!postData.title){
             alert('please type in title')
@@ -90,15 +99,15 @@ const NewPost2 = ({ loggedIn }) => {
         }
             
         if(!postData.coursename){
-            alert('please select a channel')
+            alert('Please select a channel')
             return
 
         }
             
         //send postData to server
-        await axios.post('http://localhost:5000/homeposts',postData)
+        await axios.post('http://localhost:5000/homeposts',postData,{headers:{'Token':token}})
             .then(response=>{
-                console.log(response);
+                console.log("Data Sent");
             })
             .catch((err) => console.log(err.message))
         //jump back to home
@@ -120,19 +129,19 @@ const NewPost2 = ({ loggedIn }) => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClick}>
-                            {channel} <span className="plusSign">+</span>
+                            {channel.name} <span className="plusSign">+</span>
                         </Button>
                         <Menu
                             id="basic-menu"
                             anchorEl={anchorEl}
                             open={open}
-                            onClose={handleClose}
+                            onClose={Close}
                             MenuListProps={{
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
                             {userChannels.map((item,index) => (
-                                <MenuItem key={index} onClick={() =>
+                                <MenuItem key={index+1} onClick={() =>
                                     handleClose(`${item}`)
                                 }>{item}</MenuItem>
                             ))}
@@ -176,7 +185,7 @@ const NewPost2 = ({ loggedIn }) => {
 
                 <div className="buttonSection">
                     <div>
-                        <p class="imgUpload">Upload an image</p>
+                        <p className="imgUpload">Upload an image</p>
                         <FileBase64
                         multiple={ false} 
                         onDone={ ({base64}) =>{

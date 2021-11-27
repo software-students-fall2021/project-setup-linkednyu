@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon server.js ",
-    "test": "mocha test",
-    "coverage": "nyc npm run test"
+    "test": "./node_modules/.bin/nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --exit",
+    "coverage": "nyc npm test"
   },
   "keywords": [],
   "author": "",
