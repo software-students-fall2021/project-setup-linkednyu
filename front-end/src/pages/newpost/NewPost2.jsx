@@ -111,7 +111,7 @@ const NewPost2 = ({ loggedIn }) => {
             })
             .catch((err) => console.log(err.message))
         //jump back to home
-        history.push('/')
+        history.push(`channel/${postData.coursename}`)
     }
     
     return (
