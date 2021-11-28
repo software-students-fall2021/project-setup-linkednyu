@@ -40,6 +40,12 @@
     margin-left: 2px;
 }
 
+.channelNum{
+    text-align: center;
+    font-size: 1.1em;
+    padding: 5px 5px;
+}
+
 .avatarAndUser{
     display: flex;
     justify-content: flex-end;
