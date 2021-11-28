@@ -49,7 +49,7 @@ let posts = {
 };
 
 
-// Setting up databse connection
+// Setting up database connection
 before((done)=>{
   mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnifiedTopology: true })
   .then(() => {
