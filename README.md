@@ -73,6 +73,7 @@ Scrum Master [@AnastasiaYe](https://github.com/AnastasiaYe)
 ### Sprint 4
 Product Owner 
 Scrum Master
+
 ### Color Theme
 We choose NYU purple to be the main color of our theme.     
 ![color](images/LinkedNYU_ColorTheme.png)
