@@ -11,6 +11,7 @@ import Channel from './pages/channel/Channel'
 import { useState,useEffect } from 'react';
 import SignUp from './pages/login/signUp';
 import NewPost2 from './pages/newpost/NewPost2'
+import NotFound from './pages/notfound/notFound';
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/signup"> <SignUp /> </Route>
         <Route path="/account" > <Account /></Route>
         <Route path="/newpost2" > <NewPost2 loggedIn={loggedIn} /></Route>
+        <Route path="*"><NotFound/></Route>
       </Switch>
     </BrowserRouter>
 

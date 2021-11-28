@@ -111,7 +111,7 @@ const NewPost2 = ({ loggedIn }) => {
             })
             .catch((err) => console.log(err.message))
         //jump back to home
-        history.push('/')
+        history.push(`channel/${postData.coursename}`)
     }
     
     return (
@@ -140,6 +140,8 @@ const NewPost2 = ({ loggedIn }) => {
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
+                            <p className="channelNum" key={0}>{userChannels.length} {userChannels.length===1 ? "Channel" : "Channels"}</p>
+                            {userChannels.length >0 && <hr/>}
                             {userChannels.map((item,index) => (
                                 <MenuItem key={index+1} onClick={() =>
                                     handleClose(`${item}`)

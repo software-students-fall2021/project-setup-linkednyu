@@ -131,7 +131,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 			filteredData.length!==0 && <div className="dataResult">
 			{filteredData.map((item,index)=>{
 				return (
-					<Link key= {index} className="dataItem" to={loggedIn?`/joinclass/${item.name}`:'/login'}>{item.name}</Link>
+					<Link key= {index} onClick={clearSearch} className="dataItem" to={loggedIn?`/joinclass/${item.name}`:'/login'}>{item.name}</Link>
 				);
 			})}	
 			</div>}
