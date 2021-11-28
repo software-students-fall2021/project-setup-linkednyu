@@ -70,35 +70,10 @@ Srum Master [@Comf0rTS1997](https://github.com/Comf0rTS1997)
 Product Owner [@princeampofo](https://github.com/princeampofo)    
 Scrum Master [@AnastasiaYe](https://github.com/AnastasiaYe)  
 
-## Front-end
-We use `react.js` for front-end developemnt.    
-Before implementing back-end, data's are fetching from mock datas. We use [MockAPI](https://mockapi.io/) instead of Mockaroo, as the latter one has a daily request limit. Images are radomly generated from [PicSum](https://picsum.photos/).     
-During the development, we divded front-end elements into components and pages:
-### Components
-1. Avatar
-2. Button [@AnastasiaYe](https://github.com/AnastasiaYe)   
-    ![button](/images/button.png)   
-	We use a uniform button design for all button components. It takes `children`(the text of the button), `type`, `onClick`(onClick function), `buttonStyle` and `buttonSize` as inputs.    
-	Two styles and three sizes are designed for developers to choose. New style and size can be customized by changing the `css`.  
-3. Comment [@AnastasiaYe](https://github.com/AnastasiaYe)   
-	![comment](images/comment.png)    
-   Comments appear as little boxes displayed as `css flex box`. Each comment cotains information of `avatar`, `name`, `date`, `comment content`. 
-4. PostBox
-5. TextBox
-6. Hamburger Menu
-7. Header
-### Pages
-1. Home Page
-2. Account Page
-3. Channel Page
-4. Detailed Post Page [@AnastasiaYe](https://github.com/AnastasiaYe)  
-   ![detailedPost1](images/detailedPost1.png) ![detailedPost2](images/detailedPost2.png)        
-   Detailed Post Page is what user will see after clicking into a post. Information on this page includes `post title`, `post content`, `poster avatar`, `poster name`, `post date`, `course channel` and `post image`.    
-   Additionally, `cooments` on this post along with the `comment count` are also displayed below the post.    
-   Finally, there's a footer at the bottom of this page, where users can type in new comment. 
-5. Join Class Page
-6. Create New Post Page
-7. Log In Page
+### Sprint 4
+Product Owner 
+Scrum Master
+
 ### Color Theme
 We choose NYU purple to be the main color of our theme.     
 ![color](images/LinkedNYU_ColorTheme.png)

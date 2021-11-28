@@ -49,7 +49,7 @@ let posts = {
 };
 
 
-// Setting up databse connection
+// Setting up database connection
 before((done)=>{
   mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -435,10 +435,13 @@ describe('Password reset',()=>{
 after(done => {
     try{
       async function deleteUser (){
-        await User.deleteOne({"email" : "msr345@gmail.com"})
-        await Post.deleteOne({'_id': postId})
-        await Comment.deleteOne({'post_id': postId})
-        console.log("Deleted user and details from db");
+        const userData = await User.deleteOne({"email" : "msr345@gmail.com"})
+        const postData = await Post.deleteOne({'_id': postId})
+        const commentData = await Comment.deleteOne({'post_id': postId})
+        console.log(userData);
+        console.log(postData);
+        console.log(commentData);
+        console.log("Deleted user, post and comment details from db");
         done();
       }
       deleteUser()
