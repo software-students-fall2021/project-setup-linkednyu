@@ -2,6 +2,7 @@
     margin-top: 50px;
     padding-top: 10px;
     background-color: #5f5d98;
+    min-height:100vh;
 }
 
 .channelHeader{
