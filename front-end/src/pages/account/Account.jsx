@@ -11,22 +11,22 @@ export default function Account() {
     const posturl = "http://localhost:5000/homeposts"
     const History = useHistory()
     var postArray = []
-    
+
     const [account, setAccount] = useState(undefined)
     const [loading, setIsloading] = useState(true)
-    const [posts,setPosts] = useState(undefined)
+    const [posts, setPosts] = useState(undefined)
 
     useEffect(() => {
         let isMounted = true;
         async function fetchaccount() {
             let token = localStorage.getItem('token')
-            
+
             try {
-                await axios.get(url, {headers:{'Token':token}}).then(response => {
-                    if(isMounted){
+                await axios.get(url, { headers: { 'Token': token } }).then(response => {
+                    if (isMounted) {
                         setAccount(response.data)
                     }
-                    
+
                 });
             } catch (error) {
                 History.push('/login')
@@ -34,12 +34,12 @@ export default function Account() {
 
         }
         fetchaccount()
-        return () => {isMounted=false};
+        return () => { isMounted = false };
         // eslint-disable-next-line 
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        if(account !== undefined && posts !== undefined) setIsloading(false);
+    useEffect(() => {
+        if (account !== undefined && posts !== undefined) setIsloading(false);
         // eslint-disable-next-line 
     }, [posts])
 
@@ -48,20 +48,20 @@ export default function Account() {
         async function fetchposts() {
             try {
                 await axios.get(posturl).then(response => {
-                    if(isMounted1){
-                        for (let i = 0 ;i <response.data.length ;i++){
+                    if (isMounted1) {
+                        for (let i = 0; i < response.data.length; i++) {
                             let newArray = []
-                            if (account.username === response.data[i].username){
+                            if (account.username === response.data[i].username) {
                                 newArray = response.data[i].content.split(" ")
                                 let newSentence = ""
-                                if (newArray.length>10){
-                                    newSentence =parser(newArray.slice(0,12).join(" ")+ "...")
+                                if (newArray.length > 10) {
+                                    newSentence = parser(newArray.slice(0, 12).join(" ") + "...")
                                 }
-                                else{
-                                    newSentence =parser(response.data[i].content)
+                                else {
+                                    newSentence = parser(response.data[i].content)
                                 }
-                                postArray.push({content:newSentence,link:response.data[i]._id})
-                                if (postArray.length===3){
+                                postArray.push({ content: newSentence, link: response.data[i]._id })
+                                if (postArray.length === 3) {
                                     break
                                 }
                             }
@@ -74,15 +74,17 @@ export default function Account() {
             }
         }
         fetchposts()
-        return () => {isMounted1=false};
+        return () => { isMounted1 = false };
         // eslint-disable-next-line 
-    },[account])
+    }, [account])
 
 
 
 
     return (
         <>
+            {loading && < div className="landing" >
+                <h1>Linked NYU</h1></div>}
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
                     <h1 className="accountName">{account.username}</h1>
@@ -102,10 +104,10 @@ export default function Account() {
                             <h2>My Classes</h2>
                         </div>
                         <div className="contentList">
-                        {account.channel.map((item,index)=>{
-                           return <Link className="classStyle" key={index} to={`/channel/${item}`}>{item}</Link>
-                            
-                        })}
+                            {account.channel.map((item, index) => {
+                                return <Link className="classStyle" key={index} to={`/channel/${item}`}>{item}</Link>
+
+                            })}
                         </div>
                     </div>
                     <div className="userClasses">
@@ -113,13 +115,13 @@ export default function Account() {
                             <h2>Recent Posts</h2>
                         </div>
                         <div className="contentList">
-                        {posts.map((item,index)=>{
-                           return <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index+1}.{item.content}</Link>
-                            
-                        })}
+                            {posts.map((item, index) => {
+                                return <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index + 1}.{item.content}</Link>
+
+                            })}
                         </div>
                     </div>
-                   
+
                 </div>
 
             </div>}
