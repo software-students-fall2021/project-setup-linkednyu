@@ -105,34 +105,33 @@ export default function EditAccount() {
             {loading && < div className="landing" >
                 <h1>Linked NYU</h1></div>}
             {!loading && <div className="accountPage">
-                <div className="accountHeader">
-                    <h1 className="accountName">{account.name}</h1>
+                <div className="accountWrapper">
+                    <div className="accountHeader">
+                        <h1 className="accountName">{account.name}</h1>
+                    </div>
+                    <div className="accountBio">
+                        <form className="accountBioForm" onSubmit={onUpdate}>
+                            <div class="profile-pic-div">
+                                <img src={newInfo.profile} id="photo" />
+                                <FileBase64 id="file"
+                                    multiple={false}
+                                    onDone={({ base64 }) => {
+                                        setInfo({ ...newInfo, profile: base64 })
+                                    }} />
+                                <label for="file" id="uploadBtn"> Choose Photo</label>
+                            </div>
+                            <label className="accountInfo">
+                                Info
+                                <input type="text" value={newInfo.info} onChange={(e) => setInfo({ ...newInfo, info: e.target.value })} />
+                            </label>
+                            <label className="accountMessage">
+                                Message
+                                <input type="text" value={newInfo.message} onChange={(e) => setInfo({ ...newInfo, message: e.target.value })} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
                 </div>
-
-                <div className="accountBio">
-                    <form className="accountBio" onSubmit={onUpdate}>
-                        <ImageAvatars className="profilePreview" avatarSrc={newInfo.profile} />
-                        <label for="file" id="uploadProfile"> Choose Photo
-                            <FileBase64
-                                multiple={false}
-                                onDone={({ base64 }) => {
-                                    setInfo({ ...newInfo, profile: base64 })
-                                }} />
-                        </label>
-                        <label>
-                            Info
-                            <input type="text" value={newInfo.info} onChange={(e) => setInfo({ ...newInfo, info: e.target.value })} />
-                        </label>
-                        <label>
-                            Message
-                            <input type="text" value={newInfo.message} onChange={(e) => setInfo({ ...newInfo, message: e.target.value })} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-                </div>
-                <div className="accountBottom">
-                </div>
-
             </div>
             }
         </>
