@@ -120,7 +120,7 @@ export default function DetailedPost() {
     return (
         <>
             {(loading || loadingComment) && < div className="landing" >
-                <h1>Linked NYU</h1></div>}
+                <h1>LinkedNYU</h1></div>}
             {!loading && !loadingComment && <div className="detailedPost" >
                 <div className="detailedWrapper">
                     <div className="detailedPostTop">

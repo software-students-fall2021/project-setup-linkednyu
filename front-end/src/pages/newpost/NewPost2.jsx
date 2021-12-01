@@ -116,8 +116,8 @@ const NewPost2 = ({ loggedIn }) => {
 
     return (
         <>
-            {loading && < div className="landing" >
-                <h1>Linked NYU</h1></div>}
+            {/* {loading && < div className="landing" >
+                <h1>LinkedNYU</h1></div>} */}
             {!loading && <div className="newPostPage">
                 <div className="newPostCenter">
                     <div className="postPageTitle">

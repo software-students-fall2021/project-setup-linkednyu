@@ -84,7 +84,7 @@ export default function Account() {
     return (
         <>
             {loading && < div className="landing" >
-                <h1>Linked NYU</h1></div>}
+                <h1>LinkedNYU</h1></div>}
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
                     <h1 className="accountName">{account.username}</h1>
