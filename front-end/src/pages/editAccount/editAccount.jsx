@@ -1,5 +1,4 @@
 import "./editAccount.css"
-import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
@@ -12,7 +11,6 @@ export default function EditAccount() {
     //console.log(token)
 
     //connect to backend
-    const url = `/editaccount`
     const accounturl = "http://localhost:5000/userAccount"
     const [account, setAccount] = useState(undefined)
     const [loading, setIsloading] = useState(true)
@@ -112,7 +110,7 @@ export default function EditAccount() {
                     <div className="accountBio">
                         <form className="accountBioForm" onSubmit={onUpdate}>
                             <div class="profile-pic-div">
-                                <img src={newInfo.profile} id="photo" />
+                                <img src={newInfo.profile} alt="profile img" id="photo" />
                                 <FileBase64 id="file"
                                     multiple={false}
                                     onDone={({ base64 }) => {
