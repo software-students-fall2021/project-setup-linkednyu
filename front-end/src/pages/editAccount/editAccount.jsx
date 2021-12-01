@@ -1,11 +1,9 @@
 import "./editAccount.css"
-import { Button } from "../../components/Button"
 import ImageAvatars from "../../components/Avatar"
 import { useState, useEffect } from "react"
 import axios from 'axios'
-import { useParams } from "react-router"
-import parser from 'html-react-parser'
 import { useHistory } from "react-router"
+import FileBase64 from 'react-file-base64';
 
 
 export default function EditAccount() {
@@ -113,6 +111,14 @@ export default function EditAccount() {
 
                 <div className="accountBio">
                     <form className="accountBio" onSubmit={onUpdate}>
+                        <ImageAvatars className="profilePreview" avatarSrc={newInfo.profile} />
+                        <label for="file" id="uploadProfile"> Choose Photo
+                            <FileBase64
+                                multiple={false}
+                                onDone={({ base64 }) => {
+                                    setInfo({ ...newInfo, profile: base64 })
+                                }} />
+                        </label>
                         <label>
                             Info
                             <input type="text" value={newInfo.info} onChange={(e) => setInfo({ ...newInfo, info: e.target.value })} />
