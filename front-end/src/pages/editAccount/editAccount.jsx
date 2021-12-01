@@ -57,11 +57,12 @@ export default function EditAccount() {
 
         }
         fetchaccount()
-        setInfo({
-            profile: account.profile,
-            info: account.info,
-            message: account.message
-        })
+        // setInfo({
+        //     profile: account.profile,
+        //     info: account.info,
+        //     message: account.message
+        // })
+        History.push('/account')
 
     }
 
@@ -109,7 +110,7 @@ export default function EditAccount() {
                     </div>
                     <div className="accountBio">
                         <form className="accountBioForm" onSubmit={onUpdate}>
-                            <div class="profile-pic-div">
+                            <div className="profile-pic-div">
                                 <img src={newInfo.profile} alt="profile img" id="photo" />
                                 <FileBase64 id="file"
                                     multiple={false}

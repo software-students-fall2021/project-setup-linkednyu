@@ -14,7 +14,7 @@ const viewAccount = async (req, res) => {
 const updateAccount = async (req, res) => {
 
     const info = req.body
-    res.status(200).send(info)
+    //res.status(200).send(info)
     const error = infoValidation(info).error;
     if (error) {
         console.log(error);
