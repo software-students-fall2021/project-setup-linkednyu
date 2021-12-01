@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://robohash.org/etiustodolorum.png?size=50x50&set=set1"
     },
-    bio: {
+    info: {
         type: String,
         default: "student"
     },

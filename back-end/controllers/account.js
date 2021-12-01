@@ -22,11 +22,28 @@ const editAccount = async (req, res) => {
 
 const updateAccount = async (req, res) => {
 
-    const userFound = await User.findOne({ _id: req.user._id })
+    const info = req.body
+    //const error = infoValidation(info).error;
+    // if (error) {
+    //     console.log(error);
+    //     return res.status(409).json({ errors: error.details[0].message })
+    // }
 
-    if (!userFound) return res.status(409).json({ message: "User not found" });
+    const newInfo = new Comment({
+        profile: info.profile,
+        info: info.info,
+        message: info.message
+    })
 
-    res.status(200).send(userFound)
+    // try {
+    //     const infoUpdate = await User.findOneAndUpdate({ _id: req.user._id }, newInfo, {
+    //         new: true
+    //     })
+    //     // const savedComment = await newComment.save()
+    //     res.status(200).json(infoUpdate)
+    // } catch (error) {
+    //     res.status(409).json({ message: error.message })
+    // }
 
 }
 

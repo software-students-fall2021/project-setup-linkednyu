@@ -101,7 +101,7 @@ export default function Account() {
                 </div>
                 <div className="accountBottom">
                     <div className="accountEdit">
-                        <Link to={`/editaccount/${account._id}`} >
+                        <Link to={`/editaccount`} >
                             <Button buttonStyle="btn--dark--solid"
                                 buttonSize="btn--large--fixed">
                                 Update Info
