@@ -88,7 +88,7 @@ export default function Account() {
                 <h1>Linked NYU</h1></div>}
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
-                    <h1 className="accountName">{account.username}</h1>
+                    <h1 className="accountName">{account.name}</h1>
                 </div>
                 <div className="accountTop">
                     <div className="accountImage">

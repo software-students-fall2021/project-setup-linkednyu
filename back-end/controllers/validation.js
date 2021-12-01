@@ -22,10 +22,10 @@ const loginValidation = (data) => {
         password: Joi.string().min(6).required()
     })
 
-   return schema.validate(data)
+    return schema.validate(data)
 }
 
-const resetValidate = (data)=>{
+const resetValidate = (data) => {
     const schema = Joi.object({
         email: Joi.string().min(6).email().required(),
         newPassword: Joi.string().min(6).required()
@@ -39,7 +39,7 @@ const postValidation = (data) => {
         title: Joi.string().required(),
         content: Joi.string().required(),
         coursename: Joi.string().required()
-    }).options({allowUnknown: true})
+    }).options({ allowUnknown: true })
 
 
     return schema.validate(data)
@@ -59,9 +59,21 @@ const commentValidation = (data) => {
 
 }
 
+const infoValidation = (data) => {
+    const schema = Joi.object({
+        profile: Joi.string().required(),
+        info: Joi.string().required(),
+        message: Joi.string().required()
+    })
+
+    return schema.validate(data)
+
+}
+
 module.exports.signUpValidation = signUpValidation
 module.exports.loginValidation = loginValidation
 module.exports.commentValidation = commentValidation
 module.exports.postValidation = postValidation
+module.exports.infoValidation = infoValidation
 module.exports.resetValidate = resetValidate
 

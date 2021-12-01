@@ -30,6 +30,45 @@ export default function EditAccount() {
         message: ''
     })
 
+    const onUpdate = async (e) => {
+        e.preventDefault()
+
+
+        // if (!newComment.content) {
+        //     alert('please add a comment')
+        //     return
+        // }
+
+        await axios.post(`http://localhost:5000/editaccount`, newInfo, { headers: { 'Token': token } }).then(response => {
+            console.log("sent");
+        })
+            .catch((err) => console.log(err.message));
+
+
+        async function fetchaccount() {
+            let token = localStorage.getItem('token')
+
+            try {
+                await axios.get(accounturl, { headers: { 'Token': token } }).then(response => {
+
+                    setAccount(response.data)
+
+
+                });
+            } catch (error) {
+                History.push('/login')
+            }
+
+        }
+        fetchaccount()
+        setInfo({
+            profile: account.profile,
+            info: account.info,
+            message: account.message
+        })
+
+    }
+
     useEffect(() => {
         let isMounted = true;
         async function fetchaccount() {
@@ -63,58 +102,17 @@ export default function EditAccount() {
         // eslint-disable-next-line 
     }, [account])
 
-    const onSubmit = async (e) => {
-        e.preventDefault()
-
-
-        // if (!newComment.content) {
-        //     alert('please add a comment')
-        //     return
-        // }
-
-        await axios.post(`http://localhost:5000/editaccount`, newInfo, { headers: { 'Token': token } }).then(response => {
-            console.log("sent");
-        })
-            .catch((err) => console.log(err.message));
-
-
-        let isMounted = true;
-        async function fetchaccount() {
-            let token = localStorage.getItem('token')
-
-            try {
-                await axios.get(accounturl, { headers: { 'Token': token } }).then(response => {
-                    if (isMounted) {
-                        setAccount(response.data)
-                    }
-
-                });
-            } catch (error) {
-                History.push('/login')
-            }
-
-        }
-        fetchaccount()
-        setInfo({
-            profile: account.profile,
-            info: account.info,
-            message: account.message
-        })
-        return () => { isMounted = false }
-
-    }
-
     return (
         <>
             {loading && < div className="landing" >
                 <h1>Linked NYU</h1></div>}
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
-                    <h1 className="accountName">{account.username}</h1>
+                    <h1 className="accountName">{account.name}</h1>
                 </div>
 
                 <div className="accountBio">
-                    <form className="accountBio" onSubmit={onSubmit}>
+                    <form className="accountBio" onSubmit={onUpdate}>
                         <label>
                             Info
                             <input type="text" value={newInfo.info} onChange={(e) => setInfo({ ...newInfo, info: e.target.value })} />
