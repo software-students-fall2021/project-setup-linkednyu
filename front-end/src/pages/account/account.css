@@ -76,6 +76,10 @@
     margin-left: 5px;
 }
 
+.accountEdit{
+    margin: auto;
+}
+
 .accountName{
     color:white;
 }
