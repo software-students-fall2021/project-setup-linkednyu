@@ -351,7 +351,7 @@ describe('Channel detail', () => {
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property('joined').eq(false);
+        //res.body.should.have.property('joined').eq(false);
         done()
       })
   }).timeout(10000)
