@@ -17,6 +17,7 @@ const NewPost2 = ({ loggedIn }) => {
     const url = 'http://localhost:5000/userAccount'
     const [channel, setChannel] = useState({ name: "Channel" })
     const [userChannels, setUserChannels] = useState([])
+    const [profile,setProfile]=useState("")
     let history = useHistory(); //jump to home
     let token = localStorage.getItem('token')
 
@@ -44,6 +45,7 @@ const NewPost2 = ({ loggedIn }) => {
                             username: response.data.username,
                             avatar: response.data.avatar,
                         })
+                        setProfile(response.data.profile)
                         setUserChannels(response.data.channel)
                         setIsLoading(false)
                     }
@@ -153,7 +155,7 @@ const NewPost2 = ({ loggedIn }) => {
                         </div>
                         <div className="avatarAndUser">
                             <Avatar className="avatarIcon"
-                                sx={{ width: 30, height: 30 }} src='https://robohash.org/etiustodolorum.png?size=50x50&set=set1' >
+                                sx={{ width: 30, height: 30 }} src={profile} >
                             </Avatar>
                             <p className="postUserName">{postData.username}</p>
                         </div>
