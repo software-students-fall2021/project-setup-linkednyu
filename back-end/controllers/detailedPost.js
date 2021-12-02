@@ -1,4 +1,6 @@
 const Post = require('../models/Post')
+const User = require('../models/User')
+const { likeValidation } = require('./validation')
 
 
 const viewPost = async (req, res) => {
@@ -12,19 +14,26 @@ const viewPost = async (req, res) => {
 };
 
 const likePost = async (req, res) => {
-    const user = req.user._id
-    const error = commentValidation(comment).error;
+    const like = req.body
+
+    const error = likeValidation(like).error;
     if (error) {
         console.log(error);
         return res.status(409).json({ errors: error.details[0].message })
     }
 
+    const isLiked = like.isLiked
+    const userFound = await User.findOne({ _id: req.user._id })
     try {
-        const savedComment = await newComment.save()
-        res.status(200).json(savedComment)
+        if (isLiked) {
+            const likeUpdate = await Post.findOneAndUpdate({ _id: req.params.id }, { $pull: { like: userFound._id } })
+            res.status(200).json(likeUpdate)
+        } else {
+            const likeUpdate = await Post.findOneAndUpdate({ _id: req.params.id }, { $push: { like: userFound._id } })
+            res.status(200).json(likeUpdate)
+        }
     } catch (error) {
-
-        res.status(409).json({ message: error.message })
+        res.status(409).json({ message: error })
     }
 }
 

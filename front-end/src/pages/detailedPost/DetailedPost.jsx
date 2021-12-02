@@ -35,7 +35,7 @@ export default function DetailedPost() {
     const [loadingAccount, setIsloadingAccount] = useState(true)
 
     const onLike = async () => {
-        await axios.post(`http://localhost:5000/like/${id}`, { headers: { 'Token': token } }).then(response => {
+        await axios.post(`http://localhost:5000/like/${id}`, { headers: { 'Token': token }, isLiked: liked }, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));
@@ -45,6 +45,21 @@ export default function DetailedPost() {
         } else {
             setIsLiked(true)
         }
+
+        async function fetchposts() {
+            let token = localStorage.getItem('token')
+            try {
+                await axios.get(url, { headers: { 'Token': token } }).then(response => {
+                    setPosts(response.data)
+                    setIsloading(false)
+
+                });
+            } catch (error) {
+                History.push('/login')
+            }
+
+        }
+        fetchposts()
     }
 
 
