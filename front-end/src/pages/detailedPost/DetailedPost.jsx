@@ -135,6 +135,7 @@ export default function DetailedPost() {
                     if (isMounted) {
                         setPosts(response.data)
                         setIsloading(false)
+
                     }
                 });
             } catch (error) {
@@ -172,6 +173,23 @@ export default function DetailedPost() {
     }, [commenturl])
 
 
+    useEffect(() => {
+        async function setLike() {
+            if (!loading && !loadingAccount) {
+                setIsLiked(false)
+                for (let i = 0; i < post.like.length; i++) {
+                    if (post.like[i] === account._id) {
+                        setIsLiked(true)
+                        break
+                    }
+                }
+                // console.log(liked)
+            }
+        }
+        setLike()
+    }, [loading, loadingAccount, account, post])
+
+
     return (
         <>
             {(loading || loadingComment || loadingAccount) && < div className="landing" >
@@ -201,10 +219,10 @@ export default function DetailedPost() {
                     </div>
                     <div className="detailedPostBottom">
                         <span className="detailedPostCommentCounter">{comment.length} comments</span>
-                        <Button class="detailedPostLikeBtn"
+                        <Button className="detailedPostLikeBtn"
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                             onClick={onLike}>
-                            <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                            <span id="icon"><i className="far fa-thumbs-up"></i></span>
                             <span id="count">{post.like.length}</span> Like
                         </Button>
                     </div>
