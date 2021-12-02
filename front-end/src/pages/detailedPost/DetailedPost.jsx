@@ -17,9 +17,11 @@ export default function DetailedPost() {
     //connect to backend
     const url = `/detailedposts/${id}`
     const commenturl = `/comments/${id}`
+    const accounturl = `/userAccount`
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
+    const [liked, setIsLiked] = useState(false)
     const [loadingComment, setIsloadingComment] = useState(true)
     const [newComment, setContent] = useState({
         userName: '',
@@ -29,6 +31,21 @@ export default function DetailedPost() {
         post_id: ''
     })
 
+    const [account, setAccount] = useState(undefined)
+    const [loadingAccount, setIsloadingAccount] = useState(true)
+
+    const onLike = async () => {
+        await axios.post(`http://localhost:5000/like/${id}`, { headers: { 'Token': token } }).then(response => {
+            console.log("sent");
+        })
+            .catch((err) => console.log(err.message));
+
+        if (liked) {
+            setIsLiked(false)
+        } else {
+            setIsLiked(true)
+        }
+    }
 
 
     const onComment = async (e) => {
@@ -69,6 +86,29 @@ export default function DetailedPost() {
 
 
     }
+
+    useEffect(() => {
+        let isMounted2 = true;
+        async function fetchaccount() {
+            let token = localStorage.getItem('token')
+
+            try {
+                await axios.get(accounturl, { headers: { 'Token': token } }).then(response => {
+                    if (isMounted2) {
+                        setAccount(response.data)
+                        setIsloadingAccount(false)
+                    }
+
+                });
+            } catch (error) {
+                History.push('/login')
+            }
+
+        }
+        fetchaccount()
+        return () => { isMounted2 = false };
+        // eslint-disable-next-line 
+    }, [])
 
 
     useEffect(() => {
@@ -119,9 +159,9 @@ export default function DetailedPost() {
 
     return (
         <>
-            {(loading || loadingComment) && < div className="landing" >
+            {(loading || loadingComment || loadingAccount) && < div className="landing" >
                 <h1>Linked NYU</h1></div>}
-            {!loading && !loadingComment && <div className="detailedPost" >
+            {!loading && !loadingComment && !loadingAccount && <div className="detailedPost" >
                 <div className="detailedWrapper">
                     <div className="detailedPostTop">
                         <div className="detailedPostTopLeft">
@@ -146,6 +186,12 @@ export default function DetailedPost() {
                     </div>
                     <div className="detailedPostBottom">
                         <span className="detailedPostCommentCounter">{comment.length} comments</span>
+                        <Button class="detailedPostLikeBtn"
+                            buttonSize="btn--medium" buttonStyle="btn--dark--solid"
+                            onClick={onLike}>
+                            <span id="icon"><i class="far fa-thumbs-up"></i></span>
+                            <span id="count">{post.like.length}</span> Like
+                        </Button>
                     </div>
                     <div className="detailedPostComment">
                         {comment.map((p, index) => (
@@ -158,12 +204,12 @@ export default function DetailedPost() {
                             placeholder="Comment Something..."
                             className="detailedPostAddComment"
                             value={newComment.content}
-                            onChange={(e) => setContent({ ...newComment, userName: post.username, avatar: post.avatar, post_id: post._id, content: e.target.value })}
+                            onChange={(e) => setContent({ ...newComment, userName: account.username, avatar: account.profile, post_id: post._id, content: e.target.value })}
                         />
                         <div className="commentButtonSection">
                             <Button className="commentButton"
                                 buttonSize="btn--medium" buttonStyle="btn--dark--solid"
-                            > Comment</Button>
+                            > Comment </Button>
                         </div>
                     </form>
                 </div>
