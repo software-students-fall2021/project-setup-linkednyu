@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
 import parser from 'html-react-parser'
+import { Button } from "../../components/Button"
 
 
 export default function Account() {
@@ -87,18 +88,26 @@ export default function Account() {
                 <h1>LinkedNYU</h1></div>}
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
-                    <h1 className="accountName">{account.username}</h1>
+                    <h1 className="accountName">{account.name}</h1>
                 </div>
                 <div className="accountTop">
                     <div className="accountImage">
-                        <img className="profilePicture" alt="" src="https://robohash.org/etiustodolorum.png?size=50x50&set=set1"></img>
+                        <img className="profilePicture" alt="" src={account.profile}></img>
                     </div>
                     <div className="accountBio">
-                        <h2>Welcome Back!</h2>
+                        <h2>{account.info}</h2>
                         <span>{account.message}</span>
                     </div>
                 </div>
                 <div className="accountBottom">
+                    <div className="accountEdit">
+                        <Link to={`/editaccount`} >
+                            <Button buttonStyle="btn--dark--solid"
+                                buttonSize="btn--large--fixed">
+                                Update Info
+                            </Button>
+                        </Link>
+                    </div>
                     <div className="userClasses">
                         <div className="contentTitle">
                             <h2>My Classes</h2>
@@ -117,7 +126,6 @@ export default function Account() {
                         <div className="contentList">
                             {posts.map((item, index) => {
                                 return <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index + 1}.{item.content}</Link>
-
                             })}
                         </div>
                     </div>

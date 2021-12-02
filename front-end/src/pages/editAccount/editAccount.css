@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+@keyframes landing {
+    0%   {background-color: #ffffff;}
+    25%  {background-color: #ff9d47;}
+    50%  {background-color: #547b51;}
+    100% {background-color: #5f5d98;}
+  }
+
+.landing{
+    width:100%;
+    height: 100vh;
+    padding-top:45px ;
+    margin: auto;
+    background-color: #5f5d98;
+    color: #57068c;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: landing;
+    animation-duration: 5s;
+}
+
+.accountPage{
+    width:100%;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    margin: 3% 0;
+    padding-top:45px ;
+    background-color: #5f5d98;
+    color: white;
+}
+
+.accountWrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-top: 40px;
+}
+
+.accountHeader{
+    display: flex;
+    justify-content: center;
+    background-color: #57068c;
+    border-radius: 5px;
+    margin: 5px;
+    padding-top: 2px; 
+}
+
+.accountBio{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 5px;
+    padding-top: 2px; 
+}
+
+.accountImage{
+    display: flex;
+    margin-left: 15px;
+    
+}
+
+.accountBioForm{
+    display:flex;
+    margin: auto;
+    padding-top: 15%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.profile-pic-div{
+    height: 200px;
+    width: 200px;
+    flex:1;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    border: 1px solid grey;
+}
+
+#photo{
+    height: 100%;
+    width: 100%;
+}
+
+#file{
+    display: none;
+}
+
+#uploadBtn{
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: wheat;
+    line-height: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+.accountInfo{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    padding-top: 150px;
+    padding-inline: 10px;
+}
+
+.accountMessage{
+    flex:3;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+
+
+
