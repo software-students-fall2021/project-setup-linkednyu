@@ -70,10 +70,21 @@ const infoValidation = (data) => {
 
 }
 
+const likeValidation = (data) => {
+    const schema = Joi.object({
+        isLiked: Joi.boolean().required(),
+        headers: Joi.required()
+    })
+
+    return schema.validate(data)
+
+}
+
 module.exports.signUpValidation = signUpValidation
 module.exports.loginValidation = loginValidation
 module.exports.commentValidation = commentValidation
 module.exports.postValidation = postValidation
 module.exports.infoValidation = infoValidation
+module.exports.likeValidation = likeValidation
 module.exports.resetValidate = resetValidate
 

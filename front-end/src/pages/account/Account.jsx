@@ -21,6 +21,7 @@ export default function Account() {
         let isMounted = true;
         async function fetchaccount() {
             let token = localStorage.getItem('token')
+            console.log(token)
 
             try {
                 await axios.get(url, { headers: { 'Token': token } }).then(response => {

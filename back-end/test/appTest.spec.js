@@ -8,6 +8,10 @@ let Post = require('../models/Post')
 let Comment = require('../models/Comment')
 let token
 let postId
+let isLiked = true
+let headers = {
+  Token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWE1MjcyNDA5NGI5NjAxZGY2NTY1ZTAiLCJpYXQiOjE2Mzg0MDYxMjUsImV4cCI6MTYzODQwOTcyNX0.LVx5PIuWOIZUehr1LQB2jAvSeooaTF7xq2QmCpainX4"
+}
 
 // Configure chai
 chai.use(chaiHttp)
@@ -214,6 +218,34 @@ describe('Post /homeposts', () => {
     chai.request(app)
       .post('/homeposts')
       .send(posts)
+      .end((err, res) => {
+        res.should.have.status(401)
+        done()
+      })
+
+  }).timeout(10000)
+
+})
+
+// Like a post
+describe('Like a post', () => {
+  it('it should like a post when it is not liked by the user', (done) => {
+    chai.request(app)
+      .post(`/like/${postId}`)
+      .set('Token', token)
+      .send({ headers, isLiked })
+      .end((err, res) => {
+        console.log(err)
+        res.should.have.status(200);
+        done()
+      })
+
+  }).timeout(10000)
+
+  it('it should return 401 if token not added', (done) => {
+    chai.request(app)
+      .post(`/like/${postId}`)
+      .send({ headers, isLiked })
       .end((err, res) => {
         res.should.have.status(401)
         done()
