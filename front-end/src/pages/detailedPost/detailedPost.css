@@ -127,6 +127,22 @@
     margin: 10px 10px;
 }
 
+.detailedPostCommentCounter{
+    flex-shrink: 1;
+    flex-basis: 20rem;
+}
+
+.likeCount{
+    flex-shrink: 2;
+    flex-basis: 10rem;
+    
+}
+
+.detailedPostLikeBtn{
+    flex-shrink: 2;
+    flex-basis: 5rem;
+}
+
 .detailedPostCommentText{
     font-size: 15px;
 }

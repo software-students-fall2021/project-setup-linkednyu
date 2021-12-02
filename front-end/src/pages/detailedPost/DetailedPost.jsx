@@ -7,6 +7,8 @@ import axios from 'axios'
 import { useParams } from "react-router"
 import parser from 'html-react-parser'
 import { useHistory } from "react-router"
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 export default function DetailedPost() {
@@ -219,11 +221,11 @@ export default function DetailedPost() {
                     </div>
                     <div className="detailedPostBottom">
                         <span className="detailedPostCommentCounter">{comment.length} comments</span>
+                        <span className="likeCount">{post.like.length} likes </span>
                         <Button className="detailedPostLikeBtn"
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                             onClick={onLike}>
-                            <span id="icon"><i className="far fa-thumbs-up"></i></span>
-                            <span id="count">{post.like.length}</span> Like
+                            <span className="likeIcon">{!liked && <FavoriteBorderIcon fontSize="small" />}{liked && <FavoriteIcon fontSize="small" />}</span>
                         </Button>
                     </div>
                     <div className="detailedPostComment">
