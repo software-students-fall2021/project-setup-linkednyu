@@ -13,7 +13,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-const NewPost2 = ({ loggedIn }) => {
+const NewPost2 = () => {
     const url = 'http://localhost:5000/userAccount'
     const [channel, setChannel] = useState({ name: "Channel" })
     const [userChannels, setUserChannels] = useState([])

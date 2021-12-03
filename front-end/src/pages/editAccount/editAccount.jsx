@@ -5,7 +5,7 @@ import { useHistory } from "react-router"
 import FileBase64 from 'react-file-base64';
 
 
-export default function EditAccount() {
+export default function EditAccount({picChange , setpicChange }) {
     const History = useHistory()
     let token = localStorage.getItem('token')
 
@@ -44,6 +44,9 @@ export default function EditAccount() {
 
         }
         fetchaccount()
+        setpicChange(()=>{
+            return !picChange
+        })
         History.push('/account')
 
     }
@@ -85,7 +88,7 @@ export default function EditAccount() {
         <>
             {loading && < div className="landing" >
                 <h1>Linked NYU</h1></div>}
-            {!loading && <div className="accountPage">
+            {!loading && <div className="editaccountPage">
                 <div className="accountWrapper">
                     <div className="accountHeader">
                         <h1 className="accountName">{account.name}</h1>
