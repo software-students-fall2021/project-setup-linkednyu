@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
 import FileBase64 from 'react-file-base64';
+import Button from '@mui/material/Button'
 
 
 export default function EditAccount({picChange , setpicChange }) {
@@ -113,7 +114,11 @@ export default function EditAccount({picChange , setpicChange }) {
                                 <p className="inputHeader">Message</p>
                                 <textarea type="text" value={newInfo.message} onChange={(e) => setInfo({ ...newInfo, message: e.target.value })} />
                             </div>
-                            <input type="button" value="Submit" onClick={onUpdate} />
+                            <div className="updateArea">
+                                <Button onClick={onUpdate} variant = "contained" 
+                                className = "updateButton">Update</Button>
+                            </div>
+                           
                         </div>
                     </div>
                 </div>

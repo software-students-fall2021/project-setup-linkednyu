@@ -103,6 +103,13 @@
     flex-direction: column;
     margin-bottom: 1em;
 }
+.updateArea{
+    display: flex;
+    justify-content: center;
+}
+input{
+    height: 30px;
+}
 
 textarea{
     resize: none;
