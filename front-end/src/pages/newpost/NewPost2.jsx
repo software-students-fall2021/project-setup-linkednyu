@@ -42,7 +42,7 @@ const NewPost2 = ({ loggedIn }) => {
                     if (isMounted) {
                         setPostData({
                             username: response.data.username,
-                            avatar: response.data.avatar,
+                            avatar: response.data.profile,
                         })
                         setUserChannels(response.data.channel)
                         setIsLoading(false)
