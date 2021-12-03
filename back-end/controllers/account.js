@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Post = require('../models/Post')
 const { infoValidation } = require('./validation')
 
 const viewAccount = async (req, res) => {
@@ -39,7 +40,19 @@ const updateAccount = async (req, res) => {
 
 }
 
+const deletePost = async (req, res) => {
+
+    try {
+        const postDeleted = await Post.deleteOne({ _id: req.body._id });
+        res.status(200).json(postDeleted)
+    } catch (error) {
+        res.status(409).json({ message: error.message })
+    }
+
+}
+
 module.exports = {
     viewAccount,
-    updateAccount
+    updateAccount,
+    deletePost
 }

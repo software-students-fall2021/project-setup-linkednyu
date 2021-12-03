@@ -17,11 +17,53 @@ export default function Account() {
     const [loading, setIsloading] = useState(true)
     const [posts, setPosts] = useState(undefined)
 
+
+    const onDelete = async (e) => {
+        let token = localStorage.getItem('token')
+        //console.log(e)
+
+        await axios.post(`http://localhost:5000/deletePost`, { _id: e }, { headers: { 'Token': token } }).then(response => {
+            console.log("sent");
+        })
+            .catch((err) => console.log(err.message));
+
+
+        async function fetchposts() {
+            try {
+                await axios.get(posturl).then(response => {
+                    for (let i = 0; i < response.data.length; i++) {
+                        let newArray = []
+                        if (account.username === response.data[i].username) {
+                            newArray = response.data[i].content.split(" ")
+                            let newSentence = ""
+                            if (newArray.length > 10) {
+                                newSentence = parser(newArray.slice(0, 12).join(" ") + "...")
+                            }
+                            else {
+                                newSentence = parser(response.data[i].content)
+                            }
+                            postArray.push({ content: newSentence, link: response.data[i]._id })
+                            if (postArray.length === 3) {
+                                break
+                            }
+                        }
+                    }
+                    setPosts(postArray)
+
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchposts()
+
+    }
+
     useEffect(() => {
         let isMounted = true;
         async function fetchaccount() {
             let token = localStorage.getItem('token')
-            console.log(token)
+            //console.log(token)
 
             try {
                 await axios.get(url, { headers: { 'Token': token } }).then(response => {
@@ -126,7 +168,14 @@ export default function Account() {
                         </div>
                         <div className="contentList">
                             {posts.map((item, index) => {
-                                return <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index + 1}.{item.content}</Link>
+                                return (<><div className="postItem">
+                                    <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index + 1}.{item.content}</Link>
+                                    <Button className="postDelete"
+                                        onClick={() => onDelete(item.link)}
+                                        buttonSize="btn--medium" buttonStyle="btn--primary--outline">
+                                        <span className="likeIcon">Delete</span>
+                                    </Button>
+                                </div></>)
                             })}
                         </div>
                     </div>
