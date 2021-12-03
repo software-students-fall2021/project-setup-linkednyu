@@ -8,6 +8,7 @@ const signUpValidation = (data) => {
         username: Joi.string().required(),
         email: Joi.string().min(6).email().required(),
         password: Joi.string().min(6).required(),
+        profile:Joi.string()
     })
 
     return schema.validate(data)

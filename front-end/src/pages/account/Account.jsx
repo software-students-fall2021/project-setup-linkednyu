@@ -153,7 +153,7 @@ export default function Account() {
                     </div>
                     <div className="userClasses">
                         <div className="contentTitle">
-                            <h2>My Classes</h2>
+                            <h2>My Channels</h2>
                         </div>
                         <div className="contentList">
                             {account.channel.map((item, index) => {
