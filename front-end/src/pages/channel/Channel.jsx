@@ -44,7 +44,7 @@ export default function Channel({ loggedIn }) {
     return (
         <>
             {loading && < div className="landing" >
-                <h1>Linked NYU</h1></div>}
+                <h1>LinkedNYU</h1></div>}
             {!loading && <div className="channelPage">
                 <h2 className="channelHeader">{id}</h2>
                 {post.map((items, index) => (

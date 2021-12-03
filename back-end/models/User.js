@@ -32,15 +32,15 @@ const userSchema = new mongoose.Schema({
     },
     profile: {
         type: String,
-        default: "https://robohash.org/etiustodolorum.png?size=50x50&set=set1"
+        default: ""
     },
     info: {
         type: String,
-        default: "student"
+        default: "Student"
     },
     message: {
         type: String,
-        default: "say somthing about yourself ..."
+        default: "Say something about yourself ..."
     }
 })
 

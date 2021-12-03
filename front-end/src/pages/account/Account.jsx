@@ -128,7 +128,7 @@ export default function Account() {
     return (
         <>
             {loading && < div className="landing" >
-                <h1>Linked NYU</h1></div>}
+                <h1>LinkedNYU</h1></div>}
             {!loading && <div className="accountPage">
                 <div className="accountHeader">
                     <h1 className="accountName">{account.name}</h1>
@@ -153,7 +153,7 @@ export default function Account() {
                     </div>
                     <div className="userClasses">
                         <div className="contentTitle">
-                            <h2>My Classes</h2>
+                            <h2>My Channels</h2>
                         </div>
                         <div className="contentList">
                             {account.channel.map((item, index) => {

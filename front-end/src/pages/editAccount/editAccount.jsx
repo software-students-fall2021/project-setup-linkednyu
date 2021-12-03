@@ -3,24 +3,18 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
 import FileBase64 from 'react-file-base64';
+import Button from '@mui/material/Button'
 
 
-export default function EditAccount() {
+export default function EditAccount({picChange , setpicChange }) {
     const History = useHistory()
     let token = localStorage.getItem('token')
-    //console.log(token)
 
     //connect to backend
     const accounturl = "http://localhost:5000/userAccount"
     const [account, setAccount] = useState(undefined)
     const [loading, setIsloading] = useState(true)
     const [newInfo, setInfo] = useState({
-        // name: account.name,
-        // username: account.username,
-        // email: account.email,
-        // password: account.password,
-        // channel: account.channel,
-        // date: account.date,
         profile: '',
         info: '',
         message: ''
@@ -28,12 +22,6 @@ export default function EditAccount() {
 
     const onUpdate = async (e) => {
         e.preventDefault()
-
-
-        // if (!newComment.content) {
-        //     alert('please add a comment')
-        //     return
-        // }
 
         await axios.post(`http://localhost:5000/editaccount`, newInfo, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
@@ -57,11 +45,9 @@ export default function EditAccount() {
 
         }
         fetchaccount()
-        // setInfo({
-        //     profile: account.profile,
-        //     info: account.info,
-        //     message: account.message
-        // })
+        setpicChange(()=>{
+            return !picChange
+        })
         History.push('/account')
 
     }
@@ -103,32 +89,37 @@ export default function EditAccount() {
         <>
             {loading && < div className="landing" >
                 <h1>Linked NYU</h1></div>}
-            {!loading && <div className="accountPage">
+            {!loading && <div className="editaccountPage">
                 <div className="accountWrapper">
                     <div className="accountHeader">
                         <h1 className="accountName">{account.name}</h1>
                     </div>
                     <div className="accountBio">
-                        <form className="accountBioForm" onSubmit={onUpdate}>
+                        <div className="accountBioForm" >
                             <div className="profile-pic-div">
                                 <img src={newInfo.profile} alt="profile img" id="photo" />
-                                <FileBase64 id="file"
-                                    multiple={false}
-                                    onDone={({ base64 }) => {
-                                        setInfo({ ...newInfo, profile: base64 })
-                                    }} />
-                                <label for="file" id="uploadBtn"> Choose Photo</label>
+                                <div id="file">
+                                    <FileBase64 
+                                        multiple={false}
+                                        onDone={({ base64 }) => {
+                                            setInfo({ ...newInfo, profile: base64 })
+                                        }} />
+                                </div>
                             </div>
-                            <label className="accountInfo">
-                                Info
+                            <div className="accountInfo">
+                                <p className="inputHeader">Info</p>
                                 <input type="text" value={newInfo.info} onChange={(e) => setInfo({ ...newInfo, info: e.target.value })} />
-                            </label>
-                            <label className="accountMessage">
-                                Message
-                                <input type="text" value={newInfo.message} onChange={(e) => setInfo({ ...newInfo, message: e.target.value })} />
-                            </label>
-                            <input type="submit" value="Submit" />
-                        </form>
+                            </div>
+                            <div className="accountMessage">
+                                <p className="inputHeader">Message</p>
+                                <textarea type="text" value={newInfo.message} onChange={(e) => setInfo({ ...newInfo, message: e.target.value })} />
+                            </div>
+                            <div className="updateArea">
+                                <Button onClick={onUpdate} variant = "contained" 
+                                className = "updateButton">Update</Button>
+                            </div>
+                           
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
     padding-top: 10px;
     background-color: #5f5d98;
     min-height:100vh;
+    overflow-x: hidden;
 }
 
 .channelHeader{

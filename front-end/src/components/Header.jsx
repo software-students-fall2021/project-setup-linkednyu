@@ -12,7 +12,7 @@ import axios from "axios";
 
 
 
-const Header = ({ loggedIn, setloggedIn }) => {
+const Header = ({ loggedIn, setloggedIn , picChange }) => {
 
 	const [menuShow, setMenuShow] = useState(false)
 	const [filteredData, setFilteredData] = useState([])
@@ -44,7 +44,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 		fetchaccount()
 		return () => { isMounted = false };
 		// eslint-disable-next-line 
-	}, [loggedIn])
+	}, [loggedIn,picChange])
 
 	useEffect(() => {
 		if (account !== undefined) {
@@ -72,7 +72,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 		fetchchannel()
 		return () => { isMounted = false };
 		// eslint-disable-next-line 
-	}, [loggedIn])
+	}, [loggedIn,picChange])
 
 
 	const toggleMenu = () => {
