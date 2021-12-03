@@ -197,6 +197,35 @@ describe('Update Account Info', () => {
 
 })
 
+
+//Delete a post
+describe('Delete post', () => {
+
+  it('it should delete a post', (done) => {
+    chai.request(app)
+      .post(`/deletePost`)
+      .set('Token', token)
+      .send(postId)
+      .end((err, res) => {
+        console.log(err)
+        res.should.have.status(200);
+        done()
+      })
+  }).timeout(10000)
+
+  it('it should not delete post if token not provided', (done) => {
+    chai.request(app)
+      .post(`/deletePost`)
+      .send(postId)
+      .end((err, res) => {
+        res.should.have.status(401);
+        done()
+      })
+
+  }).timeout(10000)
+
+})
+
 // Make a new post
 describe('Post /homeposts', () => {
   it('it should send make a new post', (done) => {
@@ -351,7 +380,7 @@ describe('Channel detail', () => {
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property('joined').eq(false);
+        //res.body.should.have.property('joined').eq(false);
         done()
       })
   }).timeout(10000)
