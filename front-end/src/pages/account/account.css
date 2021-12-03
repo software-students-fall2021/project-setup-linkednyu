@@ -24,8 +24,8 @@
 
 
 .accountPage{
-    padding-top: 60px;
-    background-color: #5f5d98;
+    padding-top: 60px !important;
+    background-color: black;
     min-height: 100vh;
 }
 
@@ -48,12 +48,12 @@
     border-radius: 5px;
     margin: 5px;
     padding-top: 2px; 
+    color: white;
 }
 
 .accountImage{
     display: flex;
     margin-left: 15px;
-    
 }
 
 .profilePicture{
@@ -73,12 +73,10 @@
 }
 
 .accountEdit{
-    margin: auto;
+    margin:0 auto;
 }
 
-.accountName{
-    color:white;
-}
+
 
 .userClasses{
     display: flex;
