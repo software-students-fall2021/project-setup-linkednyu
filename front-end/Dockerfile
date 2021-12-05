@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:14 as builder
 
 LABEL version = "1.0"
 LABEL descriptions="Image for front-end"
@@ -11,6 +11,11 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+RUN npm build
 
-CMD [ "npm", "start" ]
+FROM nginx:1.19-alpine
+
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=builder /app/build /usr/share/nginx/html
+
