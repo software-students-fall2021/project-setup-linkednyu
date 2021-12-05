@@ -4,9 +4,7 @@ services:
     image: react-app
     build: ./front-end 
     container_name: front-end
-    stdin_open : true
-    # ports: 
-    #   - "3000:3000" 
+    stdin_open : true 
     restart: always 
     links:
       - backend
@@ -19,8 +17,6 @@ services:
     image: server-app
     build: ./back-end
     container_name: back-end
-    # ports:
-    #   - "5000:5000"
     restart: always
     networks:
       - linkednyunetwork

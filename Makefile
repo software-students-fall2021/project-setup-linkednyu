@@ -1,4 +1,4 @@
-run-dev:
+up:
 	docker-compose up --build
 
 down:
