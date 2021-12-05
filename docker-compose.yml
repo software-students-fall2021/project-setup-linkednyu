@@ -3,6 +3,7 @@ services:
   frontend:
     image: react-app
     build: ./front-end 
+    container_name: front-end
     stdin_open : true
     ports: 
       - "3000:3000" 
@@ -17,6 +18,7 @@ services:
   backend:
     image: server-app
     build: ./back-end
+    container_name: back-end
     ports:
       - "5000:5000"
     restart: always
