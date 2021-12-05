@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 export default function Home({ loggedIn }) {
-    const url = "http://localhost:5000/homeposts"
+    const url = "http://localhost:5000/api/homeposts"
     const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 
