@@ -17,9 +17,9 @@ export default function DetailedPost() {
     let token = localStorage.getItem('token')
 
     //connect to backend
-    const url = `/detailedposts/${id}`
-    const commenturl = `/comments/${id}`
-    const accounturl = `/userAccount`
+    const url = `http://localhost:5000/detailedposts/${id}`
+    const commenturl = `http://localhost:5000/comments/${id}`
+    const accounturl = `http://localhost:5000/userAccount`
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)

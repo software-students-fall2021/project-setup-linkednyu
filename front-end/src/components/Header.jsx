@@ -18,7 +18,7 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 	const [filteredData, setFilteredData] = useState([])
 	const [wordEntered, setWordEntered] = useState("")
 	const [data, setData] = useState([])
-	const url = "/channels"
+	const url = "http://localhost:5000/channels"
 
 	const accounturl = "http://localhost:5000/userAccount"
 	const [account, setAccount] = useState(undefined)

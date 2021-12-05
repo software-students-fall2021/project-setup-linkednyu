@@ -8,7 +8,7 @@ import { Button } from "../../components/Button"
 
 
 export default function Account() {
-    const url = "/userAccount"
+    const url = "http://localhost:5000/userAccount"
     const posturl = "http://localhost:5000/homeposts"
     const History = useHistory()
     var postArray = []

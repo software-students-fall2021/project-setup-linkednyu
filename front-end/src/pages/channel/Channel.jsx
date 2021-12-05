@@ -8,7 +8,7 @@ import { useHistory } from "react-router"
 
 export default function Channel({ loggedIn }) {
     const { id } = useParams();
-    const url = `/channel/${id}`
+    const url = `http://localhost:5000/channel/${id}`
     const [post, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
     const History = useHistory()
