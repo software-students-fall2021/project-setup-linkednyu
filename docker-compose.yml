@@ -5,8 +5,8 @@ services:
     build: ./front-end 
     container_name: front-end
     stdin_open : true
-    ports: 
-      - "3000:3000" 
+    # ports: 
+    #   - "3000:3000" 
     restart: always 
     links:
       - backend
@@ -19,9 +19,22 @@ services:
     image: server-app
     build: ./back-end
     container_name: back-end
-    ports:
-      - "5000:5000"
+    # ports:
+    #   - "5000:5000"
     restart: always
+    networks:
+      - linkednyunetwork
+
+  nginx:
+    restart: always
+    depends_on:
+      - frontend
+      - backend
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    ports:
+      - 3000:80
     networks:
       - linkednyunetwork
 
