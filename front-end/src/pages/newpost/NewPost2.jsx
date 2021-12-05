@@ -14,7 +14,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 const NewPost2 = ({ loggedIn }) => {
-    const url = '/userAccount'
+    const url = process.env.REACT_APP_API_URL + '/userAccount'
     const [channel,setChannel] = useState({name:"Channel"})
     const [userChannels,setUserChannels] = useState([])
     let history = useHistory(); //jump to home
@@ -105,7 +105,7 @@ const NewPost2 = ({ loggedIn }) => {
         }
             
         //send postData to server
-        await axios.post('http://localhost:5000/homeposts',postData,{headers:{'Token':token}})
+        await axios.post(process.env.API_URL + '/homeposts',postData,{headers:{'Token':token}})
             .then(response=>{
                 console.log("Data Sent");
             })

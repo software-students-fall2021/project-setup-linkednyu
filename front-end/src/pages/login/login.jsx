@@ -34,7 +34,7 @@ export default function Login({ setLoggedIn }) {
         };
 
         try{
-            const res = await axios.post('/login',loginDetails)
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/login',loginDetails)
             if (res.status === 200){
                 localStorage.setItem('token',res.data.token)
                 setmStyle("messageShow")

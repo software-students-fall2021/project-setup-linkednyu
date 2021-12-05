@@ -32,7 +32,7 @@ export default function PwReset(props){
         }
 
         try{
-            const res = await axios.post('/reset',resetDetails)
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/reset',resetDetails)
             console.log('here 1');
             if (res.status === 200){
                 console.log(res.status)

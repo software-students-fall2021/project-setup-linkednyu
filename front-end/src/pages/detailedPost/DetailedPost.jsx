@@ -15,8 +15,8 @@ export default function DetailedPost() {
     let token = localStorage.getItem('token')
     
     //connect to backend
-    const url = `/detailedposts/${id}`
-    const commenturl = `/comments/${id}`
+    const url = process.env.REACT_APP_API_URL+ `/detailedposts/${id}`
+    const commenturl = process.env.REACT_APP_API_URL+ `/comments/${id}`
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)

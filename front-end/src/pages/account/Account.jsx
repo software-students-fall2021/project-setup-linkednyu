@@ -7,8 +7,8 @@ import parser from 'html-react-parser'
 
 
 export default function Account() {
-    const url = "/userAccount"
-    const posturl = "/homeposts"
+    const url = process.env.REACT_APP_API_URL + "/userAccount"
+    const posturl = process.env.REACT_APP_API_URL + "/homeposts"
     const History = useHistory()
     var postArray = []
     

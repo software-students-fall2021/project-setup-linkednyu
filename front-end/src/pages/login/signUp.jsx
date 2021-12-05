@@ -39,7 +39,7 @@ export default function SignUp(){
         };
 
         try{
-            const res = await axios.post('/register',signUpDetails)
+            const res = await axios.post(process.env.REACT_APP_API_URL + '/register',signUpDetails)
             if (res.status === 200){
                 setMessage("Account Created! You will be redirected to the login page shortly")
                 setTimeout(()=>{

@@ -18,7 +18,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 	const [filteredData , setFilteredData] = useState([])
 	const [wordEntered,setWordEntered] = useState("")
 	const [data, setData]= useState([])
-	const url = "/channels"
+	const url = process.env.REACT_APP_API_URL + "/channels"
 
 	useEffect(() => {
         let isMounted = true;
