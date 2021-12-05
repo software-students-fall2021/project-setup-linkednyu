@@ -30,7 +30,7 @@ const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.
 
 const routes = require("./routes/userRoutes");
 
-app.use('/', routes)
+app.use('/api', routes)
 
 
 // export the express app we created to make it available to other modules
