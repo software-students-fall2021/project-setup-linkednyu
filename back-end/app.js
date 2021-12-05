@@ -14,14 +14,13 @@ const morgan = require("morgan") // middleware for nice logging of incoming HTTP
  * In this file, however, most middlewares are after most routes
  * This is to match the order of the accompanying slides
  */
-
+app.use(cors())
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
 
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json({limit: '10mb'})) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ limit: '10mb', extended: true })) // decode url-encoded incoming POST data
-app.use(cors())
 
 //connect to database
 const CONNECTION_URL = 'mongodb+srv://linkednyu:nyu1234@linkednyu.3tdal.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
