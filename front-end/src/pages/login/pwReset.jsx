@@ -32,7 +32,7 @@ export default function PwReset(props){
         }
 
         try{
-            const res = await axios.post('http://localhost:5000/reset',resetDetails)
+            const res = await axios.post('/reset',resetDetails)
             console.log('here 1');
             if (res.status === 200){
                 console.log(res.status)

@@ -68,6 +68,14 @@ const Header = ({ loggedIn, setloggedIn }) => {
 								</Button>
 							</Link>
 						</div>
+						{(data.role == 'professor') && <div className="Menuitem">
+							<Link to="/createclass">
+								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"
+									buttonSize="btn--large--fixed">
+									Create Class
+								</Button>
+							</Link>
+						</div>}
 						{loggedIn && <div className="Menuitem">
 							<Link to="/newpost2" >
 								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"

@@ -40,7 +40,7 @@ export default function DetailedPost() {
             return
         }
 
-        await axios.post(`http://localhost:5000/comments/${id}`, newComment, {headers:{'Token':token}}).then(response => {
+        await axios.post(`/comments/${id}`, newComment, {headers:{'Token':token}}).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));
