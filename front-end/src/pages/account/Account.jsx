@@ -8,8 +8,8 @@ import { Button } from "../../components/Button"
 
 
 export default function Account() {
-    const url = "http://localhost:5000/api/userAccount"
-    const posturl = "http://localhost:5000/api/homeposts"
+    const url = "/api/userAccount"
+    const posturl = "/api/homeposts"
     const History = useHistory()
     var postArray = []
 
@@ -22,7 +22,7 @@ export default function Account() {
         let token = localStorage.getItem('token')
         //console.log(e)
 
-        await axios.post(`http://localhost:5000/api/deletePost`, { _id: e }, { headers: { 'Token': token } }).then(response => {
+        await axios.post(`/api/deletePost`, { _id: e }, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));

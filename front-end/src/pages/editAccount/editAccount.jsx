@@ -11,7 +11,7 @@ export default function EditAccount({picChange , setpicChange }) {
     let token = localStorage.getItem('token')
 
     //connect to backend
-    const accounturl = "http://localhost:5000/api/userAccount"
+    const accounturl = "/api/userAccount"
     const [account, setAccount] = useState(undefined)
     const [loading, setIsloading] = useState(true)
     const [newInfo, setInfo] = useState({
@@ -23,7 +23,7 @@ export default function EditAccount({picChange , setpicChange }) {
     const onUpdate = async (e) => {
         e.preventDefault()
 
-        await axios.post(`http://localhost:5000/api/editaccount`, newInfo, { headers: { 'Token': token } }).then(response => {
+        await axios.post(`/api/editaccount`, newInfo, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));
