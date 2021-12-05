@@ -1,5 +1,5 @@
 run-dev:
 	docker-compose up --build
 
-remove-cont:
+down:
 	docker-compose down
