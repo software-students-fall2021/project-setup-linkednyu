@@ -403,16 +403,6 @@ describe('Specific Channel', () => {
       })
   }).timeout(10000)
 
-  it('it should return a specific channel if the user is logged in and subcribed to the channel', (done) => {
-    chai.request(app)
-      .get('/api/channel/Mathematics')
-      .set('Token', token)
-      .end((err, res) => {
-        res.should.have.status(200)
-        res.body.should.be.a('array')
-        done();
-      });
-  }).timeout(10000)
 
   it('should return status 401 if token is not added', (done) => {
     chai.request(app)
