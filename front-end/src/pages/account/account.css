@@ -81,6 +81,7 @@
 .userClasses{
     display: flex;
     flex-direction: column;
+    border-radius: 5px solid red;
     margin: 10px;
     background-color: white;
     border-radius: 5px;
