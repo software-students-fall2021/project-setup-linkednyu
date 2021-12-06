@@ -68,7 +68,7 @@ const Header = ({ loggedIn, setloggedIn }) => {
 								</Button>
 							</Link>
 						</div>
-						{(data.role == 'professor') && <div className="Menuitem">
+						{(data.role === 'professor') && <div className="Menuitem">
 							<Link to="/createclass">
 								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"
 									buttonSize="btn--large--fixed">
