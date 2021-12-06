@@ -44,7 +44,7 @@ jobs:
     steps:
       - checkout
       - run : echo "this is the CD stage"
-      - run : ssh -oStrictHostKeyChecking=no -v $USER@$IP
+      - run : ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy.sh"
 
 
 # Orchestrate our job run sequence
