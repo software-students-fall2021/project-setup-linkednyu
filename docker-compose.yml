@@ -22,26 +22,18 @@ services:
       - linkednyunetwork
 
   nginx:
-    image: linuxserver/swag
     restart: always
     depends_on:
       - frontend
       - backend
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod
     ports:
       - 80:80
-      - 443:443
     container_name: nginx
     networks:
       - linkednyunetwork
-    environment: 
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-      - URL=comf0rts.com
-      - SUBDOMAINS=www,
-      - VALIDATION=http
-      - STAGING= false 
-      - EMAIL=pla252@nyu.edu
 
 networks:
   linkednyunetwork:
