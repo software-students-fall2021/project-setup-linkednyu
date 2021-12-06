@@ -15,6 +15,7 @@ import axios from "axios";
 const Header = ({ loggedIn, setloggedIn , picChange }) => {
 
 	const [menuShow, setMenuShow] = useState(false)
+
 	const [filteredData, setFilteredData] = useState([])
 	const [wordEntered, setWordEntered] = useState("")
 	const [data, setData] = useState([])
@@ -101,6 +102,14 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 								</Button>
 							</Link>
 						</div>
+						{(data.role === 'professor') && <div className="Menuitem">
+							<Link to="/createclass">
+								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"
+									buttonSize="btn--large--fixed">
+									Create Class
+								</Button>
+							</Link>
+						</div>}
 						{loggedIn && <div className="Menuitem">
 							<Link to="/newpost2" >
 								<Button onClick={toggleMenu} buttonStyle="btn--primary--outline"

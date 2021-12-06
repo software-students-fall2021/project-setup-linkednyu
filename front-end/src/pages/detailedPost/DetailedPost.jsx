@@ -74,6 +74,7 @@ export default function DetailedPost() {
             return
         }
 
+
         await axios.post(`/api/comments/${id}`, newComment, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })

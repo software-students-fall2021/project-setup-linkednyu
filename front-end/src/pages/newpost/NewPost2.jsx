@@ -13,11 +13,13 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
+
 const NewPost2 = () => {
     const url = '/api/userAccount'
     const [channel, setChannel] = useState({ name: "Channel" })
     const [userChannels, setUserChannels] = useState([])
     const [profile,setProfile]=useState("")
+
     let history = useHistory(); //jump to home
     let token = localStorage.getItem('token')
 
