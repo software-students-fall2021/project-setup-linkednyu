@@ -65,7 +65,7 @@ export default function Login({ setLoggedIn }) {
     return (
         <div className="loginPage">
             <div className='signinTitle1'>
-                <h2>Linked</h2>
+                <h2>LinkedNYU</h2>
             </div>
             <div className="signinTitle">
                 Sign in

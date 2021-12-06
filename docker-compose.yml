@@ -10,6 +10,9 @@ services:
       - backend
     depends_on:
       - backend
+    volumes:
+      - /app/node_modules
+      - ./front-end:/app
     networks:
       - linkednyunetwork
 
@@ -18,6 +21,9 @@ services:
     build: ./back-end
     container_name: back-end
     restart: always
+    volumes:
+      - /app/node_modules
+      - ./back-end:/app
     networks:
       - linkednyunetwork
 
