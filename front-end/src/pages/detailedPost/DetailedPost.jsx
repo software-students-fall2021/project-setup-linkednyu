@@ -17,9 +17,9 @@ export default function DetailedPost() {
     let token = localStorage.getItem('token')
 
     //connect to backend
-    const url = `/detailedposts/${id}`
-    const commenturl = `/comments/${id}`
-    const accounturl = `/userAccount`
+    const url = process.env.REACT_APP_API_URL+ `/detailedposts/${id}`
+    const commenturl = process.env.REACT_APP_API_URL+ `/comments/${id}`
+    const accounturl = process.env.REACT_APP_API_URL + `/userAccount`
     const [post, setPosts] = useState(null)
     const [comment, setComments] = useState(null)
     const [loading, setIsloading] = useState(true)
@@ -74,7 +74,7 @@ export default function DetailedPost() {
             return
         }
 
-        await axios.post(`http://localhost:5000/comments/${id}`, newComment, { headers: { 'Token': token } }).then(response => {
+        await axios.post(commenturl, newComment, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));

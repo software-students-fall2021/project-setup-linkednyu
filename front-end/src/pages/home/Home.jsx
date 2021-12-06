@@ -5,7 +5,7 @@ import axios from 'axios'
 
 
 export default function Home({ loggedIn }) {
-    const url = "http://localhost:5000/homeposts"
+    const url = process.env.REACT_APP_API_URL + "/homeposts"
     const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 

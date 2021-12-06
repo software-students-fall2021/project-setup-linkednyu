@@ -8,8 +8,8 @@ import { Button } from "../../components/Button"
 
 
 export default function Account() {
-    const url = "/userAccount"
-    const posturl = "http://localhost:5000/homeposts"
+    const url = process.env.REACT_APP_API_URL + "/userAccount"
+    const posturl = process.env.REACT_APP_API_URL + "/homeposts"
     const History = useHistory()
     var postArray = []
 

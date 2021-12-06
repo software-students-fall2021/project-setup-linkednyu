@@ -5,12 +5,12 @@ import axios from 'axios'
 import { useParams } from "react-router"
 import { useHistory } from "react-router"
 
-
 export default function Channel({ loggedIn }) {
     const { id } = useParams();
-    const url = `/channel/${id}`
+    const url = process.env.REACT_APP_API_URL + `/channel/${id}`
     const [post, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
+
     const History = useHistory()
 
 
