@@ -74,7 +74,7 @@ before((done) => {
 before((done) => {
   chai
     .request(app)
-    .post("/register")
+    .post("/api/register")
     .send(userCredentials)
     .end((err, res) => {
       res.should.have.status(200);
@@ -87,7 +87,7 @@ before((done) => {
 before((done) => {
   chai
     .request(app)
-    .post("/login")
+    .post("/api/login")
     .send(userLogin)
     .end((err, res) => {
       token = res.body.token;
@@ -103,7 +103,7 @@ describe('User Account', () => {
 
   it('it should return users account if the user is logged in', (done) => {
     chai.request(app)
-      .get('/userAccount')
+      .get('/api/userAccount')
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(200)
@@ -115,7 +115,7 @@ describe('User Account', () => {
 
   it('it should return status 401 if token is not added', (done) => {
     chai.request(app)
-      .get('/userAccount')
+      .get('/api/userAccount')
       .end(function (err, res) {
         res.should.have.status(401)
         done();
@@ -131,7 +131,7 @@ describe('All Channels', () => {
 
   it('it should return all channels if the user is logged in', (done) => {
     chai.request(app)
-      .get('/channels')
+      .get('/api/channels')
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(200)
@@ -142,7 +142,7 @@ describe('All Channels', () => {
 
   it('it should return status 401 if token is not added', (done) => {
     chai.request(app)
-      .get('/channels')
+      .get('/api/channels')
       .end(function (err, res) {
         res.should.have.status(401)
         done();
@@ -158,7 +158,7 @@ describe('Home page', () => {
   describe('Get /homeposts', () => {
     it('it should get all home posts', (done) => {
       chai.request(app)
-        .get('/homeposts')
+        .get('/api/homeposts')
         .end((err, res) => {
           res.should.have.status(200)
           res.body.should.be.a('array')
@@ -174,7 +174,7 @@ describe('Update Account Info', () => {
 
   it('it should update account', (done) => {
     chai.request(app)
-      .post(`/editaccount`)
+      .post(`/api/editaccount`)
       .set('Token', token)
       .send(newInfo)
       .end((err, res) => {
@@ -186,7 +186,7 @@ describe('Update Account Info', () => {
 
   it('it should not update account if token not provided', (done) => {
     chai.request(app)
-      .post(`/editaccount`)
+      .post(`/api/editaccount`)
       .send(newInfo)
       .end((err, res) => {
         res.should.have.status(401);
@@ -203,7 +203,7 @@ describe('Delete post', () => {
 
   it('it should delete a post', (done) => {
     chai.request(app)
-      .post(`/deletePost`)
+      .post(`/api/deletePost`)
       .set('Token', token)
       .send(postId)
       .end((err, res) => {
@@ -215,7 +215,7 @@ describe('Delete post', () => {
 
   it('it should not delete post if token not provided', (done) => {
     chai.request(app)
-      .post(`/deletePost`)
+      .post(`/api/deletePost`)
       .send(postId)
       .end((err, res) => {
         res.should.have.status(401);
@@ -230,7 +230,7 @@ describe('Delete post', () => {
 describe('Post /homeposts', () => {
   it('it should send make a new post', (done) => {
     chai.request(app)
-      .post('/homeposts')
+      .post('/api/homeposts')
       .set('Token', token)
       .send(posts)
       .end((err, res) => {
@@ -245,7 +245,7 @@ describe('Post /homeposts', () => {
 
   it('it should return 401 if token not added', (done) => {
     chai.request(app)
-      .post('/homeposts')
+      .post('/api/homeposts')
       .send(posts)
       .end((err, res) => {
         res.should.have.status(401)
@@ -260,7 +260,7 @@ describe('Post /homeposts', () => {
 describe('Like a post', () => {
   it('it should like a post when it is not liked by the user', (done) => {
     chai.request(app)
-      .post(`/like/${postId}`)
+      .post(`/api/like/${postId}`)
       .set('Token', token)
       .send({ headers, isLiked })
       .end((err, res) => {
@@ -273,7 +273,7 @@ describe('Like a post', () => {
 
   it('it should return 401 if token not added', (done) => {
     chai.request(app)
-      .post(`/like/${postId}`)
+      .post(`/api/like/${postId}`)
       .send({ headers, isLiked })
       .end((err, res) => {
         res.should.have.status(401)
@@ -290,7 +290,7 @@ describe('Channel detail', () => {
 
   it('it should get channel detail', (done) => {
     chai.request(app)
-      .get('/channel/detail/' + "Mathematics")
+      .get('/api/channel/detail/' + "Mathematics")
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(200);
@@ -301,7 +301,7 @@ describe('Channel detail', () => {
 
   it('it should not get channel detail if token not provided', (done) => {
     chai.request(app)
-      .get('/channel/detail/' + "Mathematics")
+      .get('/api/channel/detail/' + "Mathematics")
       .end((err, res) => {
         res.should.have.status(401);
         done();
@@ -310,7 +310,7 @@ describe('Channel detail', () => {
 
   it('it should join channel', (done) => {
     chai.request(app)
-      .post('/channel/join')
+      .post('/api/channel/join')
       .set('Token', token)
       .send({ channelname: 'Mathematics' })
       .end((err, res) => {
@@ -321,7 +321,7 @@ describe('Channel detail', () => {
 
   it('it should not join channel if token not provided', (done) => {
     chai.request(app)
-      .post('/channel/join')
+      .post('/api/channel/join')
       .send({ channelname: 'Mathematics' })
       .end((err, res) => {
         res.should.have.status(401);
@@ -331,7 +331,7 @@ describe('Channel detail', () => {
 
   it('it should check if user joined channel', (done) => {
     chai.request(app)
-      .post('/channel/isJoined')
+      .post('/api/channel/isJoined')
       .set('Token', token)
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
@@ -343,7 +343,7 @@ describe('Channel detail', () => {
 
   it('it should not check if user joined channel if token is not provided', (done) => {
     chai.request(app)
-      .post('/channel/isJoined')
+      .post('/api/channel/isJoined')
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
         res.should.have.status(401);
@@ -354,7 +354,7 @@ describe('Channel detail', () => {
 
   it('it should leave channel', (done) => {
     chai.request(app)
-      .post('/channel/leave/')
+      .post('/api/channel/leave/')
       .set('Token', token)
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
@@ -365,7 +365,7 @@ describe('Channel detail', () => {
 
   it('it should leave channel if token is not provided', (done) => {
     chai.request(app)
-      .post('/channel/leave/')
+      .post('/api/channel/leave/')
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
         res.should.have.status(401);
@@ -375,7 +375,7 @@ describe('Channel detail', () => {
 
   it('it should verify if user left channel', (done) => {
     chai.request(app)
-      .post('/channel/isJoined')
+      .post('/api/channel/isJoined')
       .set('Token', token)
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
@@ -394,7 +394,7 @@ describe('Specific Channel', () => {
 
   it('it should join channel', (done) => {
     chai.request(app)
-      .post('/channel/join')
+      .post('/api/channel/join')
       .set('Token', token)
       .send({ channelname: 'Mathematics' })
       .end((err, res) => {
@@ -405,7 +405,7 @@ describe('Specific Channel', () => {
 
   it('it should return a specific channel if the user is logged in and subcribed to the channel', (done) => {
     chai.request(app)
-      .get('/channel/Mathematics')
+      .get('/api/channel/Mathematics')
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(200)
@@ -416,7 +416,7 @@ describe('Specific Channel', () => {
 
   it('should return status 401 if token is not added', (done) => {
     chai.request(app)
-      .get('/channel/Mathematics')
+      .get('/api/channel/Mathematics')
       .end(function (err, res) {
         res.should.have.status(401)
         done();
@@ -425,7 +425,7 @@ describe('Specific Channel', () => {
 
   it('it should leave channel', (done) => {
     chai.request(app)
-      .post('/channel/leave/')
+      .post('/api/channel/leave/')
       .set('Token', token)
       .send({ channelname: "Mathematics" })
       .end((err, res) => {
@@ -436,7 +436,7 @@ describe('Specific Channel', () => {
 
   it('should return a status of 402 if the user is logged in and not subcribed to channel', (done) => {
     chai.request(app)
-      .get('/channel/Mathematics')
+      .get('/api/channel/Mathematics')
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(402)
@@ -450,7 +450,7 @@ describe('Specific Channel', () => {
 describe('Get specific post details', () => {
   it('it should get specific post details ', (done) => {
     chai.request(app)
-      .get(`/detailedposts/${postId}`)
+      .get(`/api/detailedposts/${postId}`)
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(200);
@@ -464,7 +464,7 @@ describe('Get and Post Comments', () => {
 
   it('it should post comment', (done) => {
     chai.request(app)
-      .post(`/comments/${postId}`)
+      .post(`/api/comments/${postId}`)
       .set('Token', token)
       .send(newComment)
       .end((err, res) => {
@@ -476,7 +476,7 @@ describe('Get and Post Comments', () => {
 
   it('it should not post comment if token not provided', (done) => {
     chai.request(app)
-      .post(`/comments/${postId}`)
+      .post(`/api/comments/${postId}`)
       .send(newComment)
       .end((err, res) => {
         res.should.have.status(401);
@@ -487,7 +487,7 @@ describe('Get and Post Comments', () => {
 
   it('it should get comments', (done) => {
     chai.request(app)
-      .get(`/comments/${postId}`)
+      .get(`/api/comments/${postId}`)
       .set('Token', token)
       .end((err, res) => {
         res.should.have.status(200);
@@ -498,7 +498,7 @@ describe('Get and Post Comments', () => {
 
   it('it should not get comments if token not provided', (done) => {
     chai.request(app)
-      .get(`/comments/${postId}`)
+      .get(`/api/comments/${postId}`)
       .end((err, res) => {
         res.should.have.status(401);
         done()
@@ -514,7 +514,7 @@ describe('Get and Post Comments', () => {
 describe('Password reset', () => {
   it('should reset password if user is found', (done) => {
     chai.request(app)
-      .post('/reset')
+      .post('/api/reset')
       .send(resetDetails)
       .end((err, res) => {
         res.should.have.status(200)
