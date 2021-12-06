@@ -27,10 +27,6 @@ services:
     depends_on:
       - frontend
       - backend
-    volumes:
-      - ./nginx/config:/config
-      - ./nginx/default.conf:/config/nginx/site-confs/default
-      - ./nginx/ssl.conf:/config/nginx/ssl.conf
     ports:
       - 80:80
       - 443:443
@@ -41,7 +37,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - URL=docker.linkednyu.comf0rts.com
+      - URL=comf0rts.com
       - SUBDOMAINS=www,
       - VALIDATION=http
       - STAGING= false 
