@@ -20,6 +20,10 @@
     margin-top: 1em;
 }
 
+.passwordConfirm{
+    margin-top: 1em;
+}
+
 .nextButtonArea{
     margin-top: 5%;
     display: flex;

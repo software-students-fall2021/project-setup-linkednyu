@@ -71,8 +71,8 @@ Product Owner [@princeampofo](https://github.com/princeampofo)
 Scrum Master [@AnastasiaYe](https://github.com/AnastasiaYe)  
 
 ### Sprint 4
-Product Owner 
-Scrum Master
+Product Owner [@princeampofo](https://github.com/princeampofo)         
+Scrum Master [@Comf0rTS1997](https://github.com/Comf0rTS1997)        
 
 ### Color Theme
 We choose NYU purple to be the main color of our theme.     

@@ -1,12 +1,32 @@
+@keyframes landing {
+    0%   {background-color: #ffffff;}
+    25%  {background-color: #ff9d47;}
+    50%  {background-color: #547b51;}
+    100% {background-color: #5f5d98;}
+  }
 
-.accountPage{
-    padding-top: 60px;
-    background-color: #5f5d98;
+.landing{
+    width:100%;
     height: 100vh;
+    padding-top:45px ;
+    margin: auto;
+    background-color: #5f5d98;
+    color: #57068c;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: landing;
+    animation-duration: 5s;
 }
 
-.account{
-    display: flex;
+
+.accountPage{
+    padding-top: 60px !important;
+    background-color:#5f5d98;
+    min-height: 100vh;
 }
 
 .accountTop{
@@ -28,12 +48,12 @@
     border-radius: 5px;
     margin: 5px;
     padding-top: 2px; 
+    color: white;
 }
 
 .accountImage{
     display: flex;
     margin-left: 15px;
-    
 }
 
 .profilePicture{
@@ -52,9 +72,11 @@
     margin-left: 5px;
 }
 
-.accountName{
-    color:white;
+.accountEdit{
+    margin:0 auto;
 }
+
+
 
 .userClasses{
     display: flex;
@@ -101,5 +123,13 @@
 
 .classStyle1:hover{
     background-color: lightgrey;
+}
+
+.postItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 10px;
 }
 

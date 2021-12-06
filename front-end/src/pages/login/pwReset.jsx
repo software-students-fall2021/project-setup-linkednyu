@@ -10,15 +10,27 @@ export default function PwReset(props){
     const [mStyle, setmStyle] = useState("")
     const [email,setEmail] = useState("")
     const [newPassword,setNewPassword] = useState("")
+    const [confPassword,setConfPassword]=useState("")
     const history = useHistory()
 
 
     const resetPassword = async (e)=>{
 
-        if (!email || !newPassword) {
+        if (!email || !newPassword || !confPassword) {
             e.preventDefault()
             setmStyle("messageShow")
             setMessage("Email or new password fields are missing!")
+            setTimeout(()=>{
+                setmStyle("")
+                setMessage("")
+            },4000);
+            return
+        }
+
+        if (newPassword!==confPassword){
+            e.preventDefault()
+            setmStyle("messageShow")
+            setMessage("Password fields do not match!")
             setTimeout(()=>{
                 setmStyle("")
                 setMessage("")
@@ -89,6 +101,15 @@ export default function PwReset(props){
                             required
                             value ={newPassword}
                             onChange = {(e)=>{setNewPassword(e.target.value)}}
+                            className = "passwordInput"></TextField>
+                </div>
+                <div className="passwordConfirm">
+                    <TextField variant = "outlined"
+                            label = "Confirm New Password"
+                            type="Password"
+                            required
+                            value ={confPassword}
+                            onChange = {(e)=>{setConfPassword(e.target.value)}}
                             className = "passwordInput"></TextField>
                 </div>
                 <div className={mStyle}>

@@ -8,14 +8,14 @@ export default function Home({ loggedIn }) {
     const url = process.env.REACT_APP_API_URL + "/homeposts"
     const [posts, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
-    
+
     //fetch post from server
     useEffect(() => {
         let isMounted = true;
         async function fetchposts() {
             try {
                 await axios.get(url).then(response => {
-                    if(isMounted){
+                    if (isMounted) {
                         setPosts(response.data)
                         setIsloading(false)
                     }
@@ -26,13 +26,15 @@ export default function Home({ loggedIn }) {
         }
         fetchposts()
 
-        return () => {isMounted=false};
+        return () => { isMounted = false };
     }, [url])
 
     return (
         <>
+            {loading && < div className="landing" >
+                <h1>LinkedNYU</h1></div>}
             {!loading && <div className="homePage">
-                {posts.map((items,index) => (
+                {posts.map((items, index) => (
                     <PostBox key={index} loggedIn={loggedIn} post={items} />
                 ))}
             </div>}

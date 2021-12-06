@@ -1,6 +1,6 @@
 import React from "react"
 import "./Header.css"
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -12,35 +12,70 @@ import axios from "axios";
 
 
 
-const Header = ({ loggedIn, setloggedIn }) => {
+const Header = ({ loggedIn, setloggedIn , picChange }) => {
 
 	const [menuShow, setMenuShow] = useState(false)
-	const [filteredData , setFilteredData] = useState([])
-	const [wordEntered,setWordEntered] = useState("")
-	const [data, setData]= useState([])
+
+	const [filteredData, setFilteredData] = useState([])
+	const [wordEntered, setWordEntered] = useState("")
+	const [data, setData] = useState([])
 	const url = process.env.REACT_APP_API_URL + "/channels"
 
-	useEffect(() => {
-        let isMounted = true;
-        async function fetchchannel() {
-            let token = localStorage.getItem('token')
-            try {
-                await axios.get(url, {headers:{'Token':token}}).then(response => {
-                    if(isMounted){
-                        setData(response.data)
-                    }
-                    
-                });
-            } catch (error) {
-                console.log(error);
-            }
 
-        }
-        fetchchannel()
-        return () => {isMounted=false};
-        // eslint-disable-next-line 
-    },[loggedIn])
-	
+	const accounturl = "http://localhost:5000/userAccount"
+	const [account, setAccount] = useState(undefined)
+	const [loading, setIsloading] = useState(true)
+
+
+	useEffect(() => {
+		let isMounted = true;
+		async function fetchaccount() {
+			let token = localStorage.getItem('token')
+
+			try {
+				await axios.get(accounturl, { headers: { 'Token': token } }).then(response => {
+					if (isMounted) {
+						setAccount(response.data)
+					}
+				});
+			} catch (error) {
+				console.log(error);
+			}
+
+		}
+		fetchaccount()
+		return () => { isMounted = false };
+		// eslint-disable-next-line 
+	}, [loggedIn,picChange])
+
+	useEffect(() => {
+		if (account !== undefined) {
+			setIsloading(false);
+		}
+		// eslint-disable-next-line 
+	}, [account])
+
+	useEffect(() => {
+		let isMounted = true;
+		async function fetchchannel() {
+			let token = localStorage.getItem('token')
+			try {
+				await axios.get(url, { headers: { 'Token': token } }).then(response => {
+					if (isMounted) {
+						setData(response.data)
+					}
+
+				});
+			} catch (error) {
+				console.log(error);
+			}
+
+		}
+		fetchchannel()
+		return () => { isMounted = false };
+		// eslint-disable-next-line 
+	}, [loggedIn,picChange])
+
 
 	const toggleMenu = () => {
 		setMenuShow(!menuShow);
@@ -112,40 +147,40 @@ const Header = ({ loggedIn, setloggedIn }) => {
 		}
 	}
 
-	const handleFilter = (e)=>{
+	const handleFilter = (e) => {
 		const searchWord = e.target.value
 		setWordEntered(searchWord)
-		const newFilter = data.filter((item)=>{
+		const newFilter = data.filter((item) => {
 			return item.name.toLowerCase().includes(searchWord.toLowerCase())
 		})
-		if (searchWord === ""){
+		if (searchWord === "") {
 			setFilteredData([])
 		}
-		else{
+		else {
 			setFilteredData(newFilter)
 		}
-		
+
 	}
 
-	const clearSearch = ()=>{
+	const clearSearch = () => {
 		setFilteredData([])
 		setWordEntered("")
 	}
 
-	const searchResults = ()=>{
-		
+	const searchResults = () => {
+
 		return (
-		<>{ 
-			filteredData.length!==0 && <div className="dataResult">
-			{filteredData.map((item,index)=>{
-				return (
-					<Link key= {index} onClick={clearSearch} className="dataItem" to={loggedIn?`/joinclass/${item.name}`:'/login'}>{item.name}</Link>
-				);
-			})}	
-			</div>}
-		</>
+			<>{
+				filteredData.length !== 0 && <div className="dataResult">
+					{filteredData.map((item, index) => {
+						return (
+							<Link key={index} onClick={clearSearch} className="dataItem" to={loggedIn ? `/joinclass/${item.name}` : '/login'}>{item.name}</Link>
+						);
+					})}
+				</div>}
+			</>
 		)
-		
+
 	}
 
 
@@ -162,14 +197,14 @@ const Header = ({ loggedIn, setloggedIn }) => {
 					</div>
 					<div className="searchBox">
 						<input placeholder="Search for channel details" value={wordEntered} className="searchInput" onChange={handleFilter} />
-						{filteredData.length===0 ? <SearchIcon className="searchIcon" /> : <CloseIcon className="closeIcon" onClick={clearSearch}/>}
+						{filteredData.length === 0 ? <SearchIcon className="searchIcon" /> : <CloseIcon className="closeIcon" onClick={clearSearch} />}
 					</div>
 					<div className="avatarContainer">
 						<Link to={loggedIn ? "/account" : "/login"}>
 							<Avatar onClick={() => {
 								setMenuShow(false);
 							}} className="avatarIcon"
-								sx={{ width: 30, height: 30 }} src={loggedIn ? "https://robohash.org/etiustodolorum.png?size=50x50&set=set1" : ""}>
+								sx={{ width: 30, height: 30 }} src={loggedIn && !loading ? account.profile : ""}>
 							</Avatar>
 						</Link>
 					</div>
