@@ -13,19 +13,21 @@ const signUp = async (req,res)=>{
 
     const emailExist = await User.findOne({email:req.body.email});
 
-    if (emailExist) return res.status(400).send("Email already exists")
+    if (emailExist) return res.status(400).send({message:"Email already exists"})
 
     const salt = await bcrypt.genSalt(10)
     const hashPassword = await bcrypt.hash(req.body.password,salt);
     
     const wMessage = "Hi! " + req.body.name + ". Welcome Back! We hope you are having a good time on LinkedNYU!"
 
+    console.log(req.body.profile)
     const user = new User({
         name:req.body.name,
         username:req.body.username,
         email:req.body.email,
         password:hashPassword,
-        message: wMessage
+        message: wMessage,
+        profile :req.body.profile
     });
 
 
@@ -52,7 +54,7 @@ const login = async (req,res)=>{
     if (!validPass) return res.status(409).json({message:"Invalid Password"});
 
 
-    const token = jwt.sign({_id:userFound._id},process.env.SECRET_TOKEN, {expiresIn : "60m"})
+    const token = jwt.sign({_id:userFound._id},process.env.SECRET_TOKEN)
 
 
     res.status(200).json({token:token ,message:"Successfully Logged In!"})
@@ -77,7 +79,6 @@ const resetPassword = async (req,res) =>{
 
 
 }
-
 
 
 module.exports = {

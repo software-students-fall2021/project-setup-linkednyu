@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField'
 import { useState } from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
+import FileBase64 from 'react-file-base64';
 
 
 export default function SignUp(){
@@ -11,6 +12,7 @@ export default function SignUp(){
     const [email,setEmail] = useState("")
     const [password,setPassword]=useState("")
     const [message,setMessage] = useState("")
+    const [profile,setProfile]=useState("")
     const [mStyle, setmStyle] = useState("")
     const history = useHistory()
 
@@ -31,11 +33,13 @@ export default function SignUp(){
         let randNumber = Math.floor(Math.random()*10) + 1
         let uName = newName[0] + randNumber.toString()
         
+        console.log(profile);
         const signUpDetails = {
             name:name,
             username:uName,
             email:email,
-            password:password
+            password:password,
+            profile: profile
         };
 
         try{
@@ -96,6 +100,14 @@ export default function SignUp(){
                             className = "pwInput"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}></TextField>
+                </div>
+                <div className="imageUpload">
+                    <p className="imgUpload">Upload a profile picture</p>
+                    <FileBase64
+                        multiple={false}
+                        onDone={({ base64 }) => {
+                            setProfile(base64)
+                        }} />
                 </div>
             </div>
             <div className={mStyle}>

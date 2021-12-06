@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+@keyframes landing {
+    0%   {background-color: #ffffff;}
+    25%  {background-color: #ff9d47;}
+    50%  {background-color: #547b51;}
+    100% {background-color: #5f5d98;}
+  }
+
+.landing{
+    width:100%;
+    height: 100vh;
+    padding-top:45px ;
+    margin: auto;
+    background-color: #5f5d98;
+    color: #57068c;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: landing;
+    animation-duration: 5s;
+}
+
+.editaccountPage{
+    width:100%;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    padding-top:20px;
+    background-color: #5f5d98;
+    color: white;
+    min-height: 100vh;
+}
+
+.accountWrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-top: 40px;
+}
+
+.accountHeader{
+    display: flex;
+    justify-content: center;
+    background-color: #57068c;
+    border-radius: 5px;
+    margin: 5px;
+    padding-top: 2px; 
+}
+
+.accountBio{
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 5px;
+    padding-top: 2px; 
+}
+
+.accountBioForm{
+    display:flex;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.profile-pic-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 200px;
+    margin: 0 auto;
+   
+}
+
+#photo{
+    margin-top: 1em;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-bottom: 1em;
+}
+
+#file{
+    width: 85%;
+}
+
+.accountInfo{
+    display: flex;
+    flex-direction: column;
+    margin:1em 0;
+}
+
+.inputHeader{
+    margin-bottom: 0.5em;
+}
+
+.accountMessage{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+.updateArea{
+    display: flex;
+    justify-content: center;
+}
+input{
+    height: 30px;
+}
+
+textarea{
+    resize: none;
+    height: 70px;
+}
+
+
+
+
