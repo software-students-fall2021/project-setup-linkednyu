@@ -41,7 +41,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
-      - URL=linkednyu.com
+      - URL=docker.linkednyu.comf0rts.com
       - SUBDOMAINS=www,
       - VALIDATION=http
       - STAGING= false 
