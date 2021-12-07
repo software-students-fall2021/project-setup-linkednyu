@@ -20,6 +20,7 @@
 	- [References](#references)
 
 ## Live Link
+**Note:** This app is designed for mobile users, adjust browser size for better experience. 
 - docker version: http://137.184.103.24/ 
 - manual setup: https://linkednyu.comf0rts.com
 
@@ -77,6 +78,7 @@ npm install
 Create a `.env` file with content that allow you to connect to database   
 ```
 CONNECTION_URL = <your link here>
+SECRET_TOKEN = secretkey
 ```
 Start the server    
 (there should be a browser windows shows up and tells you the server is running locally)
@@ -97,10 +99,6 @@ npm run coverage
 ### Run Front-end
 ( If you are inside back-end folder, make sure to go back first by typing `cd -` ) 
 
-first make a `.env` file in the root to designate api address    
-```
-REACT_APP_API_URL=api_address
-```
 Go to front end folder  
 ```
 cd front-end
