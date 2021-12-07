@@ -56,6 +56,10 @@
     font-size:15px;
 }
 
+.btn--tiny{
+    padding: 0px 5px;
+}
+
 .btn--small{
     padding: 5px 10px;
     font-size: 10px;

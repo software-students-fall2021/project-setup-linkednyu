@@ -4,15 +4,14 @@ import { useState, useEffect } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import Avatar from '@mui/material/Avatar'
-import UnstyledButton from '@mui/core/ButtonUnstyled'
-import { Button } from "../components/Button"
+import Avatar from '@mui/material/Avatar';
+import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 
 
-const Header = ({ loggedIn, setloggedIn , picChange }) => {
+const Header = ({ loggedIn, setloggedIn, picChange }) => {
 
 	const [menuShow, setMenuShow] = useState(false)
 
@@ -46,7 +45,7 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 		fetchaccount()
 		return () => { isMounted = false };
 		// eslint-disable-next-line 
-	}, [loggedIn,picChange])
+	}, [loggedIn, picChange])
 
 	useEffect(() => {
 		if (account !== undefined) {
@@ -74,7 +73,7 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 		fetchchannel()
 		return () => { isMounted = false };
 		// eslint-disable-next-line 
-	}, [loggedIn,picChange])
+	}, [loggedIn, picChange])
 
 
 	const toggleMenu = () => {
@@ -191,9 +190,10 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 			<div className="topBarContainer">
 				<div className="topBarItems">
 					<div className="hamburgerMenu">
-						<UnstyledButton onClick={toggleMenu}>
+						<Button classname="menubtn" buttonStyle="btn--primary--outline"
+							buttonSize="btn--tiny" onClick={toggleMenu}>
 							<MenuIcon className="menuIcon" />
-						</UnstyledButton>
+						</Button>
 					</div>
 					<div className="searchBox">
 						<input placeholder="Search for channel details" value={wordEntered} className="searchInput" onChange={handleFilter} />

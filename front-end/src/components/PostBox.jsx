@@ -5,6 +5,7 @@ import parser from 'html-react-parser'
 
 
 
+
 const PostBox = ({ post, loggedIn }) => {
 
 	let newDate = new Date(post.date)
@@ -24,12 +25,12 @@ const PostBox = ({ post, loggedIn }) => {
 					<ImageAvatars className="imgAvatar" size="36px" id={post.username} avatarSrc={post.avatar} />
 					<h3 className="userName">{post.username}</h3>
 					<h3 className="courseName"><Link className="tLink" to={loggedIn ? `/joinclass/${post.coursename}` : ""}>{post.coursename}</Link></h3>
-					<h3 className="time">{mDate}</h3>
+					<p className="time">{mDate}</p>
 				</div>
-				<hr />
-				<Link className="tLink" to={loggedIn ?`/detailedposts/${post._id}`:"/login"}><div className="content">
-					<h3 className="contenttitle">{post.title}</h3>
+				{/* <hr /> */}
+				<Link className="tLink" to={loggedIn ? `/detailedposts/${post._id}` : "/login"}><div className="content">
 					<img className="contentImg" src={post.imgSrc} alt="" ></img>
+					<h3 className="contenttitle">{post.title}</h3>
 					<div className="textContent">
 						{newSentence}
 					</div>

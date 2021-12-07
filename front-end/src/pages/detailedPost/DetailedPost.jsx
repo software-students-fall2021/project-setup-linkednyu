@@ -199,6 +199,11 @@ export default function DetailedPost() {
                 <h1>Linked NYU</h1></div>}
             {!loading && !loadingComment && !loadingAccount && <div className="detailedPost" >
                 <div className="detailedWrapper">
+                    <div className="detailedPostCenter">
+                        <img className="detailedPostImg" src={post.imgSrc} alt="" />
+                        <span className="detailedPostTitle">{post.title}</span>
+                        <span className="detailedPostText">{parser(post.content + '')}</span>
+                    </div>
                     <div className="detailedPostTop">
                         <div className="detailedPostTopLeft">
                             <div className="detailedPostAvatar">
@@ -214,11 +219,6 @@ export default function DetailedPost() {
                                 <div className="detailedPosDate">{new Date(post.date).toISOString().slice(0, 10)}</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="detailedPostCenter">
-                        <span className="detailedPostTitle">{post.title}</span>
-                        <span className="detailedPostText">{parser(post.content + '')}</span>
-                        <img className="detailedPostImg" src={post.imgSrc} alt="" />
                     </div>
                     <div className="detailedPostBottom">
                         <span className="detailedPostCommentCounter">{comment.length} comments</span>

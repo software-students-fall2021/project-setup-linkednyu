@@ -1,19 +1,27 @@
- 
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap'); 
+
+body,h1,h2,h3,h4,h5,div,link 
+{
+    font-family: "Readex Pro", sans-serif;
+    color:aliceblue;
+}
 
 .container {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     max-width: 100%;
 }
 
 .task {
     background: #f4f4f4;
-    border: 2px solid #57068c;
+    /* border: 2px solid #57068c; */
     border-radius: 7px;
     max-width: 95%;
     margin: 0 auto;
     cursor: pointer;
     height: auto;
+    background-color:rgba(255, 255, 255, 0.144);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.144);
 }
 
 .header {
@@ -47,12 +55,12 @@
 }
 
 .content{
-    max-width: 95%;
-    margin: 15px auto;
+    max-width: 100%;
+    margin: auto;
 }
 
 .contenttitle{
-    margin: 7px 0px;
+    margin: 7px 10px;
 }
 
 .contentImg{
@@ -62,7 +70,10 @@
 
 .textContent{
     text-align:justify;
-    margin-top: 0.5em;
+    /* margin-top: 0.5em;
+    margin-left: 10px;
+    margin-right: 10px; */
+    margin: 0.5em 10px 10px 10px;
 }
 
 img{
@@ -76,5 +87,4 @@ img{
 .tLink {
     text-decoration: none;
     color: black;
-
 }
