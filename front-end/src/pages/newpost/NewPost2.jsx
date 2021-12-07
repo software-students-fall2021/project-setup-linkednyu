@@ -18,7 +18,7 @@ const NewPost2 = () => {
     const url = '/api/userAccount'
     const [channel, setChannel] = useState({ name: "Channel" })
     const [userChannels, setUserChannels] = useState([])
-    const [profile,setProfile]=useState("")
+    const [profile, setProfile] = useState("")
 
     let history = useHistory(); //jump to home
     let token = localStorage.getItem('token')

@@ -5,120 +5,123 @@ import { useState } from "react"
 import axios from "axios"
 import { useHistory } from "react-router"
 
-export default function PwReset(props){
-    const [message,setMessage] = useState("")
+export default function PwReset(props) {
+    const [message, setMessage] = useState("")
     const [mStyle, setmStyle] = useState("")
-    const [email,setEmail] = useState("")
-    const [newPassword,setNewPassword] = useState("")
-    const [confPassword,setConfPassword]=useState("")
+    const [email, setEmail] = useState("")
+    const [newPassword, setNewPassword] = useState("")
+    const [confPassword, setConfPassword] = useState("")
     const history = useHistory()
 
 
-    const resetPassword = async (e)=>{
+    const resetPassword = async (e) => {
 
         if (!email || !newPassword || !confPassword) {
             e.preventDefault()
             setmStyle("messageShow")
             setMessage("Email or new password fields are missing!")
-            setTimeout(()=>{
+            setTimeout(() => {
                 setmStyle("")
                 setMessage("")
-            },4000);
+            }, 4000);
             return
         }
 
-        if (newPassword!==confPassword){
+        if (newPassword !== confPassword) {
             e.preventDefault()
             setmStyle("messageShow")
             setMessage("Password fields do not match!")
-            setTimeout(()=>{
+            setTimeout(() => {
                 setmStyle("")
                 setMessage("")
-            },4000);
+            }, 4000);
             return
         }
 
         const resetDetails = {
-            email : email,
+            email: email,
             newPassword: newPassword
         }
 
-        try{
-            const res = await axios.post('/api/reset',resetDetails)
+        try {
+            const res = await axios.post('/api/reset', resetDetails)
             console.log('here 1');
-            if (res.status === 200){
+            if (res.status === 200) {
                 console.log(res.status)
                 console.log('here 5');
                 setmStyle("messageShow")
                 setMessage(res.data.message)
-                setTimeout(()=>{
+                setTimeout(() => {
                     setmStyle("")
                     setMessage("")
                     history.push('/login')
-                },1500)
-                
+                }, 1500)
+
             }
 
-        }catch(error){
+        } catch (error) {
             console.log('here 2');
             e.preventDefault()
             setmStyle("messageShow")
             console.log(error.response.data.message);
             setMessage(error.response.data.message)
-            setTimeout(()=>{
+            setTimeout(() => {
                 setmStyle("")
                 setMessage("")
-            },4000);
+            }, 4000);
 
         }
 
     }
 
-    return(
-        <div className = "pwResetPage">
-            <div className = "signinTitle">
-                <div className = "title">
+    return (
+        <div className="pwResetPage">
+            <div className="signinTitle">
+                <div className="title">
                     Forgot your password?
                 </div>
-                <div className = "subTitle">
+                <div className="subTitle">
                     Don't worry, we got you.
                 </div>
             </div>
-            <div className = "inputArea">
+            <div className="inputArea">
                 <div>
-                <TextField variant = "outlined"
-                            label = "Email"
-                            required
-                            value = {email}
-                            onChange = {(e)=>{setEmail(e.target.value)}}
-                            className = "emailInput"></TextField>
+                    <label for="email"> Email </label>
+                    <TextField variant="outlined"
+                        required
+                        value={email}
+                        id="email"
+                        onChange={(e) => { setEmail(e.target.value) }}
+                        className="emailInput"></TextField>
                 </div>
-                
+
                 <div className='passwordField'>
-                <TextField variant = "outlined"
-                            label = "New Password"
-                            type="Password"
-                            required
-                            value ={newPassword}
-                            onChange = {(e)=>{setNewPassword(e.target.value)}}
-                            className = "passwordInput"></TextField>
+                    <label for="newpassword"> New Password </label>
+                    <TextField variant="outlined"
+                        type="Password"
+                        required
+                        value={newPassword}
+                        id="newpassword"
+                        onChange={(e) => { setNewPassword(e.target.value) }}
+                        className="passwordInput"></TextField>
                 </div>
                 <div className="passwordConfirm">
-                    <TextField variant = "outlined"
-                            label = "Confirm New Password"
-                            type="Password"
-                            required
-                            value ={confPassword}
-                            onChange = {(e)=>{setConfPassword(e.target.value)}}
-                            className = "passwordInput"></TextField>
+                    <label for="confirmpassword"> Confirm New Password</label>
+                    <TextField variant="outlined"
+                        type="Password"
+                        required
+                        value={confPassword}
+                        id="confirmpassword"
+                        onChange={(e) => { setConfPassword(e.target.value) }}
+                        className="passwordInput"></TextField>
                 </div>
                 <div className={mStyle}>
                     <p className="errMessage">{message}</p>
                 </div>
-                
-                <div className = "nextButtonArea">
-                    <Button onClick={resetPassword} variant = "contained" 
-                            className = "nextButton">Reset</Button>
+
+                <div className="nextButtonArea">
+                    <Button onClick={resetPassword} variant="contained"
+                        className="nextButton">Reset</Button>
                 </div>
             </div>
         </div>

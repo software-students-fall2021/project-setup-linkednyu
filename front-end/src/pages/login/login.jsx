@@ -2,7 +2,7 @@ import "./login.css"
 import { Button } from '../../components/Button'
 import TextField from '@mui/material/TextField'
 import { Link } from "react-router-dom"
-import { useState} from "react"
+import { useState } from "react"
 import axios from 'axios'
 import { useHistory } from "react-router"
 
@@ -11,57 +11,57 @@ import { useHistory } from "react-router"
 export default function Login({ setLoggedIn }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
-    const [message,setMessage] = useState("")
+    const [message, setMessage] = useState("")
     const [mStyle, setmStyle] = useState("")
     const history = useHistory()
 
     const onLogin = async (e) => {
-        
+
         if (!email || !password) {
             e.preventDefault()
             setmStyle("messageShow")
             setMessage("Email or password fields are missing!")
-            setTimeout(()=>{
+            setTimeout(() => {
                 setmStyle("")
                 setMessage("")
-            },4000);
+            }, 4000);
             return
         }
-        
+
         const loginDetails = {
-            email:email,
-            password:password
+            email: email,
+            password: password
         };
 
-        try{
+        try {
 
-            const res = await axios.post('/api/login',loginDetails)
-            if (res.status === 200){
-                localStorage.setItem('token',res.data.token)
+            const res = await axios.post('/api/login', loginDetails)
+            if (res.status === 200) {
+                localStorage.setItem('token', res.data.token)
                 setmStyle("messageShow")
                 setMessage(res.data.message)
                 setLoggedIn(true)
-                localStorage.setItem('loggedIn',"True")
-                setTimeout(()=>{
+                localStorage.setItem('loggedIn', "True")
+                setTimeout(() => {
                     setmStyle("")
                     setMessage("")
                     history.push('/')
-                },1500)
-                
+                }, 1500)
+
             }
-        }catch (err){
+        } catch (err) {
             e.preventDefault()
             setmStyle("messageShow")
             setMessage(err.response.data.message)
-            setTimeout(()=>{
+            setTimeout(() => {
                 setmStyle("")
                 setMessage("")
-            },4000);
+            }, 4000);
         }
 
     }
 
-    
+
     return (
         <div className="loginPage">
             <div className='signinTitle1'>
@@ -72,23 +72,25 @@ export default function Login({ setLoggedIn }) {
             </div>
             <div className="inputArea">
                 <div className="emailArea">
+                    <label for="email"> Email </label>
                     <TextField variant="outlined"
-                        label="Email"
                         required
-                        className="emailInput" 
+                        className="emailInput"
+                        id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}>
-                        </TextField>
+                    </TextField>
                 </div>
                 <div className="passwordArea">
+                    <label for="password"> Password </label>
                     <TextField variant="outlined"
-                        label="Password"
                         type="Password"
                         required
-                        className="passwordInput" 
+                        id="password"
+                        className="passwordInput"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}>       
-                        </TextField>
+                        onChange={(e) => setPassword(e.target.value)}>
+                    </TextField>
                 </div>
                 <div className={mStyle}>
                     <p className="errMessage">{message}</p>
@@ -107,6 +109,6 @@ export default function Login({ setLoggedIn }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
