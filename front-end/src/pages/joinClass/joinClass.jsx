@@ -13,7 +13,7 @@ import { Link } from "react-router-dom"
 
 const JoinClass = (props) => {
     
-    const url = process.env.REACT_APP_API_URL + "/channel/";
+    const url = "/api/channel/";
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState(null);
     const [isJoined, setIsJoined] = useState(false);

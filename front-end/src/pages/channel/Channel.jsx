@@ -7,7 +7,7 @@ import { useHistory } from "react-router"
 
 export default function Channel({ loggedIn }) {
     const { id } = useParams();
-    const url = process.env.REACT_APP_API_URL + `/channel/${id}`
+    const url = `/api/channel/${id}`
     const [post, setPosts] = useState(null)
     const [loading, setIsloading] = useState(true)
 

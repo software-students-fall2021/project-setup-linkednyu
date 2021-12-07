@@ -1,0 +1,40 @@
+version: "3"
+services:
+  frontend:
+    image: react-app
+    build: ./front-end 
+    container_name: front-end
+    stdin_open : true 
+    restart: always 
+    links:
+      - backend
+    depends_on:
+      - backend
+    networks:
+      - linkednyunetwork
+
+  backend:
+    image: server-app
+    build: ./back-end
+    container_name: back-end
+    restart: always
+    networks:
+      - linkednyunetwork
+
+  nginx:
+    restart: always
+    depends_on:
+      - frontend
+      - backend
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    container_name: nginx
+    networks:
+      - linkednyunetwork
+
+networks:
+  linkednyunetwork:
+    driver: bridge

@@ -20,7 +20,6 @@ const signUp = async (req,res)=>{
     
     const wMessage = "Hi! " + req.body.name + ". Welcome Back! We hope you are having a good time on LinkedNYU!"
 
-    console.log(req.body.profile)
     const user = new User({
         name:req.body.name,
         username:req.body.username,

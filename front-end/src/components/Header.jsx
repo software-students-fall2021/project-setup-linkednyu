@@ -19,10 +19,10 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 	const [filteredData, setFilteredData] = useState([])
 	const [wordEntered, setWordEntered] = useState("")
 	const [data, setData] = useState([])
-	const url = process.env.REACT_APP_API_URL + "/channels"
+	const url = "/api/channels"
 
 
-	const accounturl = process.env.REACT_APP_API_URL + "/userAccount"
+	const accounturl = "/api/userAccount"
 	const [account, setAccount] = useState(undefined)
 	const [loading, setIsloading] = useState(true)
 
