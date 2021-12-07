@@ -34,12 +34,6 @@ services:
     container_name: nginx
     networks:
       - linkednyunetwork
-  
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30
 
 networks:
   linkednyunetwork:
