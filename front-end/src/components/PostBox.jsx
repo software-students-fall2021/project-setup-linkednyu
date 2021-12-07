@@ -27,7 +27,7 @@ const PostBox = ({ post, loggedIn }) => {
 					<h3 className="time">{mDate}</h3>
 				</div>
 				<hr />
-				<Link className="tLink" to={loggedIn ?`/detailedposts/${post._id}`:"/login"}><div className="content">
+				<Link className="tLink" to={loggedIn ? `/detailedposts/${post._id}` : "/login"}><div className="content">
 					<h3 className="contenttitle">{post.title}</h3>
 					<img className="contentImg" src={post.imgSrc} alt="" ></img>
 					<div className="textContent">

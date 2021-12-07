@@ -1,80 +1,43 @@
- 
+import './PostBox.css'
+import ImageAvatars from './Avatar'
+import { Link } from 'react-router-dom'
+import parser from 'html-react-parser'
 
-.container {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    max-width: 100%;
+
+
+
+const PostBox = ({ post, loggedIn }) => {
+
+    let newDate = new Date(post.date)
+    let mDate = newDate.toISOString().slice(0, 10)
+    let newArray = post.content.split(" ")
+    let newSentence = ""
+    if (newArray.length > 25) {
+        newSentence = parser(newArray.slice(0, 22).join(" ") + "...<span style='color:blue;'>Click to Read More</span>")
+    }
+    else {
+        newSentence = parser(post.content)
+    }
+    return (
+        <div className="container">
+            <div className='task'>
+                <div className="header">
+                    <ImageAvatars className="imgAvatar" size="36px" id={post.username} avatarSrc={post.avatar} />
+                    <h3 className="userName">{post.username}</h3>
+                    <h3 className="courseName"><Link className="tLink" to={loggedIn ? `/joinclass/${post.coursename}` : ""}>{post.coursename}</Link></h3>
+                    <p className="time">{mDate}</p>
+                </div>
+                {/* <hr /> */}
+                <Link className="tLink" to={loggedIn ? `/detailedposts/${post._id}` : "/login"}><div className="content">
+                    <img className="contentImg" src={post.imgSrc} alt="" ></img>
+                    <h3 className="contenttitle">{post.title}</h3>
+                    <div className="textContent">
+                        {newSentence}
+                    </div>
+                </div></Link>
+            </div>
+        </div>
+    )
 }
 
-.task {
-    background: #f4f4f4;
-    border: 2px solid #57068c;
-    border-radius: 7px;
-    max-width: 95%;
-    margin: 0 auto;
-    cursor: pointer;
-    height: auto;
-}
-
-.header {
-    display: flex;
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 5px 0px;
-    align-items: center;
-}
-
-.userName{
-    margin-left: 7px;
-    display: flex;
-    flex:3;
-    justify-content: flex-start;
-    font-size: 0.9em;
-}
-
-.courseName{
-    display: flex;
-    flex: 7;
-    justify-content: flex-start;
-    font-size: 0.9em;
-}
-
-.time{
-    display: flex;
-    flex: 2;
-    justify-content: flex-end;
-    font-size: 0.9em;
-}
-
-.content{
-    max-width: 95%;
-    margin: 15px auto;
-}
-
-.contenttitle{
-    margin: 7px 0px;
-}
-
-.contentImg{
-    width : 100%;
-    height : 200px;
-}
-
-.textContent{
-    text-align:justify;
-    margin-top: 0.5em;
-}
-
-img{
-    display: block;
-    max-width: 100%;
-    max-height: 200px;
-    width: auto;
-    height: auto;
-}
-
-.tLink {
-    text-decoration: none;
-    color: black;
-
-}
+export default PostBox
