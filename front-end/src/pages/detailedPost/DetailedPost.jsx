@@ -37,7 +37,7 @@ export default function DetailedPost() {
     const [loadingAccount, setIsloadingAccount] = useState(true)
 
     const onLike = async () => {
-        await axios.post(`http://localhost:5000/like/${id}`, { headers: { 'Token': token }, isLiked: liked }, { headers: { 'Token': token } }).then(response => {
+        await axios.post(process.env.REACT_APP_API_URL + `/like/${id}`, { headers: { 'Token': token }, isLiked: liked }, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));

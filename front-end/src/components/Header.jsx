@@ -22,7 +22,7 @@ const Header = ({ loggedIn, setloggedIn , picChange }) => {
 	const url = process.env.REACT_APP_API_URL + "/channels"
 
 
-	const accounturl = "http://localhost:5000/userAccount"
+	const accounturl = process.env.REACT_APP_API_URL + "/userAccount"
 	const [account, setAccount] = useState(undefined)
 	const [loading, setIsloading] = useState(true)
 
