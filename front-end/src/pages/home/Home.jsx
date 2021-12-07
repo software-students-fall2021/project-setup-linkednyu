@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 
 
+
 export default function Home({ loggedIn }) {
     const url = "/api/homeposts"
     const [posts, setPosts] = useState(null)
@@ -32,6 +33,7 @@ export default function Home({ loggedIn }) {
     return (
         <>
             {loading && < div className="landing" >
+                {/* <img src={require("LinkedNYU.gif")} alt="" /> */}
                 <h1>LinkedNYU</h1></div>}
             {!loading && <div className="homePage">
                 {posts.map((items, index) => (

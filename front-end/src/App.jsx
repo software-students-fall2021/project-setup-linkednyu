@@ -18,7 +18,7 @@ import EditAccount from './pages/editAccount/editAccount';
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false)
-  const [picChange,setpicChange] = useState(false)
+  const [picChange, setpicChange] = useState(false)
 
   useEffect(() => {
     let newState = localStorage.getItem('loggedIn')
@@ -41,7 +41,7 @@ function App() {
         <Route path="/pwreset" component={pwReset} />
         <Route path="/signup"> <SignUp /> </Route>
         <Route path="/account" > <Account /></Route>
-        <Route path="/editaccount" ><EditAccount picChange={picChange} setpicChange={setpicChange}  /> </Route>
+        <Route path="/editaccount" ><EditAccount picChange={picChange} setpicChange={setpicChange} /> </Route>
         <Route path="/newpost2" > <NewPost2 loggedIn={loggedIn} /></Route>
         <Route path="*"><NotFound /></Route>
       </Switch>
