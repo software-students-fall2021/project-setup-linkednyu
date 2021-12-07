@@ -49,17 +49,17 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  test-build-docker-deploy:
+  build-test-docker-deploy:
     jobs:
       - build-and-test-express-js
       - build-react-js
       - hold:
-        type: approval
-        requires:
-          - build-and-test-express-js
-          - build-react-js
+          type: approval
+          requires:
+            - build-and-test-express-js
+            - build-react-js
       - pull-and-build:
-        requires:
-          - hold
+          requires:
+            - hold
        
 
