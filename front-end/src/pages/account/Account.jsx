@@ -22,7 +22,7 @@ export default function Account() {
         let token = localStorage.getItem('token')
         //console.log(e)
 
-        await axios.post(`http://localhost:5000/deletePost`, { _id: e }, { headers: { 'Token': token } }).then(response => {
+        await axios.post(process.env.REACT_APP_API_URL + `/deletePost`, { _id: e }, { headers: { 'Token': token } }).then(response => {
             console.log("sent");
         })
             .catch((err) => console.log(err.message));
