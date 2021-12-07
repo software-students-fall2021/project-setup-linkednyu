@@ -31,7 +31,7 @@ const updateAccount = async (req, res) => {
         const infoUpdate = await User.findOneAndUpdate({ _id: req.user._id }, newInfo, {
             new: true
         })
-        console.log(infoUpdate.username);
+        
         await Post.updateMany({username:infoUpdate.username},{ $set: { "avatar" : info.profile } })
         res.status(200).json(infoUpdate)
     } catch (error) {
