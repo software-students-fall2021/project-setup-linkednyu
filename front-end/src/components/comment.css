@@ -1,7 +1,8 @@
 .comment{
     width:100%;
-    border: 2px solid #57068c;
+    /* border: 2px solid #57068c; */
     border-radius: 15px;
+    background-color: rgba(161, 160, 190, 0.2);
     margin: auto;
 }
 

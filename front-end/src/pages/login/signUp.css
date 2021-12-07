@@ -1,7 +1,10 @@
 .signupPage{
     margin:auto;
-    width: 90%;
+    width: 100%;
+    height: 100vh;
     padding: 15% 10%;
+    color:#57068c;
+    background-color: #5f5d98;
 }
 
 .signupTitle1{
@@ -24,10 +27,13 @@
 
 .emailInputArea, .pwInputArea{
     margin-top: 5%;
+    
 }
 
 .unInput, .emailInput, .pwInput{
     width : 100%;
+    background-color: #ffffffcb;
+    border-radius: 5px;
 }
 
 .messageShow{

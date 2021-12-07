@@ -1,7 +1,10 @@
 .loginPage{
     margin:auto;
-    width: 90%;
+    width: 100%;
+    height: 100vh;
     padding: 15% 10%;
+    color:#57068c;
+    background-color: #5f5d98;
 }
 
 .signinTitle{
@@ -33,10 +36,14 @@
     width: 100%;
     height: 1%;
     padding: 10%;
+    background-color: #ffffffcb;
+    border-radius: 5px;
 }
 
 .passwordInput{
     width: 100%;
+    background-color: #ffffffcb;
+    border-radius: 5px;
 }
 
 .messageShow{
@@ -46,6 +53,9 @@
 .errMessage{
     font-size:large;
     color: red;
+}
+.emailArea{
+    margin-top:6%;
 }
 .passwordArea{
     margin-top:6%;
