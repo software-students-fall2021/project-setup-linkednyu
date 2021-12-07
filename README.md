@@ -20,7 +20,8 @@
 	- [References](#references)
 
 ## Live Link
-http://137.184.103.24/ 
+- docker version: http://137.184.103.24/ 
+- manual setup: https://linkednyu.comf0rts.com
 
 ## Product Vision
 
@@ -90,7 +91,11 @@ npm run coverage
 ```
 
 ### Run Front-end
-( If you are inside back-end folder, make sure to go back first by typing `cd -` )     
+( If you are inside back-end folder, make sure to go back first by typing `cd -` ) 
+
+first make a .env file in the root to designate api address:
+REACT_APP_API_URL=api_address
+```
 Go to front end folder  
 ```
 cd front-end
