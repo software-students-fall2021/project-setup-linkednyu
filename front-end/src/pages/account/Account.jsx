@@ -172,7 +172,7 @@ export default function Account() {
                                     <Button key={index+posts.length} className="postDelete"
                                         onClick={() => onDelete(item.link)}
                                         buttonSize="btn--medium" buttonStyle="btn--primary--outline">
-                                        <span className="likeIcon">Delete</span>
+                                        <span key={index+posts.length+posts.length} className="likeIcon">Delete</span>
                                     </Button>
                                 </div></>)
                             })}

@@ -28,23 +28,6 @@ export default function EditAccount({picChange , setpicChange }) {
         })
             .catch((err) => console.log(err.message));
 
-
-        async function fetchaccount() {
-            let token = localStorage.getItem('token')
-
-            try {
-                await axios.get(accounturl, { headers: { 'Token': token } }).then(response => {
-
-                    setAccount(response.data)
-
-
-                });
-            } catch (error) {
-                History.push('/login')
-            }
-
-        }
-        fetchaccount()
         setpicChange(()=>{
             return !picChange
         })

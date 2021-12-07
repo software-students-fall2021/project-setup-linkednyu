@@ -221,8 +221,8 @@ export default function DetailedPost() {
                         </div>
                     </div>
                     <div className="detailedPostBottom">
-                        <span className="detailedPostCommentCounter">{comment.length} comments</span>
-                        <span className="likeCount">{post.like.length} likes </span>
+                        <span className="detailedPostCommentCounter">{comment.length} {comment.length===1? ' comment':' comments'} </span>
+                        <span className="likeCount">{post.like.length}{post.like.length===1? ' like':' likes'}  </span>
                         <Button className="detailedPostLikeBtn"
                             buttonSize="btn--medium" buttonStyle="btn--dark--solid"
                             onClick={onLike}>
