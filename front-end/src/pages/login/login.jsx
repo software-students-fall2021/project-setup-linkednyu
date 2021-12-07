@@ -72,7 +72,7 @@ export default function Login({ setLoggedIn }) {
             </div>
             <div className="inputArea">
                 <div className="emailArea">
-                    <label for="email"> Email </label>
+                    <label htmlFor="email"> Email </label>
                     <TextField variant="outlined"
                         required
                         className="emailInput"
@@ -82,7 +82,7 @@ export default function Login({ setLoggedIn }) {
                     </TextField>
                 </div>
                 <div className="passwordArea">
-                    <label for="password"> Password </label>
+                    <label htmlFor="password"> Password </label>
                     <TextField variant="outlined"
                         type="Password"
                         required

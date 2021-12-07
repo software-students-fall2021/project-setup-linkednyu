@@ -63,7 +63,6 @@ export default function Account() {
         let isMounted = true;
         async function fetchaccount() {
             let token = localStorage.getItem('token')
-            //console.log(token)
 
             try {
                 await axios.get(url, { headers: { 'Token': token } }).then(response => {
@@ -170,7 +169,7 @@ export default function Account() {
                             {posts.map((item, index) => {
                                 return (<><div className="postItem">
                                     <Link className="classStyle1" key={index} to={`/detailedposts/${item.link}`}>{index + 1}.{item.content}</Link>
-                                    <Button className="postDelete"
+                                    <Button key={index+posts.length} className="postDelete"
                                         onClick={() => onDelete(item.link)}
                                         buttonSize="btn--medium" buttonStyle="btn--primary--outline">
                                         <span className="likeIcon">Delete</span>

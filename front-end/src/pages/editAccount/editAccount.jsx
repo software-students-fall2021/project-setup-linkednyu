@@ -88,7 +88,7 @@ export default function EditAccount({picChange , setpicChange }) {
     return (
         <>
             {loading && < div className="landing" >
-                <h1>Linked NYU</h1></div>}
+                <h1>LinkedNYU</h1></div>}
             {!loading && <div className="editaccountPage">
                 <div className="accountWrapper">
                     <div className="accountHeader">
