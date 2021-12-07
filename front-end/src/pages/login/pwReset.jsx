@@ -86,7 +86,7 @@ export default function PwReset(props) {
             </div>
             <div className="inputArea">
                 <div>
-                    <label for="email"> Email </label>
+                    <label htmlFor="email"> Email </label>
                     <TextField variant="outlined"
                         required
                         value={email}
@@ -96,7 +96,7 @@ export default function PwReset(props) {
                 </div>
 
                 <div className='passwordField'>
-                    <label for="newpassword"> New Password </label>
+                    <label htmlFor="newpassword"> New Password </label>
                     <TextField variant="outlined"
                         type="Password"
                         required
@@ -106,7 +106,7 @@ export default function PwReset(props) {
                         className="passwordInput"></TextField>
                 </div>
                 <div className="passwordConfirm">
-                    <label for="confirmpassword"> Confirm New Password</label>
+                    <label htmlFor="confirmpassword"> Confirm New Password</label>
                     <TextField variant="outlined"
                         type="Password"
                         required

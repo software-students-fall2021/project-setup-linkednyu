@@ -15,7 +15,6 @@ const viewAccount = async (req, res) => {
 const updateAccount = async (req, res) => {
 
     const info = req.body
-    //res.status(200).send(info)
     const error = infoValidation(info).error;
     if (error) {
         console.log(error);
@@ -32,7 +31,8 @@ const updateAccount = async (req, res) => {
         const infoUpdate = await User.findOneAndUpdate({ _id: req.user._id }, newInfo, {
             new: true
         })
-        // const savedComment = await newComment.save()
+        console.log(infoUpdate.username);
+        await Post.updateMany({username:infoUpdate.username},{ $set: { "avatar" : info.profile } })
         res.status(200).json(infoUpdate)
     } catch (error) {
         res.status(409).json({ message: error.message })

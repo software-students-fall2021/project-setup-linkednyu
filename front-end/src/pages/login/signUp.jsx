@@ -76,7 +76,7 @@ export default function SignUp() {
             </div>
             <div className="form">
                 <div className="unInputArea">
-                    <label for="name"> Name </label>
+                    <label htmlFor="name"> Name </label>
                     <TextField variant="outlined"
                         required
                         className="unInput"
@@ -86,7 +86,7 @@ export default function SignUp() {
                     ></TextField>
                 </div>
                 <div className="emailInputArea">
-                    <label for="email"> Email </label>
+                    <label htmlFor="email"> Email </label>
                     <TextField variant="outlined"
                         required
                         className="emailInput"
@@ -95,7 +95,7 @@ export default function SignUp() {
                         onChange={(e) => setEmail(e.target.value)}></TextField>
                 </div>
                 <div className="pwInputArea">
-                    <label for="password"> Password </label>
+                    <label htmlFor="password"> Password </label>
                     <TextField variant="outlined"
                         label="Password"
                         required

@@ -45,6 +45,7 @@ body,h1,h2,h3,h4,h5,div,link
     flex: 7;
     justify-content: flex-start;
     font-size: 0.9em;
+    margin-left: 1em;
 }
 
 .time{
