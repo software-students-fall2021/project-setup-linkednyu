@@ -1,0 +1,38 @@
+.comment{
+    width:100%;
+    /* border: 2px solid #57068c; */
+    border-radius: 15px;
+    background-color: rgba(161, 160, 190, 0.2);
+    margin: auto;
+}
+
+.commentTop{
+    display: flex;
+    margin: 5px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.commentAvatar{
+    
+    margin: 0 10px;
+}
+
+.commentUserName{
+    font-size: small;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.commentDate{
+    font-size: small;
+}
+
+.commentBottom{
+    display: flex;
+    align-items: center;
+}
+
+.commentText{
+    margin: 15px;
+}

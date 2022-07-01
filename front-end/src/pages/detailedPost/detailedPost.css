@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+@keyframes landing {
+    0%   {background-color: #ffffff;}
+    25%  {background-color: #ff9d47;}
+    50%  {background-color: #547b51;}
+    100% {background-color: #5f5d98;}
+  }
+
+.landing{
+    width:100%;
+    height: 100vh;
+    padding-top:45px ;
+    margin: auto;
+    background-color: #5f5d98;
+    color: #57068c;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: landing;
+    animation-duration: 5s;
+}
+
+.detailedPost{
+    width:100%;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    margin: 49px 0;
+    background-color: #5f5d98;
+    color: white;
+    min-height: 93vh;
+}
+
+.detailedWrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+}
+
+.detailedPostTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 5px;
+    background-color: rgba(0,0,0,0.1);
+    /* border: 5px double #57068c; */
+    border-radius: 15px;
+}
+
+.detailedPostTopLeft{
+    display: flex;
+    flex:1;
+    align-items: center;
+    margin: 5px;
+}
+
+.detailedPostTopMiddle{
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    align-items: flex-start;
+}
+
+.detailedPostTopMiddleBottom{
+    display: flex;
+    flex-direction: row;
+}
+
+.detailedPostTopRight{
+    display: flex;
+    flex: 2;
+    align-items: flex-end;
+}
+
+.detailedPostAvatar{
+    border-radius: 20%;
+    margin: 0 10px;
+}
+
+.detailedPostClass{
+    font-size: large;
+    margin: 0 10px;
+}
+
+.detailedPostUserName{
+    font-size: medium;
+    margin: 0 10px;
+}
+
+.detailedPostDate{
+    font-size: small;
+}
+
+.detailedPostCenter{
+    display: flex;
+    flex-direction: column;
+    min-height: 40vh;
+    /* margin: 7% 10%; */
+}
+
+.detailedPostTitle{
+    font-size: large;
+    font-weight: bold;
+    margin:10px;
+}
+
+.detailedPostText{
+    margin: 10px;
+    margin-bottom: 10px;
+}
+
+.detailedPostImg{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.detailedPostBottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 10px;
+}
+
+.detailedPostCommentCounter{
+    flex-shrink: 1;
+    flex-basis: 20rem;
+}
+
+.likeCount{
+    flex-shrink: 2;
+    flex-basis: 10rem;
+    
+}
+
+.detailedPostLikeBtn{
+    flex-shrink: 2;
+    flex-basis: 5rem;
+}
+
+.detailedPostCommentText{
+    font-size: 15px;
+}
+
+.detailedPostComment{
+    display: flex;
+    flex-direction: column; 
+    gap: 5px;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 70px;
+    padding-bottom: 20px;
+}
+
+.detailedPostFooter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    background-color: #57068c;
+    color: white;
+    text-align: center;
+    gap:5px;
+    margin-top: 200px;
+}
+
+.detailedPostAddComment{
+    flex:8;
+    width: 90%;
+    height: 30px;
+    background-color:white;
+    border-radius: 20px;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.commentButtonSection{
+    margin-right: 10px; 
+}
+
+.commentButton{
+    font-size: 12px !important;
+}

@@ -1,0 +1,138 @@
+@keyframes landing {
+    0%   {background-color: #ffffff;}
+    25%  {background-color: #ff9d47;}
+    50%  {background-color: #547b51;}
+    100% {background-color: #5f5d98;}
+  }
+
+.landing{
+    width:100%;
+    height: 100vh;
+    padding-top:45px ;
+    margin: auto;
+    background-color: #5f5d98;
+    color: #57068c;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: landing;
+    animation-duration: 5s;
+}
+
+
+.accountPage{
+    padding-top: 49px !important;
+    background-color:#5f5d98;
+    min-height: 100vh;
+}
+
+.accountTop{
+    display: flex;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.accountBottom{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.accountHeader{
+    display: flex;
+    justify-content: center;
+    background-color:rgba(255, 255, 255, 0.144);
+    border-radius: 5px;
+    margin: 5px;
+    padding-top: 2px; 
+    color: white;
+}
+
+.accountImage{
+    display: flex;
+    margin-left: 25px;
+}
+
+.profilePicture{
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.accountBio{
+    display: flex;
+    flex: 9;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 5px;
+    padding-top: 10px;
+    margin-left: 5px;
+}
+
+.accountEdit{
+    margin:0 auto;
+    padding-bottom: 10px;
+}
+
+
+
+.userClasses{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    /* border: 10px solid red; */
+    background-color: white;
+    border-radius: 5px;
+}
+
+.contentTitle{
+    padding: 5px;
+    background-color: #57068c;
+    border-radius: 5px;
+    color:white;
+    text-align: center;
+}
+
+.contentList{
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.classStyle{
+    color: black;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.classStyle1{
+    display: flex;
+    color: black;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.classStyle:hover{
+    background-color: lightgrey;
+}
+
+.classStyle1:hover{
+    background-color: lightgrey;
+}
+
+.postItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 10px;
+}
+

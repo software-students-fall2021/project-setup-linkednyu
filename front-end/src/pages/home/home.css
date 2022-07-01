@@ -1,0 +1,28 @@
+.homePage{
+    margin-top: 49px;
+    background-color: #5f5d98;
+}
+
+@keyframes landing {
+    0%   {background-color: #ffffff;}
+    25%  {background-color: #ff9d47;}
+    50%  {background-color: #547b51;}
+    100% {background-color: #5f5d98;}
+  }
+
+.landing{
+    width:100%;
+    height: 100vh;
+    padding-top:45px ;
+    margin: auto;
+    background-color: #5f5d98;
+    color: #57068c;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: landing;
+    animation-duration: 5s;
+}
